@@ -26,7 +26,7 @@ CREATE TABLE Piece(
 CREATE TABLE Rencontre(
 	numRencontre integer not null check(numRencontre>0),
 	nomTour varchar(20) NOT NULL,
-	idJoueur integer NOT NULL,
+	idJoueur integer NOT NULL,  
 	PRIMARY KEY(numRencontre),
 	FOREIGN KEY(nomTour) REFERENCES Tour(nomTour),
 	FOREIGN KEY(idJoueur) REFERENCES Joueur(idJoueur));
@@ -36,9 +36,13 @@ CREATE TABLE Couleur(
 	primary key(nomCouleur));
 
 CREATE TABLE Historique(
-	idCoup integer not null,
+	idCoup integer not null auto_increment,
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
+	posY integer check(0<posY<9),
+	posX character check(posX in ('A','B','C','D','E','F','G','H'),
+	oldY integer check(0<oldY<9),
+	oldX character check(oldX in ('A','B','C','D','E','F','G','H'),
 	primary key(idCoup),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
 
