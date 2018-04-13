@@ -39,6 +39,10 @@ CREATE TABLE Historique(
 	idCoup integer not null,
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
+	posY integer check(0<posY<9),
+	posX character check(posX in ('A','B','C','D','E','F','G','H'),
+	oldY integer check(0<oldY<9),
+	oldX character check(oldX in ('A','B','C','D','E','F','G','H'),
 	primary key(idCoup),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
 
