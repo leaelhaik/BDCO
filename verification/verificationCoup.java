@@ -11,37 +11,37 @@ Statement stmt = conn.createStatement();
 // Execution de la requete
 ResultSet rset = stmt.executeQuery(STMT);
 
-boolean B = false ;
+boolean isValid = false ;
 
 if((Math.abs(oldX-posX)+Math.abs(oldY-posY))>0){
 
  switch(typePiece){
     //verification Tour :
     case "tour" : if((posX==oldX)||(posY==oldY)){
-      B = true;
+      isValid = true;
     }
     //verification Fou:
     case "fou" : if(Math.abs(oldX-posX)==Math.abs(oldY-posY)){
-      B = true;
+      isValid = true;
     }
     //verification Roi:
     case "roi" : if(Math.abs(oldX-posX)<2 && Math.abs(oldY-posY)<2){
-      B = true;
+      isValid = true;
     }
     //verification cavalier:
     case "cavalier" : if((Math.abs(oldX-posX)==2 && Math.abs(oldY-posY)==1)||(Math.abs(oldX-posX)==1 && Math.abs(oldY-posY)==2)){
-      B = true;
+      isValid = true;
     }
     //verification reine:
-    case "reine" : if((Math.abs(oldX-posX)<2 && Math.abs(oldY-posY)<2)!=(posX==oldX)||(posY==oldY)){B = true;
-      B = true;
+    case "reine" : if((Math.abs(oldX-posX)<2 && Math.abs(oldY-posY)<2)!=(posX==oldX)||(posY==oldY)){
+      isValid = true;
     }
     //verification pion
     case "pion" : if(rset.getInt(1)<>null &&(posY1=rset.getInt(4))&&(posX==rset.getInt(3))){
-                    B = true;
+                    isValid = true;
                   }
                   else if(rset.wasNull()&&(posY-oldY==1)&&(posX==oldX)){
-                    B = true;
+                    isValid = true;
                   }
   }
 }
