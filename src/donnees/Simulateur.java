@@ -17,7 +17,7 @@ public class Simulateur implements Simulable{
 		 * Les données associées au simulateur
 		 * La carte, le tableau des robots et la liste d'inciendies
 		 */
-		private DonneesBD donnees;
+		//private DonneesBD donnees;
 		/**
 		 * La taille de Cases (en pixels) dessiné
 		 */
@@ -33,7 +33,7 @@ public class Simulateur implements Simulable{
 		public Simulateur(GUISimulator gui){
 			this.gui = gui;
 			gui.setSimulable(this);
-			this.tailleCases = echelle(gui.getPanelHeight(), gui.getWidth());
+			this.tailleCases = echelle(gui.getPanelHeight(), gui.getPanelWidth());
 			draw();
 		}
 		
@@ -60,37 +60,41 @@ public class Simulateur implements Simulable{
 		 * @param taille la taille des cases
 		 */
 		private void dessineEchiquier(int taille){
-			int p = 8;
-			int n = 8;
 			java.awt.image.ImageObserver obs=null;		
-			Case cas;
 			int x = 0;
 			int y=0;
 			
-			for(int i=0; i<n; i++){
-				for(int j=0; j<p;j++){
+			for(int i=1; i<=8; i++){
+				for(int j=1; j<=8;j++){
 					String couleur;
 					x =j*taille;
 					y= i*taille;
-					cas=this.donnees.getMap().getCase(i,j);
-					switch(cas.getCouleur()){
-					case BLANCHE:
+					if ((i%2==0 && j%2!=0 )|| i%2!=0 && j%2==0) {
 						couleur = "#FEFEE0";
-						break;
-					case NOIRE:
+					} else {
 						couleur = "#88421D";
-						break;
-					default:
-						break;
 					}
 					gui.addGraphicalElement( new Rectangle(x, y, Color.decode(couleur),Color.decode(couleur), taille));
 				}
 			}
-		}
+		} //dessiner l'echiquier de base de moi meme
 		
-		private void dessinePion(int taille) {
-			
-		}
+	/*	private void dessinePion(int taille) {
+			int i,j=1;
+			int x,y;
+			for (i=1;i<=8;i++) {
+				for (j=1;j>=8;j++){
+					x =j*taille;
+					y= i*taille;
+					String piece=donnees.getPiece(i,j);
+					String couleur=donnees.getCouleur(i,j);
+					if (piece != null) {
+						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece+"_"+couleur,taille, taille,null));
+					}
+					
+				}
+			}
+		} */
 		
 		/**
 		 * Calcul la taille en pixels des cases à dessiner dans la fenetre
