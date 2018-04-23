@@ -14,19 +14,20 @@ CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
 	typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX integer check(0<posX<9),
-	posY character check(posY in ('A','B','C','D','E','F','G','H'),
+	posY character check(posY in ('A','B','C','D','E','F','G','H')),
 	oldX integer check(0<oldX<9),
-	oldY character check(oldY in ('A','B','C','D','E','F','G','H'),
-	couleur	character varying(5) check(couleur in('blanc','noir'),
-	numRencontre integer not null,
-	nomTour varchar(20) NOT NULL,
-	PRIMARY KEY(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
+	oldY character check(oldY in ('A','B','C','D','E','F','G','H')),
+	couleur	character varying(5) check(couleur in('blanc','noir')),
+	--numRencontre integer not null,
+	--nomTour varchar(20) NOT NULL,
+	PRIMARY KEY(idPiece)
+	--foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
+);
 
 CREATE TABLE Rencontre(
 	numRencontre integer not null check(numRencontre>0),
 	nomTour varchar(20) NOT NULL,
-	idJoueur integer NOT NULL,  
+	idJoueur integer NOT NULL,
 	PRIMARY KEY(numRencontre),
 	FOREIGN KEY(nomTour) REFERENCES Tour(nomTour),
 	FOREIGN KEY(idJoueur) REFERENCES Joueur(idJoueur));

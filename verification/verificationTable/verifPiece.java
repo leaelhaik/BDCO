@@ -28,24 +28,30 @@ public class verifPiece {
       System.out.println("*************************");
       System.out.println("Données contenues dans la table Piece : ");
 
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table Piece.");
 
-      while(rset.next()) {
-        int idPiece = rset.getInt(1);
-        String typePiece = rset.getString(2);
-        int posX = rset.getInt(3);
-        int posY = rset.getInt(4);
-        int oldX = rset.getInt(5);
-        int oldY = rset.getInt(6);
-        String couleur = rset.getString(7);
-        int numRencontre = rset.getInt(8);
-        String nomTour = rset.getString(9);
-        System.out.println("| idPiece : " + idPiece + " | typePiece : " + typePiece
-        + " | posX : " + posX + " | posY : " + posY + " | oldX : " + oldX + " | oldY : " +
-        oldY + " | couleur : " + couleur + " | numRencontre : " + numRencontre +
-        " | nomTour : " + nomTour + " |");
-      }
+      dumpResultSet(rset);
+// System.out.println(rset.next());
+//       if(!rset.next())
+//         System.out.println("Aucune donnée contenue dans la table Piece.");
+//
+//       while(rset.next()) {
+//
+//         int idPiece = rset.getInt(1);
+//         String typePiece = rset.getString(2);
+//         int posX = rset.getInt(3);
+//         int posY = rset.getInt(4);
+//         int oldX = rset.getInt(5);
+//         int oldY = rset.getInt(6);
+//         String couleur = rset.getString(7);
+//         //int numRencontre = rset.getInt(8);
+//         //String nomTour = rset.getString(9);
+//         System.out.println("| idPiece : " + idPiece + " | typePiece : " + typePiece
+//         + " | posX : " + posX + " | posY : " + posY + " | oldX : " + oldX + " | oldY : " +
+//         oldY + " | couleur : " + couleur
+//         // + "| numRencontre : " + numRencontre +
+//         // " | nomTour : " + nomTour + " |"
+//         );
+//       }
 
       // Fermeture
       rset.close();
@@ -55,6 +61,20 @@ public class verifPiece {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {

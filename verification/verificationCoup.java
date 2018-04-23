@@ -1,11 +1,21 @@
-//verification Joueur
+import java.sql.*;
+
+public class verificationCoup {
+
+  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+  static final String USER = "dhouibd"; // A remplacer pour votre compte
+  static final String PASSWD = "dhouibd";
+
+//verification Joueur, cad que le joueur bouge bien la bonne couleur
 
 
 
 //verification Coup : Selon TypePiece et Etat dynamique
 
-
-static final String STMT = "select idPiece,couleur as couleur1,posX as posX1,posY as posY1,nomTour as nT1, numRencontre as nR1 from Piece where couleur1<>couleur and (posY1=oldY + 1) and((posX1=oldX+1)or(posX1=oldX-1)) and numRencontre=nR1 and nomTour=nT1;";
+// Sélectionne la case en diagonale du pion pour savoir s'il peut la manger ou non
+static final String STMT = "select idPiece,couleur as couleur1,posX as posX1,posY as posY1,
+nomTour as nT1, numRencontre as nR1 from Piece where couleur1<>couleur and (posY1=oldY + 1)
+and((posX1=oldX+1)or(posX1=oldX-1)) and numRencontre=nR1 and nomTour=nT1;";
 
 Statement stmt = conn.createStatement();
 // Execution de la requete
