@@ -1,13 +1,17 @@
 import java.sql.*;
-public class CreateTour {
+public class CreateRencontre {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
-static final String STMT1 = "insert into Tour Values('finale')";
-static final String STMT2 = "insert into Tour Values('demiFinale')";
-static final String STMT3 = "insert into Tour Values('quartFinale')";
-static final String STMT4 = "insert into Tour Values('qualifications')";
-public CreateTour() {
+static final String STMT1 = "insert into Rencontre(nomTour,numRencontre) Values('finale',1)";
+static final String STMT2 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',1)";
+static final String STMT3 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',2)";
+static final String STMT4 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',1)";
+static final String STMT5 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',2)";
+static final String STMT6 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',3)";
+static final String STMT7 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',4)";
+static final String STMT8 = "insert into Rencontre(nomTour,numRencontre) Values('qualifications',1)";
+public CreateRencontre() {
 try {
 // Enregistrement du driver Oracle
   System.out.print("Loading Oracle driver... ");
