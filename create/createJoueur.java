@@ -1,17 +1,11 @@
 import java.sql.*;
-public class CreateRencontre {
+public class CreateJoueur {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
-static final String STMT1 = "insert into Rencontre(nomTour,numRencontre) Values('finale',1)";
-static final String STMT2 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',1)";
-static final String STMT3 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',2)";
-static final String STMT4 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',1)";
-static final String STMT5 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',2)";
-static final String STMT6 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',3)";
-static final String STMT7 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',4)";
-static final String STMT8 = "insert into Rencontre(nomTour,numRencontre) Values('qualifications',1)";
-public CreateRencontre() {
+static final String STMT = "insert into Joueur(nomJoueur,prenomJoueur,dateNaissance,adresseJoueur) Values(?,?,?,?)";
+
+public CreateJoueur(String nom, String prenom, String adresse, Date date) {
 try {
 // Enregistrement du driver Oracle
   System.out.print("Loading Oracle driver... ");
@@ -22,13 +16,15 @@ try {
   Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
   System.out.println("connected");
   // Creation de la requete
-  Statement stmt = conn.createStatement();
+  PreparedStatement stmt = conn.createStatement(STMT);
+  statement.setObject(1,nom);
+  statement.setObject(2,prenom);
+  statement.setObject(3,date));
+  statement.setObject(4,adresse);
+  statement.executeUpdate();
   // Execution de la requete
-  ResultSet rset1 = stmt.executeQuery(STMT1);
-  ResultSet rset2 = stmt.executeQuery(STMT2);
-  ResultSet rset3 = stmt.executeQuery(STMT3);
-  ResultSet rset4 = stmt.executeQuery(STMT4);
 
+  //rset.close();
   stmt.close();
   conn.close();
 } catch (SQLException e) {

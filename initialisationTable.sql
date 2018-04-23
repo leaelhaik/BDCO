@@ -3,7 +3,7 @@ CREATE TABLE Tour(
 	PRIMARY KEY(nomTour));
 
 CREATE TABLE Joueur(
-  idJoueur integer NOT NULL,
+  idJoueur integer NOT NULL auto_increment,
   nomJoueur character varying(30),
   prenomJoueur character varying(30),
   dateNaissance DATE,
