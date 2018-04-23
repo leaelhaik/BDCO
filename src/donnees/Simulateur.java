@@ -56,6 +56,7 @@ public class Simulateur implements Simulable{
 			int taille = this.tailleCases;
 			dessineEchiquier(taille);
 			dessineLegende(taille);
+			dessinePions(taille);
 		}
 		
 		/**
@@ -108,22 +109,26 @@ public class Simulateur implements Simulable{
 			}
 		}
 		
-	/*	private void dessinePion(int taille) {
+		private void dessinePions(int taille) {
 			int i,j=1;
 			int x,y;
 			for (i=1;i<=8;i++) {
-				for (j=1;j>=8;j++){
-					x =j*taille;
-					y= i*taille;
-					String piece=donnees.getPiece(i,j);
-					String couleur=donnees.getCouleur(i,j);
-					if (piece != null) {
-						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece+"_"+couleur,taille, taille,null));
+				for (j=1;j<=8;j++){
+					x =j*taille-taille/2;
+					y= i*taille-taille/2;
+					String piece=null;   //donnees.getPiece(i,j);
+					String couleur= null;  //donnees.getCouleur(i,j);
+					if (i==8 && j==2) {
+						piece="tour";
+						couleur="blanc";
+					}
+					if (piece != null && couleur != null) {
+						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece+"_"+couleur+".png",taille, taille,null));
 					}
 					
 				}
 			}
-		} */
+		} 
 		
 		/**
 		 * Calcul la taille en pixels des cases à dessiner dans la fenetre
@@ -138,12 +143,21 @@ public class Simulateur implements Simulable{
 			return (Math.min(width/8, height/8));
 		}
 
-		@Override
-		public void next() {
+		public String lecture() {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Entrez le prochain coup");
 			String coup = sc.nextLine();
-			System.out.println("vous avez effectué "+coup);
+			return coup;
+		}
+		
+		public boolean verif(String coup) {
+			//TO DO avec JCBD
+			return true;
+		}
+		
+		@Override
+		public void next() {
+			draw();
 		}
 
 		@Override
