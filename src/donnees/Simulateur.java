@@ -5,6 +5,7 @@ import gui.Rectangle;
 import gui.GraphicalElement;
 import gui.ImageElement;
 import java.awt.Color;
+import java.util.Scanner;
 
 import gui.Simulable;
 
@@ -77,7 +78,8 @@ public class Simulateur implements Simulable{
 					gui.addGraphicalElement( new Rectangle(x, y, Color.decode(couleur),Color.decode(couleur), taille));
 				}
 			}
-		} //dessiner l'echiquier de base de moi meme
+		} 
+		
 		
 	/*	private void dessinePion(int taille) {
 			int i,j=1;
@@ -111,8 +113,10 @@ public class Simulateur implements Simulable{
 
 		@Override
 		public void next() {
-			// TODO Auto-generated method stub
-			
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Entrez le prochain coup");
+			String coup = sc.nextLine();
+			System.out.println("vous avez effectué "+coup);
 		}
 
 		@Override
