@@ -1,3 +1,5 @@
+package donnees;
+
 import java.sql.*;
 
 public class Piece {
@@ -44,7 +46,7 @@ public class Piece {
       conn.close();
 
       return idPiece;
-      
+
     } catch (SQLException e) {
         System.err.println("failed");
         e.printStackTrace(System.err);

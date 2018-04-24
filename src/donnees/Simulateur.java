@@ -14,7 +14,7 @@ import gui.Simulable;
 public class Simulateur implements Simulable{
 		/** L'interface graphique associé*/
 		private GUISimulator gui;
-		
+
 		/**
 		 * Les données associées au simulateur
 		 * La carte, le tableau des robots et la liste d'inciendies
@@ -24,21 +24,21 @@ public class Simulateur implements Simulable{
 		 * La taille de Cases (en pixels) dessiné
 		 */
 		private int tailleCases;
-		
+
 		/**
 		 * La date courante de la simulation
 		 * On l'initialise toujours à 0
 		 */
 		private long dateSimulation=0;
-		
-	
+
+
 		public Simulateur(GUISimulator gui){
 			this.gui = gui;
 			gui.setSimulable(this);
 			this.tailleCases = echelle(gui.getPanelHeight(), gui.getPanelWidth());
 			draw();
 		}
-		
+
 		/**
 		 * Acceseur pour connaitre la date courant du simulateur
 		 * @return long Date la date courant
@@ -46,10 +46,10 @@ public class Simulateur implements Simulable{
 		public long getDate(){
 			return this.dateSimulation;
 		}
-		
-		
+
+
 		/**
-		 * Dessine la carte sur la fenêtre graphique de taille donné dans la carte	 
+		 * Dessine la carte sur la fenêtre graphique de taille donné dans la carte
 		 */
 		public void draw(){
 			gui.reset();// clear the window
@@ -58,16 +58,16 @@ public class Simulateur implements Simulable{
 			dessineLegende(taille);
 			dessinePions(taille);
 		}
-		
+
 		/**
 		 * dessine la carte avec des cases de taille taille
 		 * @param taille la taille des cases
 		 */
 		private void dessineEchiquier(int taille){
-			java.awt.image.ImageObserver obs=null;		
+			java.awt.image.ImageObserver obs=null;
 			int x = 0;
 			int y=0;
-			
+
 			for(int i=1; i<=8; i++){
 				for(int j=1; j<=8;j++){
 					String couleur;
@@ -81,17 +81,17 @@ public class Simulateur implements Simulable{
 					gui.addGraphicalElement( new Rectangle(x, y, Color.decode(couleur),Color.decode(couleur), taille));
 				}
 			}
-		} 
-		
-		
+		}
+
+
 		/**
 		 * dessine la légende des cases de taille taille
 		 * @param taille la taille des cases
 		 */
 		private void dessineLegende(int taille){
-			java.awt.image.ImageObserver obs=null;		
+			java.awt.image.ImageObserver obs=null;
 			int x = 0;
-			
+
 			int y = 9;
 			char legende = 65; // Code ASCII du A
 			for (int j = 1; j<= 8; j++) {
@@ -99,7 +99,7 @@ public class Simulateur implements Simulable{
 				gui.addGraphicalElement( new Text(x, y, Color.WHITE, Character.toString(legende)));
 				legende ++;
 			}
-		
+
 			x = 9;
 			legende = 56; // Code ASCII du 0
 			for (int i = 1; i<=8; i++) {
@@ -108,30 +108,28 @@ public class Simulateur implements Simulable{
 				legende --;
 			}
 		}
-		
+
 		private void dessinePions(int taille) {
 			int i,j=1;
 			String coordJ;
 			int x,y;
+			String couleur = null;
+			String piece = null;
 			for (i=1;i<=8;i++) {
 				for (j=1;j<=8;j++){
 					x =j*taille-taille/2;
 					y= i*taille-taille/2;
 					coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
-					String piece=null;   //donnees.getPiece(i,coordJ);
-					String couleur= null;  //donnees.getCouleur(i,coordJ);
-					if (i==4 && j==4) {
-						piece="fou";
-						couleur="noir";
-					}
+					piece = donnees.Piece.getPiece(coordJ,i,1,"finale");
+					couleur = donnees.Couleur.getCouleur(coordJ,i,1,"finale");
 					if (piece != null && couleur != null) {
 						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece+"_"+couleur+".png",taille, taille,null));
 					}
-					
+
 				}
 			}
-		} 
-		
+		}
+
 		/**
 		 * Calcul la taille en pixels des cases à dessiner dans la fenetre
 		 * @param taille la taille réel des cases
@@ -151,12 +149,12 @@ public class Simulateur implements Simulable{
 			String coup = sc.nextLine();
 			return coup;
 		}
-		
+
 		public boolean verif(String coup) {
 			//TO DO avec JCBD
 			return true;
 		}
-		
+
 		@Override
 		public void next() {
 			draw();
@@ -165,7 +163,7 @@ public class Simulateur implements Simulable{
 		@Override
 		public void restart() {
 			// TODO Auto-generated method stub
-			
+
 		}
-			
+
 }
