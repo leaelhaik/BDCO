@@ -28,13 +28,7 @@ public class verifTour {
       System.out.println("*************************");
       System.out.println("Données contenues dans la table Tour : ");
 
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table Tour.");
-
-      while(rset.next()) {
-        String nomTour = rset.getString(1);
-        System.out.println("| nomTour : " + nomTour + " |");
-      }
+      dumpResultSet(rset);
 
       // Fermeture
       rset.close();
@@ -44,6 +38,20 @@ public class verifTour {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {

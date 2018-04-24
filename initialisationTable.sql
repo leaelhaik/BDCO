@@ -13,10 +13,10 @@ CREATE TABLE Joueur(
 CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
 	typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
-	posX integer check(0<posX<9),
-	posY character check(posY in ('A','B','C','D','E','F','G','H')),
-	oldX integer check(0<oldX<9),
-	oldY character check(oldY in ('A','B','C','D','E','F','G','H')),
+	posX character check(posY in ('A','B','C','D','E','F','G','H')),
+	posY integer check(0<posX<9),
+	oldX character check(oldY in ('A','B','C','D','E','F','G','H')),
+	oldY integer check(0<oldX<9),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	--numRencontre integer not null,
 	--nomTour varchar(20) NOT NULL,
@@ -40,10 +40,10 @@ CREATE TABLE Historique(
 	idCoup integer not null auto_increment,
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
-	posY integer check(0<posY<9),
 	posX character check(posX in ('A','B','C','D','E','F','G','H'),
-	oldY integer check(0<oldY<9),
+	posY integer check(0<posY<9),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H'),
+	oldY integer check(0<oldY<9),
 	primary key(idCoup),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
 

@@ -3,10 +3,13 @@ public class CreateTour {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
+
 static final String STMT1 = "insert into Tour Values('finale')";
 static final String STMT2 = "insert into Tour Values('demiFinale')";
 static final String STMT3 = "insert into Tour Values('quartFinale')";
 static final String STMT4 = "insert into Tour Values('qualifications')";
+
+
 public CreateTour() {
 try {
 // Enregistrement du driver Oracle
