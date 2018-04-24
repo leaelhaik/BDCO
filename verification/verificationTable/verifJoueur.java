@@ -27,24 +27,7 @@ public class verifJoueur {
       // ResultSet rset2 = stmt.executeQuery(STMT2);
       ResultSet rset = stmt.executeQuery(STMT);
 
-
-      // Parcours de la TABLE
-      System.out.println("*************************");
-      System.out.println("Données contenues dans la table Joueur : ");
-
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table Joueur.");
-
-      while(rset.next()) {
-        int idJoueur = rset.getInt(1);
-        String nomJoueur = rset.getString(2);
-        String prenomJoueur = rset.getString(3);
-        java.sql.Date date = rset.getDate(4);
-        String adresseJoueur = rset.getString(5);
-        System.out.println("| idJoueur : " + idJoueur + " | nomJoueur : " + nomJoueur
-        + " | prenomJoueur : " + prenomJoueur + " | date : " + date + " | adresseJoueur : "
-        + adresseJoueur + " |");
-      }
+      dumpResultSet(rset);
 
       // Fermeture
       rset.close();
@@ -54,6 +37,20 @@ public class verifJoueur {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {

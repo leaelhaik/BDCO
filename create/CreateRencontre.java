@@ -6,11 +6,8 @@ public class CreateRencontre {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  static final String STMTDrop1 = "Drop TABLE Piece";
-  static final String STMTDrop = "Drop TABLE Rencontre";
-  static final String STMTCreate = "CREATE TABLE Rencontre(numRencontre integer not null check(numRencontre>0), PRIMARY KEY(numRencontre))";
-
-  static final String STMT1 = "insert into Rencontre(numRencontre) Values(1)";
+  //static final String STMTCreate = "CREATE TABLE Rencontre(numRencontre integer not null check(numRencontre>0),nomTour varchar(20) NOT NULL,idJoueur integer NOT NULL,PRIMARY KEY(numRencontre),FOREIGN KEY(nomTour) REFERENCES Tour(nomTour),FOREIGN KEY(idJoueur) REFERENCES Joueur(idJoueur))";
+  static final String STMT1 = "insert into Rencontre(numRencontre, nomTour) Values('1', 'finale')";
   // static final String STMT2 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',1)";
   // static final String STMT3 = "insert into Rencontre(nomTour,numRencontre) Values('demiFinale',2)";
   // static final String STMT4 = "insert into Rencontre(nomTour,numRencontre) Values('quartFinale',1)";
@@ -30,12 +27,12 @@ public class CreateRencontre {
         System.out.print("Connecting to the database... ");
         Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
         System.out.println("connected");
+        conn.setAutoCommit(false);
         // Creation de la requete
         Statement stmt = conn.createStatement();
         // Execution de la requete
         //ResultSet rsetDrop1 = stmt.executeQuery(STMTDrop1);
-        ResultSet rsetDrop = stmt.executeQuery(STMTDrop);
-        ResultSet rsetCreate = stmt.executeQuery(STMTCreate);
+        //ResultSet rsetCreate = stmt.executeQuery(STMTCreate);
 
         ResultSet rset1 = stmt.executeQuery(STMT1);
         // ResultSet rset2 = stmt.executeQuery(STMT2);
@@ -44,8 +41,8 @@ public class CreateRencontre {
         // ResultSet n = stmt.executeQuery(STMT9); //le nombre de joueurs, faire une boucle pour les qualifs
 
         conn.commit();
-        rsetDrop.close();
-        rsetCreate.close();
+        // rsetCreate.close();
+        rset1.close();
         stmt.close();
         conn.close();
       } catch (SQLException e) {

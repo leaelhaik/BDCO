@@ -6,14 +6,14 @@ public class CreatePiece{
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  static final String STMTDrop = "Drop TABLE Piece";
-  static final String STMTCreate = "CREATE TABLE Piece(idPiece INTEGER NOT NULL ,typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),couleur	character varying(5) check(couleur in('blanc','noir')),PRIMARY KEY(idPiece))";
+  // static final String STMTDrop = "Drop TABLE Piece";
+  static final String STMTCreate = "CREATE TABLE Piece(idPiece INTEGER NOT NULL ,typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),couleur	character varying(5) check(couleur in('blanc','noir')), numRencontre integer not null, nomTour varchar(20) not null, PRIMARY KEY(idPiece), foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour))";
 
-  static final String STMT1 = "Insert into Piece Values('1','tour','A','1','A','1','blanc')";
-  static final String STMT2 = "Insert into Piece Values('2','tour','H','1','H','1','blanc')";
-  static final String STMT3 = "Insert into Piece Values('3','cavalier','B','1','B','1','blanc')";
-  static final String STMT4 = "Insert into Piece Values('4','cavalier','G','1','G','1','blanc',?,?)";
-  static final String STMT5 = "Insert into Piece Values('5','fou','C','1','C','1','blanc',?,?)";
+  static final String STMT1 = "Insert into Piece Values('1','tour','A','1','A','1','blanc','finale', '1')";
+  static final String STMT2 = "Insert into Piece Values('2','tour','H','1','H','1','blanc','finale', '1')";
+  static final String STMT3 = "Insert into Piece Values('3','cavalier','B','1','B','1','blanc','finale', '1')";
+  static final String STMT4 = "Insert into Piece Values('4','cavalier','G','1','G','1','blanc','finale', '1')";
+  static final String STMT5 = "Insert into Piece Values('5','fou','C','1','C','1','blanc','finale', '1')";
   static final String STMT6 = "Insert into Piece Values('6','fou','F','1','F','1','blanc',?,?)";
   static final String STMT7 = "Insert into Piece Values('7','reine','D','1','D','1','blanc',?,?)";
   static final String STMT8 = "Insert into Piece Values('8','roi','E','1','E','1','blanc',?,?)";
@@ -35,7 +35,7 @@ public class CreatePiece{
   static final String STMT24 = "Insert into Piece Values('24','roi','D','8','D','8','noir',?,?)";
   static final String STMT25 = "Insert into Piece Values('25','pion','A','7','A','7','noir',?,?)";
   static final String STMT26 = "Insert into Piece Values('26','pion','H','7','H','7','noir',?,?)";
-  static final String STMT27 = "Inserrset.close();t into Piece Values('27','pion','B','7','B','7','noir',?,?)";
+  static final String STMT27 = "Insert into Piece Values('27','pion','B','7','B','7','noir',?,?)";
   static final String STMT28 = "Insert into Piece Values('28','pion','G','7','G','7','noir',?,?)";
   static final String STMT29 = "Insert into Piece Values('29','pion','C','7','C','7','noir',?,?)";
   static final String STMT30 = "Insert into Piece Values('30','pion','F','7','F','7','noir',?,?)";
@@ -133,7 +133,7 @@ Oracle
         // rset.close();
         // stmt.close();
         conn.commit();
-        rsetDrop.close();
+        // rsetDrop.close();
         rsetCreate.close();
         rset2.close();
         rset3.close();
