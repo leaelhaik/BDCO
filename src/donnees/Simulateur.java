@@ -111,16 +111,18 @@ public class Simulateur implements Simulable{
 		
 		private void dessinePions(int taille) {
 			int i,j=1;
+			String coordJ;
 			int x,y;
 			for (i=1;i<=8;i++) {
 				for (j=1;j<=8;j++){
 					x =j*taille-taille/2;
 					y= i*taille-taille/2;
-					String piece=null;   //donnees.getPiece(i,j);
-					String couleur= null;  //donnees.getCouleur(i,j);
-					if (i==8 && j==2) {
-						piece="tour";
-						couleur="blanc";
+					coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
+					String piece=null;   //donnees.getPiece(i,coordJ);
+					String couleur= null;  //donnees.getCouleur(i,coordJ);
+					if (i==4 && j==4) {
+						piece="fou";
+						couleur="noir";
 					}
 					if (piece != null && couleur != null) {
 						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece+"_"+couleur+".png",taille, taille,null));
