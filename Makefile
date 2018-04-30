@@ -9,7 +9,12 @@
 all: testSimulator  
 
 testSimulator:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/Simulator.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
+
+testIGEchiquier:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
+
+
 
 
 # Execution:
@@ -22,6 +27,8 @@ testSimulator:
 exeSimulator:
 	java -classpath bin:bin/gui.jar Simulator
 
+exeIGEchiquier:
+	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
 
 clean:
 	rm -rf bin/*.class
