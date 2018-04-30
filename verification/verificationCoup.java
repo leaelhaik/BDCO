@@ -7,7 +7,7 @@ public class VerificationCoup {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  public VerificationCoup(int posY, int oldY, Character posX, Character oldX){
+  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRenconre, String nomTour, String couleur){
 
   }
 
@@ -73,7 +73,86 @@ public class VerificationCoup {
 
 
 //verification si obstacle en vue : invalide
+static final String STMT = "select * from piece where numRenconre=? and nomTour=? and posY between ? and ? and posX between ? and ?";
+
+PreparedStatement hav = conn.prepareStatement(STMT);
+hav.setInt(1,numRenconre);
+hav.setString(2,nomTour);
+hav.setInt(3,oldY);
+hav.setInt(4,posY);
+hav.setInt(5,oldX);
+hav.setInt(6,posX);
+hav.executeUpdate();
+//commit
+// Execution de la requete
+ResultSet rset = stmt.executeQuery(STMT);  //Piece dans l'entourage puis selon type de la piece on change
+
+
+
 //prise d'une autre pièce adverse
+
 //ne pas être en état échec
+VerifEchec();
+
+
+//Si valide
+  static final String STMT1 = "Delete from piece where numRenconre=? and nomTour=? and couleur<>? and posY =?and posX=?;";
+
+  static final String STMT2 = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES(?,?,?,?,?,?);";
+
+  static final String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? ;";
+
+  try {
+  // Enregistrement du driver Oracle
+    System.out.print("Loading Oracle driver... ");
+    DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+    System.out.println("loaded");
+    // Etablissement de la connection
+    System.out.print("Connecting to the database... ");
+    Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
+    System.out.println("connected");
+    // Creation de la requete
+    PreparedStatement del = conn.prepareStatement(STMT1);
+    del.setInt(1,numRenconre);
+    del.setString(2,nomTour);
+    del.setString(3,couleur);
+    del.setInt(4,posY);
+    del.setInt(5,posX);
+    del.executeUpdate();
+    //commit
+    // Execution de la requete
+    ResultSet rset = stmt.executeQuery(STMT1);
+
+    PreparedStatement inse = conn.prepareStatement(STMT2);
+    inse.setString(1,nomTour);
+    inse.setInt(2,numRenconre);
+    inse.setInt(3,posY);
+    inse.setInt(4,posX);
+    inse.setInt(5,oldY);
+    inse.setInt(6,oldX);
+    inse.executeUpdate();
+    //commit
+    // Execution de la requete
+    ResultSet rset2 = stmt.executeQuery(STMT2);
+
+    PreparedStatement nouv = conn.prepareStatement(STMT3);
+    nouv.setInt(1,null);
+    nouv.setInt(2,null);
+    nouv.setInt(3,posX);
+    nouv.setInt(4,posY);
+    inse.executeUpdate();
+    //commit
+    // Execution de la requete
+    ResultSet rset3 = stmt.executeQuery(STMT3);
+
+
+    // Fermeture
+    rset.close();
+    stmt.close();
+    conn.close();
+  } catch (SQLException e) {
+      System.err.println("failed");
+      e.printStackTrace(System.err);
+    }
 
 }
