@@ -5,7 +5,7 @@ public class VerifSituation(){
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  public VerifSituation(int numRenconre, String nomTour, int idJoueur){
+  public VerifSituation(int numRencontre, String nomTour, int idJoueur){
     try {
     // Enregistrement du driver Oracle
       System.out.print("Loading Oracle driver... ");

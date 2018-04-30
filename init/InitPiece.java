@@ -11,7 +11,7 @@ public class InitPiece {
 
   static final String STMT1 = "Insert into Piece Values('1','tour','A','1','A','1','blanc','1', 'finale')";
   static final String STMT2 = "Insert into Piece Values('2','tour','H','1','H','1','blanc','1', 'finale')";
-  static final String STMT3 = "Insert into Piece Values('3','cavalier','B','1','B','1','blanc','1', 'finale')";
+  static final String STMT3 = "Insert into Piece Values('3','cavalier','C','1','C','1','blanc','1', 'finale')";
   static final String STMT4 = "Insert into Piece Values('4','cavalier','G','1','G','1','blanc','1', 'finale')";
   static final String STMT5 = "Insert into Piece Values('5','fou','C','1','C','1','blanc','1', 'finale')";
   static final String STMT6 = "Insert into Piece Values('6','fou','F','1','F','1','blanc','1', 'finale')";

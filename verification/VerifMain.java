@@ -6,7 +6,12 @@ public class VerifMain {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  static final String STMTSelectPiece = "select * from Piece";
+  static final String STMTSelectCavalier = "select * from Cavalier";
+  static final String STMTSelectFou = "select * from Fou";
+  static final String STMTSelectPion = "select * from Pion";
+  static final String STMTSelectReine = "select * from Reine";
+  static final String STMTSelectReine = "select * from Reine";
+  static final String STMTSelectRoi = "select * from Roi";
   static final String STMTSelectAffectationCouleur = "select * from AffectationCouleur";
   static final String STMTSelectCouleur = "select * from Couleur";
   static final String STMTSelectHistorique = "select * from Historique";
@@ -32,9 +37,34 @@ public class VerifMain {
       Statement stmt = conn.createStatement();
       // Execution de la requete
 
-      System.out.println("Table Piece");
-      ResultSet rsetSelectPiece = stmt.executeQuery(STMTSelectPiece);
-      dumpResultSet(rsetSelectPiece);
+      System.out.println("Table Cavalier");
+      ResultSet rsetSelectCavalier = stmt.executeQuery(STMTSelectCavalier);
+      dumpResultSet(rsetSelectCavalier);
+      System.out.println("");
+
+      System.out.println("Table Fou");
+      ResultSet rsetSelectFou = stmt.executeQuery(STMTSelectFou);
+      dumpResultSet(rsetSelectFou);
+      System.out.println("");
+
+      System.out.println("Table Pion");
+      ResultSet rsetSelectPion = stmt.executeQuery(STMTSelectPion);
+      dumpResultSet(rsetSelectPion);
+      System.out.println("");
+
+      System.out.println("Table Reine");
+      ResultSet rsetSelectReine = stmt.executeQuery(STMTSelectReine);
+      dumpResultSet(rsetSelectReine);
+      System.out.println("");
+
+      System.out.println("Table Roi");
+      ResultSet rsetSelectRoi = stmt.executeQuery(STMTSelectRoi);
+      dumpResultSet(rsetSelectRoi);
+      System.out.println("");
+
+      System.out.println("Table Tour");
+      ResultSet rsetSelectTour = stmt.executeQuery(STMTSelectTour);
+      dumpResultSet(rsetSelectTour);
       System.out.println("");
 
       System.out.println("Table Affectation Couleur");
@@ -81,7 +111,12 @@ public class VerifMain {
       rsetSelectHistorique.close();
       rsetSelectCouleur.close();
       rsetSelectAffectationCouleur.close();
-      rsetSelectPiece.close();
+      rsetSelectCavalier.close();
+      rsetSelectFou.close();
+      rsetSelectPion.close();
+      rsetSelectReine.close();
+      rsetSelectRoi.close();
+      rsetSelectTour.close();
       stmt.close();
       conn.close();
     } catch (SQLException e) {
