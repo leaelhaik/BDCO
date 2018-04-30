@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class CreatePiece{
+public class CreatePiece {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
@@ -46,8 +46,7 @@ public class CreatePiece{
   public CreatePiece() {
 
     try {
-      // Enregistrement du driver   static final String STMTCreate = "CREATE TABLE Piece(idPiece INTEGER NOT NULL ,typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),couleur	character varying(5) check(couleur in('blanc','noir')),PRIMARY KEY(idPiece))";
-Oracle
+      // Enregistrement du driver
         System.out.print("Loading Oracle driver... ");
         DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
         System.out.println("loaded");
@@ -63,7 +62,7 @@ Oracle
         //Statement stmt1 = conn.createStatement();
         //ResultSet rset1 = stmt1.executeQuery(STMT1);
         Statement stmt = conn.createStatement();
-        ResultSet rsetDrop = stmt.executeQuery(STMTDrop);
+        // ResultSet rsetDrop = stmt.executeQuery(STMTDrop);
         ResultSet rsetCreate = stmt.executeQuery(STMTCreate);
 
         ResultSet rset2 = stmt.executeQuery(STMT2);
