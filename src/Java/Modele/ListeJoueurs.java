@@ -29,11 +29,12 @@ public class ListeJoueurs {
             throw new IllegalArgumentException("Il n'y a plus de joueurs");
         }
     }
+    /*
     //TODO : A FINIR
     public void setNewJoueur(String A_COMPLETER_QUAND_JOUEUR_IMPLEMENTER){
         this.myJoueurs.add(new Joueur(A_COMPLETER_QUAND_JOUEUR_IMPLEMENTER));
         this.nbJoueurs++;
-    }
+    }*/
 
     public int getNumberJoueurs() { return this.nbJoueurs;}
 
