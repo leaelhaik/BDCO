@@ -11,8 +11,8 @@ public abstract class PhaseFinale {
     private Joueur j2;
 
     public PhaseFinale(Joueur joueur1, Joueur joueur2 , String typeFinale){
-        Joueur j1 = new Joueur();
-        Joueur j2 = new Joueur();
+        Joueur j1 = new JoueurConcret("");
+        Joueur j2 = new JoueurConcret("");
         setJoueurs(joueur1, joueur2);
         setType(typeFinale);
     }
@@ -38,11 +38,11 @@ public abstract class PhaseFinale {
     }
 
     private void setType(String typeFinale){
-        if (!this.typeFinale.equals("quart") || !this.typeFinale.equals("demi") || !this.typeFinale.equals("finale")){
+        if (!this.typeFinale.equals("quart") && !this.typeFinale.equals("demi") && !this.typeFinale.equals("finale")){
             System.out.println("Le nom de la phase finale n'est pas valide");
             exit();
         }
-        else{
+        else {
             this.typeFinale = typeFinale;
         }
     }
