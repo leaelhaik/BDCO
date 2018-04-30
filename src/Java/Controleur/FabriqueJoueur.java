@@ -1,7 +1,5 @@
 package Java.Controleur;
 
-import Java.Modele.Joueur;
-
 import java.util.ArrayList;
 
 /**

@@ -1,4 +1,6 @@
 package Java.Modele;
+import Java.Controleur.Joueur;
+
 import java.util.*;
 /**
  * Created by georgeb on 4/30/18.

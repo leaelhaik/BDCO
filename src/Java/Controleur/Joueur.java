@@ -1,4 +1,4 @@
-package Java.Modele;
+package Java.Controleur;
 
 /**
  * Created by barred on 4/30/18.
@@ -11,7 +11,7 @@ public abstract class Joueur {
         this.nom = name;
     }
 
-    boolean isValid() {
+    public boolean isValid() {
         return true;
     }
 }

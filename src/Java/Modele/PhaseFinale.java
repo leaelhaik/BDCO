@@ -1,5 +1,7 @@
 package Java.Modele;
 
+import Java.Controleur.Joueur;
+
 import static javafx.application.Platform.exit;
 
 /**
