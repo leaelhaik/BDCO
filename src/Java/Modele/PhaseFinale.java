@@ -18,8 +18,12 @@ public abstract class PhaseFinale {
     }
 
     //accesseurs et mutateurs
-    public Joueur getJoueurs(){
-        return (this.j1, this.j2);
+    public Joueur getJoueur1(){
+        return this.j1;
+    }
+
+    public Joueur getJoueur2(){
+        return this.j2;
     }
 
     private void setJoueurs(Joueur j1, Joueur j2){
