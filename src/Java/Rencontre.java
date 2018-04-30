@@ -3,7 +3,7 @@ package Java;
 /**
  * Created by georgeb on 4/11/18.
  */
-public class rencontre {
+public class Rencontre {
     //Stocke l'état de la partie en cours
     boolean enCours;
 
