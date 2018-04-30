@@ -14,8 +14,8 @@ CREATE TABLE Piece(
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),
 	oldY integer check((0<oldY) and (oldY<9)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
-	numRencontre integer not null,
 	nomTour varchar(20) NOT NULL,
+	numRencontre integer not null,
 	PRIMARY KEY(idPiece),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
 );
@@ -32,8 +32,7 @@ CREATE TABLE Couleur(
 	nomCouleur character varying(5) check(nomCouleur in('blanc','noir')),
 	primary key(nomCouleur));
 
-CREATE TABLE Historique(idCoup integer not null auto_increment,nomTour varchar(20) NOT NULL,numRencontre integer not null,posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),
-oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),primary key(idCoup),foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
+CREATE TABLE Historique(idCoup integer not null,nomTour varchar(20) NOT NULL,numRencontre integer not null,posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')), oldY integer check(oldY<9),primary key(idCoup),foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
 
 CREATE TABLE AffectationCouleur(
 	idJoueur integer NOT NULL,

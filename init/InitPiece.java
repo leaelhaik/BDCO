@@ -1,13 +1,13 @@
 import java.sql.*;
 
-public class CreatePiece {
+public class InitPiece {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
   // static final String STMTDrop = "Drop TABLE Piece";
-  static final String STMTCreate = "CREATE TABLE Piece(idPiece INTEGER NOT NULL ,typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),couleur	character varying(5) check(couleur in('blanc','noir')), numRencontre integer not null, nomTour varchar(20) not null, PRIMARY KEY(idPiece), foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour))";
+  // static final String STMTCreate = "CREATE TABLE Piece(idPiece INTEGER NOT NULL ,typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')),oldY integer check(oldY<9),couleur	character varying(5) check(couleur in('blanc','noir')), numRencontre integer not null, nomTour varchar(20) not null, PRIMARY KEY(idPiece), foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour))";
 
   static final String STMT1 = "Insert into Piece Values('1','tour','A','1','A','1','blanc','1', 'finale')";
   static final String STMT2 = "Insert into Piece Values('2','tour','H','1','H','1','blanc','1', 'finale')";
@@ -43,7 +43,7 @@ public class CreatePiece {
   static final String STMT32 = "Insert into Piece Values('32','pion','E','7','E','7','noir','1', 'finale')";
 
 
-  public CreatePiece() {
+  public InitPiece() {
 
     try {
       // Enregistrement du driver
@@ -56,86 +56,80 @@ public class CreatePiece {
         System.out.println("connected");
         conn.setAutoCommit(false);
         // Creation de la requete
-        //Statement stmt = conn.createStatement();
-        //ResultSet rset = stmt.executeQuery(STMTCreate);
 
-        //Statement stmt1 = conn.createStatement();
-        //ResultSet rset1 = stmt1.executeQuery(STMT1);
         Statement stmt = conn.createStatement();
         // ResultSet rsetDrop = stmt.executeQuery(STMTDrop);
-        ResultSet rsetCreate = stmt.executeQuery(STMTCreate);
+        // ResultSet rsetCreate = stmt.executeQuery(STMTCreate);
 
+        ResultSet rset1 = stmt.executeQuery(STMT1);
         ResultSet rset2 = stmt.executeQuery(STMT2);
         ResultSet rset3 = stmt.executeQuery(STMT3);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT4);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT5);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT6);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT7);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT8);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT9);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT10);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT11);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT12);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT13);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT14);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT15);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT16);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT17);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT18);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT19);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT20);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT21);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT22);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT23);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT24);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT25);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT26);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT27);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT28);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT29);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT30);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT31);
-        // Statement stmt = conn.createStatement();
-        // ResultSet rset = stmt.executeQuery(STMT32);
+        ResultSet rset4 = stmt.executeQuery(STMT4);
+        ResultSet rset5 = stmt.executeQuery(STMT5);
+        ResultSet rset6 = stmt.executeQuery(STMT6);
+        ResultSet rset7 = stmt.executeQuery(STMT7);
+        ResultSet rset8 = stmt.executeQuery(STMT8);
+        ResultSet rset9 = stmt.executeQuery(STMT9);
+        ResultSet rset10 = stmt.executeQuery(STMT10);
+        ResultSet rset11 = stmt.executeQuery(STMT11);
+        ResultSet rset12 = stmt.executeQuery(STMT12);
+        ResultSet rset13 = stmt.executeQuery(STMT13);
+        ResultSet rset14 = stmt.executeQuery(STMT14);
+        ResultSet rset15 = stmt.executeQuery(STMT15);
+        ResultSet rset16 = stmt.executeQuery(STMT16);
+        ResultSet rset17 = stmt.executeQuery(STMT17);
+        ResultSet rset18 = stmt.executeQuery(STMT18);
+        ResultSet rset19 = stmt.executeQuery(STMT19);
+        ResultSet rset20 = stmt.executeQuery(STMT20);
+        ResultSet rset21 = stmt.executeQuery(STMT21);
+        ResultSet rset22 = stmt.executeQuery(STMT22);
+        ResultSet rset23 = stmt.executeQuery(STMT23);
+        ResultSet rset24 = stmt.executeQuery(STMT24);
+        ResultSet rset25 = stmt.executeQuery(STMT25);
+        ResultSet rset26 = stmt.executeQuery(STMT26);
+        ResultSet rset27 = stmt.executeQuery(STMT27);
+        ResultSet rset28 = stmt.executeQuery(STMT28);
+        ResultSet rset29 = stmt.executeQuery(STMT29);
+        ResultSet rset30 = stmt.executeQuery(STMT30);
+        ResultSet rset31 = stmt.executeQuery(STMT31);
+        ResultSet rset32 = stmt.executeQuery(STMT32);
 
         // Fermeture
-        //rset1.close();
-        //stmt1.close();
-        // rset.close();
-        // stmt.close();
         conn.commit();
         // rsetDrop.close();
-        rsetCreate.close();
+        // rsetCreate.close();
+        rset1.close();
         rset2.close();
         rset3.close();
+        rset4.close();
+        rset5.close();
+        rset6.close();
+        rset7.close();
+        rset8.close();
+        rset9.close();
+        rset10.close();
+        rset11.close();
+        rset12.close();
+        rset13.close();
+        rset14.close();
+        rset15.close();
+        rset16.close();
+        rset17.close();
+        rset18.close();
+        rset19.close();
+        rset20.close();
+        rset21.close();
+        rset22.close();
+        rset23.close();
+        rset24.close();
+        rset25.close();
+        rset26.close();
+        rset27.close();
+        rset28.close();
+        rset29.close();
+        rset30.close();
+        rset31.close();
+        rset32.close();
         stmt.close();
         conn.close();
 
@@ -146,7 +140,7 @@ public class CreatePiece {
   }
 
   public static void main(String args[]) {
-    new CreatePiece();
+    new InitPiece();
   }
 
 }
