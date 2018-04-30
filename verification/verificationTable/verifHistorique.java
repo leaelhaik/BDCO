@@ -28,16 +28,8 @@ public class verifHistorique {
       System.out.println("*************************");
       System.out.println("Données contenues dans la table Historique : ");
 
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table Historique.");
+      dumpResultSet(rset);
 
-      while(rset.next()) {
-        int idCoup = rset.getInt(1);
-        String nomTour = rset.getString(2);
-        int numRencontre = rset.getInt(3);
-        System.out.println("| idCoup : " + idCoup + " | nomTour : " + nomTour
-        + " | numRencontre : " + numRencontre + " |");
-      }
 
       // Fermeture
       rset.close();
@@ -47,6 +39,20 @@ public class verifHistorique {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {

@@ -6,8 +6,6 @@ public class verifJoueur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "select * from Joueur";
-  // static final String STMT2 = "insert into Joueur values('2', 'duchenne', 'thomas' , '28-MAY-1996','1 rue des Clercs')";
-  // static final String STMT2 = "delete from Joueur";
 
   public verifJoueur() {
 

@@ -29,13 +29,8 @@ public class verifCouleur {
       System.out.println("*************************");
       System.out.println("Données contenues dans la table Couleur : ");
 
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table Couleur.");
+      dumpResultSet(rset);
 
-      while(rset.next()) {
-        String nomCouleur = rset.getString(1);
-          System.out.println("| nomCouleur : " + nomCouleur + " |");
-      }
 
       // Fermeture
       rset.close();
@@ -45,6 +40,20 @@ public class verifCouleur {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {

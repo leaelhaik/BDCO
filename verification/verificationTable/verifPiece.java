@@ -1,3 +1,5 @@
+package verification;
+
 import java.sql.*;
 
 public class verifPiece {
