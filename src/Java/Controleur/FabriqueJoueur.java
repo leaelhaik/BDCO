@@ -1,7 +1,16 @@
 package Java.Controleur;
 
+import Java.Modele.Joueur;
+
+import java.util.ArrayList;
+
 /**
  * Created by barred on 4/30/18.
  */
-public class FabriqueJoueur {
+public abstract class FabriqueJoueur {
+
+    public abstract ArrayList<Joueur> lesJoueurs();
+
+    public abstract void ajouterJoueur();
+
 }
