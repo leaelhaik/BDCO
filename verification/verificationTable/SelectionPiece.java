@@ -1,5 +1,5 @@
 import java.sql.*;
-public class SimpleQuery {
+public class SelectionPiece {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
@@ -16,7 +16,7 @@ try {
   System.out.println("connected");
   // Creation de la requete
   PreparedStatement stmt = conn.createStatement(STMT);
-  
+
   stmt.setObject(1,nomTour,Types.VARCHAR);
   stmt.setObject(2,numRencontre,Types.INTEGER);
   stmt.executeUpdate();
