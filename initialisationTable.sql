@@ -22,10 +22,9 @@ CREATE TABLE Piece(
 
 CREATE TABLE Pion(
 	idPiecePion INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and((posX=oldX)or(posX=oldX-1)or(posX=oldX+1))),
+	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and((ascii(posX)=ascii(oldX)or(ascii(posX)=ascii(oldX)-1)or(ascii(posX)=ascii(oldX)+1))),
 	oldY integer check((0<oldY) and (oldY<9)and (posY=oldY+1)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
@@ -36,7 +35,6 @@ CREATE TABLE Pion(
 
 CREATE TABLE Tour(
 	idPieceTour INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H') ),
@@ -51,10 +49,9 @@ CREATE TABLE Tour(
 
 CREATE TABLE Roi(
 	idPieceRoi INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (posX between oldX-2 and oldX+2)),
+	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (ascii(posX) between ascii(oldX)-2 and ascii(oldX)+2)),
 	oldY integer check((0<oldY) and (oldY<9) and ((oldY<>posY)or(posX<>oldX)) and(posY between oldY-2 and oldY+2)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
@@ -66,11 +63,10 @@ CREATE TABLE Roi(
 
 CREATE TABLE Reine(
 	idPieceReine INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),
-	oldY integer check((0<oldY) and (oldY<9) and (oldY<>posY or oldX<>posX) and(((posX-oldX)=(posY-oldY))or((posX-oldX)=(oldY-posY)))),
+	oldY integer check((0<oldY) and (oldY<9) and (oldY<>posY or oldX<>posX) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY)))),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
@@ -81,11 +77,10 @@ CREATE TABLE Reine(
 
 CREATE TABLE Fou(
 	idPieceFou INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (posX<>oldX)),
-	oldY integer check((0<oldY) and (oldY<9) and(((posX-oldX)=(posY-oldY))or((posX-oldX)=(oldY-posY))or(oldX=posX)<>(oldY=posY)) and (oldY<>posY or oldX<>posX)),
+	oldY integer check((0<oldY) and (oldY<9) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))or(oldX=posX)<>(oldY=posY)) and (oldY<>posY or oldX<>posX)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
@@ -96,11 +91,10 @@ CREATE TABLE Fou(
 
 CREATE TABLE Cavalier(
 	idPieceCavalier INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (posX<>oldX)),
-	oldY integer check((0<oldY) and (oldY<9)and (oldY<>posY)and((posX=oldX+1 and posY=oldY+2)or(posX=oldX-1 and posY=oldY+2)or(posX=oldX+2 and posY=oldY+1)or(posX=oldX-2 and posY=oldY+1))),
+	oldY integer check((0<oldY) and (oldY<9)and (oldY<>posY)and((ascii(posX)=ascii(oldX)+1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)-1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)+2 and posY=oldY+1)or(ascii(posX)=ascii(oldX)-2 and posY=oldY+1))),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
