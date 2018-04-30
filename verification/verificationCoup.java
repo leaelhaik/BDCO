@@ -1,11 +1,15 @@
 import java.sql.*;
 boolean blanc = true ;
 
-public class verificationCoup {
+public class VerificationCoup {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
+
+  public VerificationCoup(int posY, int oldY, Character posX, Character oldX){
+
+  }
 
 //verification Joueur, cad que le joueur bouge bien la bonne couleur
 if((blanc && couleur=="blanc") || (!blanc && couleur=="noir"){
@@ -14,17 +18,11 @@ if((blanc && couleur=="blanc") || (!blanc && couleur=="noir"){
 
 
 //l'état echec à définir
+//select les pièces de l'autre couleur 
 
 //verification Coup : Selon TypePiece et Etat dynamique
 
-// Sélectionne la case en diagonale du pion pour savoir s'il peut la manger ou non
-static final String STMT = "select idPiece,couleur as couleur1,posX as posX1,posY as posY1,
-nomTour as nT1, numRencontre as nR1 from Piece where couleur1<>couleur ,(posY1=oldY + 1)
-,((posX1=oldX+1)or(posX1=oldX-1)),numRencontre=nR1,nomTour=nT1;";
 
-Statement stmt = conn.createStatement();
-// Execution de la requete
-ResultSet rset = stmt.executeQuery(STMT);
 
 boolean isValid = false ;
 
@@ -33,52 +31,36 @@ boolean enEchec = false ;
 if((Math.abs(oldX-posX)+Math.abs(oldY-posY))>0){
 
  switch(typePiece){
-    //verification Tour :
-    case "tour" : verifTour();
-    /* if((posX==oldX)||(posY==oldY)){
-      isValid = true;
-      static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and (px between oldX and posX or py between oldY and posY) ";
-    }*/
-    //verification Fou:
-    case "fou" : verifFou();
-    /*if(Math.abs(oldX-posX)==Math.abs(oldY-posY)){
-      isValid = true;
-      static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and px between oldX and posX and py between oldY and posY and py-oldY=px-oldX ";
-    }*/
-    //verification Roi:
-    case "roi" : verifRoi();
-    /* if(Math.abs(oldX-posX)<2 && Math.abs(oldY-posY)<2){
-      isValid = true;
-      static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and px between oldX and posX and py between oldY and posY ";
-    }*/
-    //verification cavalier:
-    case "cavalier" : verifCavalier();
-    /*if((Math.abs(oldX-posX)==2 && Math.abs(oldY-posY)==1)||(Math.abs(oldX-posX)==1 && Math.abs(oldY-posY)==2)){
-      isValid = true;
-      if(Math.abs(oldY-posY)==1)
-        static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and px between oldX and posX";
-      else
-        static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and py between oldY and posY ";
 
-    }*/
-    //verification reine:
-    case "reine" : verifReine();
-    /*if((Math.abs(oldX-posX)<2 && Math.abs(oldY-posY)<2)!=(posX==oldX)||(posY==oldY)){
-      isValid = true;
-      static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece where numRencontre=nr and nomTour=nt and coul<>couleur and px between oldX and posX and py between oldY and posY ";
-    }*/
-    //verification pion
-    case "pion" : verifPion();
-    /*if(rset.getInt(1)<>null &&(posY1=rset.getInt(4))&&(posX==rset.getInt(3))){
-                    isValid = true;
-                  }
-                  else if(rset.wasNull()&&(posY-oldY==1)&&(posX==oldX)){
-                    isValid = true;
-                  }
-  }*/
+    case "tour" : VerifTour(posY,oldY,posX,oldX);
+                  static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
+                  where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py between {$oldY} and {$posY} and px between {$oldX} and {$posX}";
+                  VerifTour();
+
+    case "fou" : VerifFou(posY,oldY,posX,oldX);
+                 static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
+                 where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py between {$oldY} and {$posY} and px between {$oldX} and {$posX}";
+                 VerifFou();
+
+    case "roi" : VerifRoi(posY,oldY,posX,oldX);
+
+    case "cavalier" : VerifCavalier(posY,oldY,posX,oldX);
+
+    case "reine" : VerifReine(posY,oldY,posX,oldX);
+
+    case "pion" : VerifPion(posY,oldY,posX,oldX);
 }
 
-//Si le coup est vérifié, insertion dans l'historique + mise à jour de la position de la pièce
-static final String STMT = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES();";
+if(isValid){
+  //Si le coup est vérifié, insertion dans l'historique + mise à jour de la position de la pièce
+  static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
+  where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py ={$posY} and px={$posX}";
+  //si il y a des pièces qui vont être mangées
+  static final String STMT = "Delete from piece where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py ={$posY} and px={$posX};";
 
-static final String STMT = "update Piece SET oldX=posX, oldY=posY ;";
+  static final String STMT = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES();";
+
+  static final String STMT = "update Piece SET oldX=posX, oldY=posY ;";
+
+  blanc = !blanc;
+}
