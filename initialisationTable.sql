@@ -3,7 +3,7 @@ CREATE TABLE Tour(
 	PRIMARY KEY(nomTour));
 
 CREATE TABLE Joueur(
-  idJoueur integer NOT NULL,
+  idJoueur integer NOT NULL auto_increment,
   nomJoueur character varying(30),
   prenomJoueur character varying(30),
   dateNaissance DATE,
@@ -13,15 +13,16 @@ CREATE TABLE Joueur(
 CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
 	typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
-	posX integer check(0<posX<9),
-	posY character check(posY in ('A','B','C','D','E','F','G','H'),
-	oldX integer check(0<oldX<9),
-	oldY character check(oldY in ('A','B','C','D','E','F','G','H'),
-	couleur	character varying(5) check(couleur in('blanc','noir'),
-	numRencontre integer not null,
-	nomTour varchar(20) NOT NULL,
-	PRIMARY KEY(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
+	posX character check(posY in ('A','B','C','D','E','F','G','H')),
+	posY integer check(0<posX<9),
+	oldX character check(oldY in ('A','B','C','D','E','F','G','H')),
+	oldY integer check(0<oldX<9),
+	couleur	character varying(5) check(couleur in('blanc','noir')),
+	--numRencontre integer not null,
+	--nomTour varchar(20) NOT NULL,
+	PRIMARY KEY(idPiece)
+	--foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
+);
 
 CREATE TABLE Rencontre(
 	numRencontre integer not null check(numRencontre>0),
@@ -36,9 +37,13 @@ CREATE TABLE Couleur(
 	primary key(nomCouleur));
 
 CREATE TABLE Historique(
-	idCoup integer not null,
+	idCoup integer not null auto_increment,
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
+	posX character check(posX in ('A','B','C','D','E','F','G','H'),
+	posY integer check(0<posY<9),
+	oldX character check(oldX in ('A','B','C','D','E','F','G','H'),
+	oldY integer check(0<oldY<9),
 	primary key(idCoup),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour));
 
