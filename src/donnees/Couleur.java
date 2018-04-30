@@ -1,5 +1,13 @@
 package donnees;
 
+public enum Couleur {
+	blanc,
+	noir
+}
+
+/*
+package donnees;
+
 import java.sql.*;
 
 public class Couleur {
@@ -8,11 +16,16 @@ public class Couleur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  public Couleur() {
-
+  private enum couleur {
+    blanc,
+    noir;
   }
 
-  public String getCouleur(String posX, int posY, int numRencontre, String nomTour) {
+  public Couleur() {
+    this.couleur=
+  }
+
+  public static String getCouleur(String posX, int posY, int numRencontre, String nomTour) {
 
     try {
       // Enregistrement du driver Oracle
@@ -52,3 +65,4 @@ public class Couleur {
       }
   }
 }
+ */
