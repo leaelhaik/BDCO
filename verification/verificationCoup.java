@@ -18,7 +18,7 @@ if((blanc && couleur=="blanc") || (!blanc && couleur=="noir"){
 
 
 //l'état echec à définir
-//select les pièces de l'autre couleur 
+//select les pièces de l'autre couleur
 
 //verification Coup : Selon TypePiece et Etat dynamique
 
@@ -50,6 +50,11 @@ if((Math.abs(oldX-posX)+Math.abs(oldY-posY))>0){
 
     case "pion" : VerifPion(posY,oldY,posX,oldX);
 }
+
+
+//Savoir si le roi est en échec ou pas
+static final String STMT= "select posX,posY from piece where numRencontre={$numRencontre} and nomTour={$nomTour} and typePiece='roi'";
+//appliquer les verifs sur toutes les pièces noires en prenant posX celle du roi blanc
 
 if(isValid){
   //Si le coup est vérifié, insertion dans l'historique + mise à jour de la position de la pièce
