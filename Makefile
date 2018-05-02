@@ -1,4 +1,4 @@
-# Ensimag 2A BDCO 
+# Ensimag 2A BDCO
 # ============================
 #
 # Ce Makefile permet de compiler le test de l'ihm en ligne de commande.
@@ -25,18 +25,24 @@ all: testSimulateur
 
 
 testSimulateur:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java	
+	javac   -d bin -classpath bin/gui.jar:bin/ojdbc6.jar -sourcepath src src/TestSimulateur.java
 
-# Execution:
-# on peut taper directement la ligne de commande :
-#   > java -classpath bin:bin/gui.jar TestInvader
-# ou bien lancer l'execution en passant par ce Makefile:
-#   > make exeInvader
+
+testIGEchiquier:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
+
+
+#Execution
+
+exeIGEchiquier:
+	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
 
 exeSimulateur:
-	java -classpath bin:bin/gui.jar TestSimulateur
+	java -classpath bin:bin/gui.jar:bin/ojdbc6.jar TestSimulateur
+
 
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/**/*.class
 	rm -rf bin/**/**/*.class
+

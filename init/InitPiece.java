@@ -11,13 +11,13 @@ public class InitPiece {
 
   static final String STMT1 = "Insert into Piece Values('1','tour','A','1','A','1','blanc','1', 'finale')";
   static final String STMT2 = "Insert into Piece Values('2','tour','H','1','H','1','blanc','1', 'finale')";
-  static final String STMT3 = "Insert into Piece Values('3','cavalier','C','1','C','1','blanc','1', 'finale')";
+  static final String STMT3 = "Insert into Piece Values('3','cavalier','B','1','B','1','blanc','1', 'finale')";
   static final String STMT4 = "Insert into Piece Values('4','cavalier','G','1','G','1','blanc','1', 'finale')";
   static final String STMT5 = "Insert into Piece Values('5','fou','C','1','C','1','blanc','1', 'finale')";
   static final String STMT6 = "Insert into Piece Values('6','fou','F','1','F','1','blanc','1', 'finale')";
-  static final String STMT7 = "Insert into Piece Values('7','reine','D','1','D','1','blanc','1', 'finale')";
-  static final String STMT8 = "Insert into Piece Values('8','roi','E','1','E','1','blanc','1', 'finale')";
-  static final String STMT9 = "Insert into Piece Values('9','pion','A','1','A','1','blanc','1', 'finale')";
+  static final String STMT7 = "Insert into Piece Values('7','reine','E','1','E','1','blanc','1', 'finale')";
+  static final String STMT8 = "Insert into Piece Values('8','roi','D','1','D','1','blanc','1', 'finale')";
+  static final String STMT9 = "Insert into Piece Values('9','pion','A','2','A','2','blanc','1', 'finale')";
   static final String STMT10 = "Insert into Piece Values('10','pion','H','2','H','2','blanc','1', 'finale')";
   static final String STMT11 = "Insert into Piece Values('11','pion','B','2','B','2','blanc','1', 'finale')";
   static final String STMT12 = "Insert into Piece Values('12','pion','G','2','G','2','blanc','1', 'finale')";

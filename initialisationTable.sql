@@ -8,7 +8,7 @@ CREATE TABLE Joueur(idJoueur integer NOT NULL ,
 
 CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
-	-- typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
+	typePiece varchar(20) NOT NULL CHECK(typePiece in('roi','reine','tour','fou','cavalier','pion')),
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),

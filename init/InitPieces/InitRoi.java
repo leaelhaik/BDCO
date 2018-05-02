@@ -7,27 +7,27 @@ public class InitRoi {
   static final String PASSWD = "dhouibd";
 
   // Finale
-  static final String STMT1 = "Insert into Roi Values('1','E','1','E','1','blanc','1', 'finale')";
+  static final String STMT1 = "Insert into Roi Values('1','D','1','D','1','blanc','1', 'finale')";
   static final String STMT2 = "Insert into Roi Values('2','D','8','D','8','noir','1', 'finale')";
 
   // Demies finale
-  static final String STMT3 = "Insert into Roi Values('3','E','1','E','1','blanc','1', 'demiFinale')";
+  static final String STMT3 = "Insert into Roi Values('3','D','1','D','1','blanc','1', 'demiFinale')";
   static final String STMT4 = "Insert into Roi Values('4','D','8','D','8','noir','1', 'demiFinale')";
-  static final String STMT5 = "Insert into Roi Values('5','E','1','E','1','blanc','2', 'demiFinale')";
+  static final String STMT5 = "Insert into Roi Values('5','D','1','D','1','blanc','2', 'demiFinale')";
   static final String STMT6 = "Insert into Roi Values('6','D','8','D','8','noir','2', 'demiFinale')";
 
   // Quarts de finale
-  static final String STMT7 = "Insert into Roi Values('7','E','1','E','1','blanc','1', 'quartFinale')";
+  static final String STMT7 = "Insert into Roi Values('7','D','1','D','1','blanc','1', 'quartFinale')";
   static final String STMT8 = "Insert into Roi Values('8','D','8','D','8','noir','1', 'quartFinale')";
-  static final String STMT9 = "Insert into Roi Values('9','E','1','E','1','blanc','2', 'quartFinale')";
+  static final String STMT9 = "Insert into Roi Values('9','D','1','D','1','blanc','2', 'quartFinale')";
   static final String STMT10 = "Insert into Roi Values('10','D','8','D','8','noir','2', 'quartFinale')";
-  static final String STMT11 = "Insert into Roi Values('11','E','1','E','1','blanc','3', 'quartFinale')";
+  static final String STMT11 = "Insert into Roi Values('11','D','1','D','1','blanc','3', 'quartFinale')";
   static final String STMT12 = "Insert into Roi Values('12','D','8','D','8','noir','3', 'quartFinale')";
-  static final String STMT13 = "Insert into Roi Values('13','E','1','E','1','blanc','4', 'quartFinale')";
+  static final String STMT13 = "Insert into Roi Values('13','D','1','D','1','blanc','4', 'quartFinale')";
   static final String STMT14 = "Insert into Roi Values('14','D','8','D','8','noir','4', 'quartFinale')";
 
   // Qualifications
-  static final String STMTRB = "Insert into Roi Values('?','E','1','E','1','blanc','?', 'qualifications')";
+  static final String STMTRB = "Insert into Roi Values('?','D','1','D','1','blanc','?', 'qualifications')";
   static final String STMTRN = "Insert into Roi Values('?','D','8','D','8','noir','?', 'qualifications')";
 
   public InitRoi(int nbRencontresQualif) {

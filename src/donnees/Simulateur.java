@@ -114,6 +114,8 @@ public class Simulateur implements Simulable{
 
 	private void dessinePions(int taille) {
 		int i,j=1;
+		
+		int coordI = 8;
 		String coordJ;
 		int x,y;
 		//String couleur = null;
@@ -123,15 +125,14 @@ public class Simulateur implements Simulable{
 			for (j=1;j<=8;j++){
 				x =j*taille-taille/2;
 				y= i*taille-taille/2;
-				if (i==1 && j == 1) {
-					coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
-					piece = new Piece(coordJ,i,1,"finale");
-					if (piece != null) {
-						gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece.getNomPiece()+"_"+piece.getCouleur()+".png",taille, taille,null));
-					}
+				coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
+				piece = new Piece(coordJ,coordI,1,"finale");
+				if (piece != null) {
+					gui.addGraphicalElement( new ImageElement(x,y,"./images/"+piece.getNomPiece()+"_"+piece.getCouleur()+".png",taille, taille,null));
 				}
-
 			}
+			coordI--;
+			//TODO Pb avec le roi blanc
 		}
 	}
 
