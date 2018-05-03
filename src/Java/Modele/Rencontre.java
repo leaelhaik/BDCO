@@ -25,6 +25,7 @@ public class Rencontre {
         if (num < 2) {
             joueurs[num] = j;
             num++;
+            informe();
         }
     }
 
@@ -33,9 +34,11 @@ public class Rencontre {
             joueurs[0] = joueurs[1];
             joueurs[1] = null;
             num --;
+            informe();
         } else if (joueurs[1] == j) {
             joueurs[1] = null;
             num --;
+            informe();
         }
     }
 
