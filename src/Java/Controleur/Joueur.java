@@ -14,4 +14,8 @@ public abstract class Joueur {
     public boolean isValid() {
         return true;
     }
+
+    public void miseAJour() {
+
+    }
 }
