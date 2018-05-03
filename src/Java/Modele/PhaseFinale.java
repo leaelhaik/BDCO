@@ -6,8 +6,9 @@ import static javafx.application.Platform.exit;
 
 /**
  * Created by georgeb on 4/30/18.
+ * Problème : plus de 2 joueurs dans une phase.
  */
-public abstract class PhaseFinale {
+public abstract class PhaseFinale extends Tour{
     private String typeFinale;
     private Joueur j1;
     private Joueur j2;
