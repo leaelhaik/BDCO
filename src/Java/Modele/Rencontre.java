@@ -1,4 +1,4 @@
-package Java;
+package Java.Modele;
 
 /**
  * Created by georgeb on 4/11/18.
