@@ -52,7 +52,6 @@ public class Echiquier extends JPanel {
 	
 	private void dessinePions(Graphics g, int taille) {
 		int i,j=1;
-		String coordJ;
 		int x,y,z;
 		z= taille/6;
 		String couleur = null;
@@ -82,7 +81,6 @@ public class Echiquier extends JPanel {
 	 * @param taille la taille des cases
 	 */
 	private void dessineLegende(Graphics g, int taille){
-		java.awt.image.ImageObserver obs=null;
 		int x = taille/2;
 
 		int y = taille/2;
