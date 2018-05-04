@@ -1,13 +1,13 @@
 import java.sql.*;
 
-public class CreateJoueur {
+public class CreateHistorique {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
-  static final String STMT = "insert into Joueur Values('1','Dhouib','Dounia','18-FEB-1996','Chez toto')";
+  static final String STMT = "CREATE TABLE Historique(idCoup integer not null,nomTour varchar(20) NOT NULL,numRencontre integer not null,posX character check(posX in ('A','B','C','D','E','F','G','H')),posY integer check(posY<9),oldX character check(oldX in ('A','B','C','D','E','F','G','H')), oldY integer check(oldY<9),primary key(idCoup),foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour))";
 
-  public CreateJoueur()
+  public CreateHistorique()
   // String nom, String prenom, String adresse, Date date)
   {
     try {
@@ -35,6 +35,6 @@ public class CreateJoueur {
     }
 
     public static void main(String args[]) {
-      new CreateJoueur();
+      new CreateHistorique();
     }
   }

@@ -1,10 +1,11 @@
 CREATE TABLE Tour(nomTour varchar(20) NOT NULL CHECK(nomTour in ('finale','demiFinale','quartFinale','qualifications')),PRIMARY KEY(nomTour));
 
-CREATE TABLE Joueur(idJoueur integer NOT NULL ,
+CREATE TABLE Joueur(idJoueur integer,
 	nomJoueur character varying(30),
 	prenomJoueur character varying(30),
 	dateNaissance DATE,
-	adresseJoueur character varying(30),PRIMARY KEY(idJoueur));
+	adresseJoueur character varying(30),
+	PRIMARY KEY(idJoueur));
 
 CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
@@ -14,93 +15,10 @@ CREATE TABLE Piece(
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),
 	oldY integer check((0<oldY) and (oldY<9)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
+	nomTour varchar(20) NOT NULL,
 	PRIMARY KEY(idPiece),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Pion(
-	idPiecePion INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and((ascii(posX)=ascii(oldX)or(ascii(posX)=ascii(oldX)-1)or(ascii(posX)=ascii(oldX)+1))),
-	oldY integer check((0<oldY) and (oldY<9)and (posY=oldY+1)),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPiecePion),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Tour(
-	idPieceTour INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') ),
-	oldY integer check((0<oldY) and (oldY<9) and ((oldX=posX)<>(oldY=posY))),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPieceTour),
-	foreign key(idPieceTour) REFERENCES Piece(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Roi(
-	idPieceRoi INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (ascii(posX) between ascii(oldX)-2 and ascii(oldX)+2)),
-	oldY integer check((0<oldY) and (oldY<9) and ((oldY<>posY)or(posX<>oldX)) and(posY between oldY-2 and oldY+2)),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPieceRoi),
-	foreign key(idPieceRoi) REFERENCES Piece(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Reine(
-	idPieceReine INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),
-	oldY integer check((0<oldY) and (oldY<9) and (oldY<>posY or oldX<>posX) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY)))),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPieceReine),
-	foreign key(idPieceReine) REFERENCES Piece(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Fou(
-	idPieceFou INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (posX<>oldX)),
-	oldY integer check((0<oldY) and (oldY<9) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))or(oldX=posX)<>(oldY=posY)) and (oldY<>posY or oldX<>posX)),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPieceFou),
-	foreign key(idPieceFou) REFERENCES Piece(idPiece),
-	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
-);
-
-CREATE TABLE Cavalier(
-	idPieceCavalier INTEGER NOT NULL ,
-	posX character check(posX in ('A','B','C','D','E','F','G','H')),
-	posY integer check((0<posY) and (posY<9)),
-	oldX character check(oldX in ('A','B','C','D','E','F','G','H') and (posX<>oldX)),
-	oldY integer check((0<oldY) and (oldY<9)and (oldY<>posY)and((ascii(posX)=ascii(oldX)+1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)-1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)+2 and posY=oldY+1)or(ascii(posX)=ascii(oldX)-2 and posY=oldY+1))),
-	couleur	character varying(5) check(couleur in('blanc','noir')),
-	nomTour varchar(20) NOT NULL,
-	numRencontre integer not null,
-	PRIMARY KEY(idPieceCavalier),
-	foreign key(idPieceCavalier) REFERENCES Piece(idPiece),
-	foreign key(numRenconre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
 );
 
 CREATE TABLE Rencontre(
