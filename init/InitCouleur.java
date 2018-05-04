@@ -1,13 +1,15 @@
 import java.sql.*;
 
-public class getPiece {
+public class InitCouleur {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  public getPiece(String posX, int posY, int numRencontre, String nomTour) {
+  static final String STMT1 = "insert into Couleur Values('blanc')";
+  static final String STMT2 = "insert into Couleur Values('noir')";
 
+  public InitCouleur() {
     try {
       // Enregistrement du driver Oracle
       System.out.print("Loading Oracle driver... ");
@@ -18,22 +20,16 @@ public class getPiece {
       Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
       System.out.println("connected");
       conn.setAutoCommit(false);
-      String STMT = "select typePiece from Piece where posX = " + posX + ", posY = " + posY + ", numRencontre = " + numRencontre + ", nomTour = " + nomTour + "";
-      Statement preparedStatement = conn.preparedStatement(STMT);
       // Creation de la requete
       Statement stmt = conn.createStatement();
       // Execution de la requete
-      ResultSet rset = stmt.executeQuery(STMT);
+      ResultSet rset1 = stmt.executeQuery(STMT1);
+      ResultSet rset2 = stmt.executeQuery(STMT2);
+
+
       conn.commit();
-
-      // Parcours de la TABLE
-      System.out.println("*************************");
-      System.out.println("Piece : ");
-
-      dumpResultSet(rset);
-
-      // Fermeture
-      rset.close();
+      rset1.close();
+      rset2.close();
       stmt.close();
       conn.close();
     } catch (SQLException e) {
@@ -41,4 +37,8 @@ public class getPiece {
         e.printStackTrace(System.err);
       }
   }
+
+    public static void main(String args[]) {
+      new InitCouleur();
+    }
 }

@@ -30,6 +30,7 @@ public class verifTour {
 
       dumpResultSet(rset);
 
+      conn.commit();
       // Fermeture
       rset.close();
       stmt.close();

@@ -4,10 +4,8 @@ static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensio
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
 
-static final String STMT1 = "insert into Tour Values('finale')";
-static final String STMT2 = "insert into Tour Values('demiFinale')";
-static final String STMT3 = "insert into Tour Values('quartFinale')";
-static final String STMT4 = "insert into Tour Values('qualifications')";
+static final String STMT = "CREATE TABLE Tour(nomTour varchar(20) NOT NULL CHECK(nomTour in ('finale','demiFinale','quartFinale','qualifications')),PRIMARY KEY(nomTour))";
+
 
 
 public CreateTour() {
@@ -24,16 +22,11 @@ public CreateTour() {
     // Creation de la requete
     Statement stmt = conn.createStatement();
     // Execution de la requete
-    ResultSet rset1 = stmt.executeQuery(STMT1);
-    ResultSet rset2 = stmt.executeQuery(STMT2);
-    ResultSet rset3 = stmt.executeQuery(STMT3);
-    ResultSet rset4 = stmt.executeQuery(STMT4);
+    ResultSet rset = stmt.executeQuery(STMT);
+
 
     conn.commit();
-    rset1.close();
-    rset2.close();
-    rset3.close();
-    rset4.close();
+    rset.close();
     stmt.close();
     conn.close();
   } catch (SQLException e) {

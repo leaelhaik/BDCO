@@ -1,6 +1,7 @@
 import gui.GUISimulator;
-import donnees.Simulateur;
+import donnees.*;
 import java.awt.Color;
+import java.sql.*;
 
 public class TestSimulateur {
 

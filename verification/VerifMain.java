@@ -37,6 +37,11 @@ public class VerifMain {
       dumpResultSet(rsetSelectPiece);
       System.out.println("");
 
+      System.out.println("Table Tour");
+      ResultSet rsetSelectTour = stmt.executeQuery(STMTSelectTour);
+      dumpResultSet(rsetSelectTour);
+      System.out.println("");
+
       System.out.println("Table Affectation Couleur");
       ResultSet rsetSelectAffectationCouleur = stmt.executeQuery(STMTSelectAffectationCouleur);
       dumpResultSet(rsetSelectAffectationCouleur);
@@ -62,10 +67,6 @@ public class VerifMain {
       dumpResultSet(rsetSelectRencontre);
       System.out.println("");
 
-      System.out.println("Table Tour");
-      ResultSet rsetSelectTour = stmt.executeQuery(STMTSelectTour);
-      dumpResultSet(rsetSelectTour);
-      System.out.println("");
 
       // PreparedStatement pS = conn.prepareStatement(STMTSelectDodo);
       // System.out.println("Dodo");

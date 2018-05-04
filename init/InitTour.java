@@ -45,6 +45,6 @@ public class InitTour {
   }
 
     public static void main(String args[]) {
-      new CreateTour();
+      new InitTour();
     }
 }

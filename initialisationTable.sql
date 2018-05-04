@@ -1,10 +1,11 @@
 CREATE TABLE Tour(nomTour varchar(20) NOT NULL CHECK(nomTour in ('finale','demiFinale','quartFinale','qualifications')),PRIMARY KEY(nomTour));
 
-CREATE TABLE Joueur(idJoueur integer NOT NULL ,
+CREATE TABLE Joueur(idJoueur integer,
 	nomJoueur character varying(30),
 	prenomJoueur character varying(30),
 	dateNaissance DATE,
-	adresseJoueur character varying(30),PRIMARY KEY(idJoueur));
+	adresseJoueur character varying(30),
+	PRIMARY KEY(idJoueur));
 
 CREATE TABLE Piece(
 	idPiece INTEGER NOT NULL ,
@@ -23,7 +24,7 @@ CREATE TABLE Piece(
 	numRencontre integer not null,
 	PRIMARY KEY(idPiece),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour),
-	constraint mouvment 
+	constraint mouvment
 );
 
 

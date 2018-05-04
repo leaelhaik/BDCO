@@ -8,7 +8,8 @@ public class CreateAffectationCouleur {
   static final String STMT = "select idJoueur from Joueur";
   String STMT1 = "insert into AffectationCouleur values(?,'qualifications',?,?)";
 
-  public CreateAffectationCouleur()
+
+  public InitAffectationCouleur()
   // String nom, String prenom, String adresse, Date date)
   {
     try {
@@ -54,7 +55,20 @@ public class CreateAffectationCouleur {
       }
       // Execution de la requete
       conn.commit();
-      rset.close();
+      rset1.close();
+      rset2.close();
+      rset3.close();
+      rset4.close();
+      rset5.close();
+      rset6.close();
+      rset7.close();
+      rset8.close();
+      rset9.close();
+      rset10.close();
+      rset11.close();
+      rset12.close();
+      rset13.close();
+      rset14.close();
       stmt.close();
       conn.close();
     } catch (SQLException e) {
@@ -64,6 +78,6 @@ public class CreateAffectationCouleur {
     }
 
     public static void main(String args[]) {
-      new CreateAffectationCouleur();
+      new InitAffectationCouleur();
     }
   }
