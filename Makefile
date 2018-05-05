@@ -1,6 +1,9 @@
+# Ensimag 2A BDCO
+# ============================
+#
 # Ce Makefile permet de compiler le test de l'ihm en ligne de commande.
 # Alternative (recommandee?): utiliser un IDE (eclipse, netbeans, ...)
-# Le but est d'illustrer les notions de "classpath", a vous de l'adapter
+# Le but est ici d'illustrer les notions de "classpath", a vous de l'adapter
 # a votre projet.
 #
 # Organisation:
@@ -10,7 +13,7 @@
 #
 #  2) Les bytecodes (*.class) se trouvent dans le repertoire bin
 #     La hierarchie des sources (par package) est conservee.
-#     Pour un package (ici gui.jar), il est aussi dans bin.
+#     L'archive bin/gui.jar contient les classes de l'interface graphique
 #
 # Compilation:
 #  Options de javac:
@@ -18,21 +21,24 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testSimulator  
+all: testIGEchiquier testIGTournoi
 
-testSimulator:
-	javac -d bin -classpath bin/gui.jar -sourcepath src src/Simulator.java
+testIGEchiquier:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
 
-
-# Execution:
-# on peut taper directement la ligne de commande :
-#   > java -classpath bin TestGUI
-# ou bien lancer l'execution en passant par ce Makefile:
-#   > make exeIHM
+testIGTournoi:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGTournoi.java
 
 
-exeSimulator:
-	java -classpath bin:bin/gui.jar Simulator
+#Execution
 
+exeIGEchiquier:
+	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
+
+exeIGTournoi:
+	java -classpath bin:bin/ojdbc6.jar TestIGTournoi
 clean:
 	rm -rf bin/*.class
+	rm -rf bin/**/*.class
+	rm -rf bin/**/**/*.class
+
