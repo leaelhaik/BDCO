@@ -30,7 +30,9 @@ public class ExecutablePartie extends JFrame {
 	private Menu menu = new Menu(9);
     private PartieEnCours partieEnCours = new PartieEnCours();
     private PartieTerminee partieTerminee = new PartieTerminee();
-    private JButton boutonQuitter = new JButton("Quitter la partie");
+    private JButton boutonQuitter = new JButton("Abandonner la partie");
+    private JButton boutonPat = new JButton("PAT");
+    private JButton boutonRetour = new JButton("Retour");
 	private JTextField nomJoueur = new JTextField("");
 	private JTextField prenomJoueur = new JTextField("");
     
@@ -71,9 +73,9 @@ public class ExecutablePartie extends JFrame {
 		south.setLayout(new BoxLayout(south, BoxLayout.LINE_AXIS));
 		JButton boutonChoix = new JButton("Choisir cette rencontre");
 		boutonChoix.addActionListener(new BoutonChoixListener());
-		JButton boutonRetour = new JButton("Retour");
-		boutonRetour.addActionListener(new BoutonRetourListener());
-		south.add(boutonRetour);
+		JButton boutonRetour2 = new JButton("Retour");
+		boutonRetour2.addActionListener(new BoutonRetourListener());
+		south.add(boutonRetour2);
 		south.add(boutonChoix);
 		
 		men.add(south,BorderLayout.SOUTH);
@@ -86,8 +88,14 @@ public class ExecutablePartie extends JFrame {
 	    partie.add(partieEnCours);
 	    
 	    boutonQuitter.addActionListener(new BoutonQuitterListener());
-	    
-	    partie.add(boutonQuitter, BorderLayout.NORTH);
+	    boutonPat.addActionListener(new BoutonPatListener());
+	    boutonRetour.addActionListener(new BoutonRetourListener());
+	    JPanel north = new JPanel();
+	    north.setLayout(new BoxLayout(north,BoxLayout.LINE_AXIS));
+	    north.add(boutonRetour);
+	    north.add(boutonPat);
+	    north.add(boutonQuitter);
+	    partie.add(north, BorderLayout.NORTH);
 	    
 	    cards.setLayout(cl);
 	    cards.add(ouverture,OUVERTURE);
@@ -147,6 +155,14 @@ public class ExecutablePartie extends JFrame {
 		
 	}
 
+	class BoutonPatListener implements java.awt.event.ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			//proposition de pat
+			
+		}
+		
+	}
 
 
 	
