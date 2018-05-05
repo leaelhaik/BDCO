@@ -82,6 +82,8 @@ public class VerifTour {
         System.out.println(nbLignes);
         if(nbLignes != 0)
           isValid = false;
+        else
+          isValide = true;
         rset.close();
         System.out.println(isValid);
       }
@@ -90,6 +92,7 @@ public class VerifTour {
             System.err.println("failed");
             e.printStackTrace();
       }
+      System.out.println(isValid);
 
   }
 
@@ -112,7 +115,7 @@ public class VerifTour {
     Connect co = new Connect();
     Connection conn = co.getConnection();
     int posY = 1;
-    int oldY = 1;
+    int oldY = 2;
     String posX = "A";
     String oldX = "D";
     int numRencontre = 1;

@@ -113,7 +113,9 @@ public class VerifReine {
         }
         System.out.println(nbLignes);
         if(nbLignes != 0)
-          isValid = false;
+          this.isValid = false;
+        else
+          this.isValid = true;
         rset.close();
         System.out.println(isValid);
       }
