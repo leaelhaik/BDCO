@@ -12,15 +12,20 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
     }
 
     @Override
-    public void nouvelleRencontre(Joueur blanc, Joueur noir) {
+    public void nouvelleRencontre(Joueur blanc, Joueur noir, String tour) {
         /*
         Cette fonction créé et envoie la requête qui permet d'ajouter une nouvelle rencontre dans la BD.
-        Valeurs :
-        etat : en cours
-        Joueur blanc : blanc
-        Joueur noir : noir
-        id : last_id +1
-        ...
+        id = dernière id utilisée dans la table Rencontre + 1
+        Ajout d'une ligne dans rencontre :
+        numRencontre : id
+        idJoueur : null
+        nomTour : tour
+
+        Ajout de deux lignes dans AffectationCouleur
+        idJoueur : blanc.id | noir.id
+        nomTour :  tour     | tour
+        numRencontre : id   | id
+        nomCouleur : blanc  | noir
          */
     }
 }
