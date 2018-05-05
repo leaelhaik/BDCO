@@ -10,10 +10,9 @@ public class Rencontre {
     Joueur joueurs[] = new Joueur[2];
     int num = 0;
 
-    public void Rencontre(boolean enCours){
-
+    public Rencontre(int id) {
+        this.enCours = getDEtat(id);
     }
-
 
     public void Rejouer(boolean enCours){
 
@@ -44,6 +43,10 @@ public class Rencontre {
         for (Joueur j : joueurs) {
             j.miseAJour();
         }
+    }
+
+    public boolean getDEtat(int id) {
+        return true;
     }
 
 }
