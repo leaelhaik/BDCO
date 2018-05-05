@@ -10,29 +10,31 @@ import static javafx.application.Platform.exit;
  */
 public abstract class PhaseFinale extends Tour{
     private String typeFinale;
-    private Joueur j1;
-    private Joueur j2;
+    private ListeJoueurs listeJoueurs;
 
-    public PhaseFinale(Joueur joueur1, Joueur joueur2 , String typeFinale){
-        Joueur j1 = new JoueurConcret("");
-        Joueur j2 = new JoueurConcret("");
-        setJoueurs(joueur1, joueur2);
-        setType(typeFinale);
+
+    public PhaseFinale(ListeJoueurs listeJoueurs, String typeFinale){
+        ListeJoueurs listeJoueurs = new ListeJoueurs();
+        setJoueurs(listeJoueurs); //on set les joueurs
+        setType(typeFinale); //on définit le type de finale (c'est un string)
     }
 
-    //accesseurs et mutateurs
-    public Joueur getJoueur1(){
-        return this.j1;
+//--------------accesseurs et mutateurs-------------------
+
+
+    public ListeJoueurs getListeJoueurs(){
+        return this.listeJoueurs;
     }
 
-    public Joueur getJoueur2(){
-        return this.j2;
-    }
 
-    private void setJoueurs(Joueur j1, Joueur j2){
-        if(j1.isValid() && j2.isValid()) {
-            this.j1 = j1;
-            this.j2 = j2;
+
+    private void setJoueurs(ListeJoueurs listeJoueurs){
+        //on vérifie si la liste des joueurs est valide
+        if(listeJoueurs.isValid()) {
+            //si c'est le cas, on copie les joueurs dans la liste des joueurs
+            for (int i = 0; i < listeJoueurs.getNumberJoueurs(); i++){
+                this.listeJoueurs.ajoutJoueur(listeJoueurs.getJoueur(i));
+            }
         }
         else{
             System.out.println("Les joueurs ne sont pas valides, fermeture du programme");
@@ -40,9 +42,10 @@ public abstract class PhaseFinale extends Tour{
         }
     }
 
+
     private void setType(String typeFinale){
         if (!this.typeFinale.equals("quart") && !this.typeFinale.equals("demi") && !this.typeFinale.equals("finale")){
-            System.out.println("Le nom de la phase finale n'est pas valide");
+            System.out.println("Le nom de la phase finale n'est pas valide" + this.typeFinale);
             exit();
         }
         else {

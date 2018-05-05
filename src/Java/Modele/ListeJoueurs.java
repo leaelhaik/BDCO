@@ -31,6 +31,11 @@ public class ListeJoueurs {
             throw new IllegalArgumentException("Il n'y a plus de joueurs");
         }
     }
+    //pour ajouter un joueur dans la liste
+    public void ajoutJoueur(Joueur j){
+        this.myJoueurs.add(j);
+        this.nbJoueurs++;
+    }
     /*
     //TODO : A FINIR
     public void setNewJoueur(String A_COMPLETER_QUAND_JOUEUR_IMPLEMENTER){
@@ -39,6 +44,15 @@ public class ListeJoueurs {
     }*/
 
     public int getNumberJoueurs() { return this.nbJoueurs;}
+
+    public boolean isValid(ListeJoueurs listeJoueurs){
+        for(int i = 0; i < nbJoueurs; i++){
+            if (!listeJoueurs[i].isValid){
+                return false;
+            }
+        }
+        return true;
+    }
 
 
 }

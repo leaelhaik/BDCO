@@ -5,4 +5,5 @@ package Java.Controleur;
  */
 public class Fabrique {
     public static FabriqueJoueur joueurs;
+
 }
