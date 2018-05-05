@@ -20,7 +20,6 @@ public class verifPiece {
             e.printStackTrace();
       }
 
-
   }
 
   private void dumpResultSet(ResultSet rset) throws SQLException {
