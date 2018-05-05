@@ -129,12 +129,12 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 	    JPanel north5 = new JPanel();
 	    north5.add(new JLabel("Tournoi n°" + getIDTournoi()));
 	    north5.add(new JLabel(" - Finale"));
-	    tourDemis.add(north5,BorderLayout.NORTH);
+	    tourFinale.add(north5,BorderLayout.NORTH);
 	    JButton boutonRetour5 = new JButton("Retour");
 	    boutonRetour5.addActionListener(new BoutonRetourListener());
 	    JPanel south5 = new JPanel();
 	    south5.add(boutonRetour5);    
-	    tourDemis.add(south5, BorderLayout.SOUTH);
+	    tourFinale.add(south5, BorderLayout.SOUTH);
 	    
 	    
 	    
@@ -150,11 +150,11 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 	    cards.setLayout(cl);
 	    cards.add(debut, DEBUT);
 	    cards.add(creationTournoi,NOUVEAUTOURNOI);
+	    cards.add(suiviTournoi,TOURNOIEXISTANT);
 	    cards.add(tourQualif,QUALIFS);
 	    cards.add(tourQuarts, QUARTS);
 	    cards.add(tourDemis, DEMIS);
 	    cards.add(tourFinale, FINALE);
-	    cards.add(suiviTournoi,TOURNOIEXISTANT);
 	    
 
 	    //JPanel tournoi = new JPanel();
@@ -164,7 +164,7 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 
 private int getPhase() {
 	// TODO retourner 0,1,2 ou 3 en fonction de la phase, autre chose si tournoi non commencé
-	return 0;
+	return 2;
 }
 
 private int getIDTournoi() {
