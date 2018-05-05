@@ -111,7 +111,8 @@ public class InscriptionJoueur extends JPanel {
 				label.setText("Date de naissance erronée");
 				return;
 			} 
-			
+			String birth = year + "-" + month + "-" + day;
+			//Birth est au format attendu par la BD
 			
 		}
 		
