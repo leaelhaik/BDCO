@@ -1,10 +1,11 @@
 package ig_tournoi;
 
 
+import Controleur.NouveauJoueur;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.text.DateFormat;
 import java.util.Calendar;
 
 import javax.swing.BoxLayout;
@@ -89,6 +90,7 @@ public class InscriptionJoueur extends JPanel {
 	
 	class BoutonAjouterJoeurListener implements java.awt.event.ActionListener {
 
+
 		public void actionPerformed(ActionEvent arg0) {
 			label.setText("");
 			String name = nom.getText();
@@ -110,10 +112,13 @@ public class InscriptionJoueur extends JPanel {
 			catch(Exception iAE) { 
 				label.setText("Date de naissance erronée");
 				return;
-			} 
-			String birth = year + "-" + month + "-" + day;
+			}
+			NouveauJoueur ajout = new NouveauJoueur(name, surname, direction, year + month + day);
+			if (ajout.envoyerBD()) {
+				//Feedback : le joueur est déjà dans le tournoi!
+			}
 			//Birth est au format attendu par la BD
-			
+
 		}
 		
 	}
