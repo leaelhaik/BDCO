@@ -14,7 +14,7 @@ public class Rencontre {
         this.enCours = getDEtat(id);
     }
 
-    public void Rejouer(boolean enCours){
+    public void Rejouer(boolean enCours) {
 
     }
 
@@ -46,6 +46,9 @@ public class Rencontre {
     }
 
     public boolean getDEtat(int id) {
+        /* select idJoueur from Rencontre where numRencontre = id -> var
+            return var == null;
+         */
         return true;
     }
 
