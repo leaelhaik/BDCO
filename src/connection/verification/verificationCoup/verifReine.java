@@ -15,8 +15,6 @@ public class VerifReine {
   public VerifReine(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour) {
 
     try {
-      //int tabPosX[0] = Character.getNumericValue(posX);
-      //int tabPosY[0] = (int) oldX;
       byte[] tabOldX = null;
       byte[] tabPosX = null;
       int nbLignes = 0;
@@ -34,8 +32,6 @@ public class VerifReine {
             STMTTour1 = "select idPiece from Piece where numRencontre=? and nomTour=? and posX between ? and ? and posY = ?";
           else
             STMTTour2 = "select idPiece from Piece where numRencontre=? and nomTour=? and posX = ? and posY between ? and ?";
-            //between ? and ? ";
-            //  and
         }
         else
           STMTFou = "select idPiece from piece where numRencontre=? and nomTour=? and abs(ascii(posX)-?)=abs(posY-?) and posX between ? and ? and posY between ? and ?";
