@@ -8,7 +8,7 @@ public class VerifReine(){
       if((posX==oldX)||(posY==oldY))
         static final String STMT = "select idPiece from piece where numRenconre={$numRencontre} and nomTour={$nomTour} and abs(oldX-{$oldX})=abs(oldY-{$oldY}) and oldX between {$oldX} and {$posX} and oldY between {$oldY} and {$posY}";
       else
-      static final String STMT = "select idPiece from piece where numRenconre={$numRencontre} and nomTour={$nomTour} and (oldX-{$oldX})<>(oldY-{$oldY}) and oldX between {$oldX} and {$posX} and oldY between {$oldY} and {$posY}";
+        static final String STMT = "select idPiece from piece where numRenconre={$numRencontre} and nomTour={$nomTour} and (oldX-{$oldX})<>(oldY-{$oldY}) and oldX between {$oldX} and {$posX} and oldY between {$oldY} and {$posY}";
     }
   }
 }

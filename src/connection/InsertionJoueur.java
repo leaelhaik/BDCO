@@ -8,6 +8,7 @@ public class InsertionJoueur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
+  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=? ";
 
   public InsertionJoueur(String nom, String prenom, Date date,String adresse){
     try {
@@ -31,10 +32,16 @@ public class InsertionJoueur {
       //commit
       // Execution de la requete
       ResultSet rset = stmt.executeQuery(STMT);
-      // Affichage du resultat
-      System.out.println("Results:");
-      dumpResultSet(rset);
-      System.out.println();
+
+      PreparedStatement verif = conn.prepareStatement(STMTVerif);
+      verif.setString(1,nom);
+      verif.setSTMT(2,prenom);
+      verif.executeUpdate();
+
+      ResultSet rset2 = stmt.executeQuery(STMTVerif);
+      if(rset2.getRow()==0){
+        throw new SQLException("Joueur déjà dans la base");
+      }
       // Fermeture
       rset.close();
       stmt.close();

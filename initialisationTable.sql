@@ -13,18 +13,18 @@ CREATE TABLE Piece(
 	posX character check(posX in ('A','B','C','D','E','F','G','H')),
 	posY integer check((0<posY) and (posY<9)),
 	oldX character check(oldX in ('A','B','C','D','E','F','G','H')),
-	oldY integer check((0<oldY) and (oldY<9)) and case  WHEN typePiece = 'roi' THEN (((oldY<>posY)or(posX<>oldX)) and(posY between oldY-2 and oldY+2)and (ascii(posX) between ascii(oldX)-2 and ascii(oldX)+2))
-																					            WHEN typePiece = 'reine' THEN check((oldY<>posY or oldX<>posX) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))))
-																					            WHEN typePiece = 'tour' THEN check(((oldX=posX)<>(oldY=posY)))
-																					            WHEN typePiece = 'fou' THEN check((((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))or(oldX=posX)<>(oldY=posY)) and (oldY<>posY or oldX<>posX))
-																											WHEN typePiece = 'cavalier' THEN check((posX<>oldX)and (oldY<>posY)and((ascii(posX)=ascii(oldX)+1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)-1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)+2 and posY=oldY+1)or(ascii(posX)=ascii(oldX)-2 and posY=oldY+1)))
-																					            ELSE check(((ascii(posX)=ascii(oldX)or(ascii(posX)=ascii(oldX)-1)or(ascii(posX)=ascii(oldX)+1)))) END,
+	oldY integer check((0<oldY) and (oldY<9)),
 	couleur	character varying(5) check(couleur in('blanc','noir')),
 	nomTour varchar(20) NOT NULL,
 	numRencontre integer not null,
 	PRIMARY KEY(idPiece),
 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour),
-	constraint mouvment
+	constraint mouvment case WHEN typePiece = 'roi' THEN (((oldY<>posY)or(posX<>oldX)) and(posY between oldY-2 and oldY+2)and (ascii(posX) between ascii(oldX)-2 and ascii(oldX)+2))
+							            WHEN typePiece = 'reine' THEN check((oldY<>posY or oldX<>posX) and(((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))))
+							            WHEN typePiece = 'tour' THEN check(((oldX=posX)<>(oldY=posY)))
+							            WHEN typePiece = 'fou' THEN check((((ascii(posX)-ascii(oldX))=(posY-oldY))or((ascii(posX)-ascii(oldX))=(oldY-posY))or(oldX=posX)<>(oldY=posY)) and (oldY<>posY or oldX<>posX))
+													WHEN typePiece = 'cavalier' THEN check((posX<>oldX)and (oldY<>posY)and((ascii(posX)=ascii(oldX)+1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)-1 and posY=oldY+2)or(ascii(posX)=ascii(oldX)+2 and posY=oldY+1)or(ascii(posX)=ascii(oldX)-2 and posY=oldY+1)))
+							            ELSE check(((ascii(posX)=ascii(oldX)or(ascii(posX)=ascii(oldX)-1)or(ascii(posX)=ascii(oldX)+1)))) END
 );
 
 
