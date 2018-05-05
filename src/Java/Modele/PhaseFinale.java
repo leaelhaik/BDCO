@@ -1,6 +1,7 @@
 package Java.Modele;
 
-import static javafx.application.Platform.exit;
+import Java.Modele.Joueur;
+
 
 /**
  * Created by georgeb on 4/30/18.
@@ -36,7 +37,7 @@ public abstract class PhaseFinale extends Tour{
         }
         else{
             System.out.println("Les joueurs ne sont pas valides, fermeture du programme");
-            exit();
+
         }
     }
 
@@ -44,7 +45,7 @@ public abstract class PhaseFinale extends Tour{
     private void setType(String typeFinale){
         if (!this.typeFinale.equals("quart") && !this.typeFinale.equals("demi") && !this.typeFinale.equals("finale")){
             System.out.println("Le nom de la phase finale n'est pas valide" + this.typeFinale);
-            exit();
+
         }
         else {
             this.typeFinale = typeFinale;
