@@ -47,14 +47,42 @@ public class PartieEnCours extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-	    	 String str = coup.getText();
-		     label2.setText("Vous avez écrit "+str);
-		     
-			
-		}
-		
-	}
-	
 
-	
+		    String str = coup.getText().toUpperCase().replaceAll(" ", "");
+		    /*Vérification textuelle du coup*/
+		    if(str.length() != 4){
+				 //La longueur doit être de 4 charctères
+				 label2.setText("Coup incorrect.");
+				 return;
+		    }
+			char coordOldX = str.substring(0,1).charAt(0);
+			if(coordOldX < 65 || coordOldX > 72){
+				 //Doit être compris entre A et H
+				 label2.setText("Coup incorrect.");
+				 return;
+			 }
+			char coordOldY = str.substring(1,2).charAt(0);
+			if(coordOldY < 48 || coordOldY > 56){
+				 //Doit être compris entre 1 et 8
+				 label2.setText("Coup incorrect.");
+				 return;
+			 }
+			char coordNewX = str.substring(2,3).charAt(0);
+			if(coordNewX < 65 || coordNewX > 72){
+				 //Doit être compris entre A et H
+				 label2.setText("Coup incorrect.");
+				 return;
+			 }
+			char coordNewY = str.substring(3,4).charAt(0);
+			if(coordNewY < 49 || coordNewY > 56){
+				 //Doit être compris entre 1 et 8
+				 label2.setText("Coup incorrect.");
+				 return;
+			 }
+		    /*Fin de la vérification textuelle du coup*/
+			
+		    label2.setText("Vous avez joué "+ str);
+		    
+		}
+	}	
 }
