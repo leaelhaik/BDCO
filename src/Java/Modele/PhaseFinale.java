@@ -1,7 +1,5 @@
 package Java.Modele;
 
-import Java.Controleur.Joueur;
-
 import static javafx.application.Platform.exit;
 
 /**
@@ -14,7 +12,7 @@ public abstract class PhaseFinale extends Tour{
 
 
     public PhaseFinale(ListeJoueurs listeJoueurs, String typeFinale){
-        ListeJoueurs listeJoueurs = new ListeJoueurs();
+        listeJoueurs = new ListeJoueurs();
         setJoueurs(listeJoueurs); //on set les joueurs
         setType(typeFinale); //on définit le type de finale (c'est un string)
     }

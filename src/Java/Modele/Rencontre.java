@@ -1,7 +1,5 @@
 package Java.Modele;
 
-import Java.Controleur.Joueur;
-
 /**
  * Created by georgeb on 4/11/18.
  */
@@ -45,8 +43,6 @@ public class Rencontre {
     public void informe() {
         for (Joueur j : joueurs) {
             j.miseAJour();
-            zrghozrhgosf
-            
         }
     }
 

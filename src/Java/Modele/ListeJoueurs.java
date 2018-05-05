@@ -1,5 +1,4 @@
 package Java.Modele;
-import Java.Controleur.Joueur;
 
 import java.util.*;
 /**
@@ -45,9 +44,9 @@ public class ListeJoueurs {
 
     public int getNumberJoueurs() { return this.nbJoueurs;}
 
-    public boolean isValid(ListeJoueurs listeJoueurs){
+    public boolean isValid(){
         for(int i = 0; i < nbJoueurs; i++){
-            if (!listeJoueurs[i].isValid){
+            if (!this.getJoueur(i).isValid()){
                 return false;
             }
         }
