@@ -62,7 +62,7 @@ public class ExecutablePartie extends JFrame {
 
 	class BoutonQuitterListener implements java.awt.event.ActionListener {
 
-		@Override
+		
 		public void actionPerformed(ActionEvent arg0) {
 			cl.show(cards, PARTIETERMINEE);
 		}

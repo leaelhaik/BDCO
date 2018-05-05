@@ -14,3 +14,5 @@ Rencontre
 Tour
 Joueur
 Couleur
+
+Update Joueur SET id = '0' where id = '1'

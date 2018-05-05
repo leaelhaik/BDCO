@@ -1,4 +1,4 @@
-package connection.verification.verificationTable;
+//package connection.verification.verificationTable;
 import java.sql.*;
 
 public class verifHistorique {
@@ -8,37 +8,16 @@ public class verifHistorique {
   static final String PASSWD = "dhouibd";
   static final String STMT = "select * from Historique";
 
-  public verifHistorique() {
+  public verifHistorique(Connection conn) {
 
     try {
-      // Enregistrement du driver Oracle
-      System.out.print("Loading Oracle driver... ");
-      DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-      System.out.println("loaded");
-      // Etablissement de la connection
-      System.out.print("Connecting to the database... ");
-      Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-      System.out.println("connected");
-      conn.setAutoCommit(false);
-      // Creation de la requete
-      Statement stmt = conn.createStatement();
-      // Execution de la requete
-      ResultSet rset = stmt.executeQuery(STMT);
-
-      // Parcours de la TABLE
-      System.out.println("*************************");
-      System.out.println("Données contenues dans la table Historique : ");
-
+      SimpleQuery req = new SimpleQuery(STMT, conn);
+      ResultSet rset = req.getResult();
       dumpResultSet(rset);
-
-
-      // Fermeture
       rset.close();
-      stmt.close();
-      conn.close();
-    } catch (SQLException e) {
-        System.err.println("failed");
-        e.printStackTrace(System.err);
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
       }
   }
 
@@ -57,6 +36,9 @@ public class verifHistorique {
   }
 
   public static void main(String args[]) {
-    new verifHistorique();
+    Connect co = new Connect();
+    Connection conn = co.getConnection();
+    new verifHistorique(conn);
+    co.closeConnection();
   }
 }
