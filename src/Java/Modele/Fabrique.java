@@ -6,4 +6,6 @@ package Java.Modele;
 public class Fabrique {
     public static FabriqueJoueur joueurs;
 
+    public static FabriqueRencontre rencontres;
+
 }
