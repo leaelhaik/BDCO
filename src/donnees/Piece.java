@@ -8,7 +8,11 @@ public class Piece {
 	static final String USER = "dhouibd"; // A remplacer pour votre compte
 	static final String PASSWD = "dhouibd";
 	
+<<<<<<< HEAD
 	static final String STMT = "SELECT typePiece, couleur FROM Piece WHERE posX = ?, posY = ?, numRencontre = ?, nomTour = ?;";
+=======
+	static final String STMT = "SELECT typePiece, couleur FROM Piece WHERE posX = ? AND posY = ? AND numRencontre = ? AND nomTour = ? ";
+>>>>>>> tacheG
 
 	private Couleur couleur;
 	private String nomPiece;
@@ -44,6 +48,7 @@ public class Piece {
 			conn.commit();
 
 			// Parcours de la TABLE
+<<<<<<< HEAD
 			System.out.println("*************************");
 
 			dumpResultSet(rset);
@@ -56,6 +61,27 @@ public class Piece {
 			}
 			else {
 				this.couleur = Couleur.noir;
+=======
+			//System.out.println("*************************");
+
+			//dumpResultSet(rset);
+
+			String nomCouleur;
+			Couleur couleur;
+			
+			if (rset != null) {
+				while(rset.next()) {
+					this.nomPiece = rset.getString(1);
+					
+					nomCouleur = rset.getString(2);
+					if ( nomCouleur.equals("blanc") ){
+						this.couleur = Couleur.blanc;
+					}
+					else {
+						this.couleur = Couleur.noir;
+					}
+				}
+>>>>>>> tacheG
 			}
 
 			// Fermeture

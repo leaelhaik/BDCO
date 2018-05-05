@@ -27,11 +27,11 @@ testIGEchiquier:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
 
 
+
 #Execution
 
 exeIGEchiquier:
 	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
-
 
 
 clean:

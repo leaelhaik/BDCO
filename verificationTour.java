@@ -47,7 +47,7 @@ public class verificationTour{
     Statement stmt = conn.createStatement();
     ResultSet rset = stmt.executeQuery(STMT);
 
-    int m = fact(rset.getInt(1)-1);
+    int m = somme(rset.getInt(1)-1);
 
     static final String STMT = "select Count(DISTINCT numRencontre),nomTour from Rencontre where nomTour="qualifications";";
     //verifier qu'il s'agit bien d'une rencontre

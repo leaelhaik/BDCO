@@ -28,16 +28,7 @@ public class verifAffectationCouleur {
       System.out.println("*************************");
       System.out.println("Données contenues dans la table AffectationCouleur : ");
 
-      if(!rset.next())
-        System.out.println("Aucune donnée contenue dans la table AffectationCouleur.");
-
-      while(rset.next()) {
-        int idJoueur = rset.getInt(1);
-        String nomCouleur = rset.getString(2);
-        int numRencontre = rset.getInt(3);
-        System.out.println("| idJoueur : " + idJoueur + " | nomCouleur : " + nomCouleur
-        + " | numRencontre : " + numRencontre + " |");
-      }
+      dumpResultSet(rset);
 
       // Fermeture
       rset.close();
@@ -47,6 +38,20 @@ public class verifAffectationCouleur {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  private void dumpResultSet(ResultSet rset) throws SQLException {
+    ResultSetMetaData rsetmd = rset.getMetaData();
+    int i = rsetmd.getColumnCount();
+    for (int k=1;k<=i;k++)
+      System.out.print(rsetmd.getColumnName(k) + "\t");
+    System.out.println();
+    while (rset.next()) {
+      for (int j = 1; j <= i; j++) {
+        System.out.print(rset.getString(j) + "\t");
+      }
+      System.out.println();
+    }
   }
 
   public static void main(String args[]) {
