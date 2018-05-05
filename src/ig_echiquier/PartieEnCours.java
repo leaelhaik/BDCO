@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 public class PartieEnCours extends JPanel {
 
 	private JButton boutonJouer = new JButton("Jouer un coup");
-    private JButton boutonQuitter = new JButton("Quitter la partie");
     private JTextField coup = new JTextField();
     private JLabel label1 = new JLabel("Votre coup");
     private JLabel label2 = new JLabel("Votre tour");
@@ -27,15 +26,13 @@ public class PartieEnCours extends JPanel {
     	this.add(echiquier, BorderLayout.CENTER);
     	
     	boutonJouer.addActionListener(new BoutonJouerListener());
-	    boutonQuitter.addActionListener(new BoutonQuitterListener());
 	    
 	    
 	    JPanel south = new JPanel();
 	    coup.setPreferredSize(new Dimension(150, 30));
-	    south.add(coup);
 	    south.add(label1);
+	    south.add(coup);
 	    south.add(boutonJouer);
-	    south.add(boutonQuitter);
 	   	this.add(south, BorderLayout.SOUTH);
 	    
 	    this.add(label2, BorderLayout.NORTH);
@@ -57,16 +54,6 @@ public class PartieEnCours extends JPanel {
 		
 	}
 	
-	
-	class BoutonQuitterListener implements java.awt.event.ActionListener {
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			label2.setText("Vous avez abandonné la partie");
-			
-		}
-		
-		
-	}
 	
 }

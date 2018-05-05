@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import donnees.Piece;
+import donnees.Couleur;
 
 
 
@@ -50,21 +52,21 @@ public class Echiquier extends JPanel {
 	}
 	
 	private void dessinePions(Graphics g, int taille) {
+		int coordI = 8;
+ 		String coordJ;
+ 		Piece piece;
 		int i,j=1;
 		int x,y,z;
 		z= taille/6;
-		String couleur = null;
-		String piece = null;
 		for (i=1;i<=8;i++) {
 			for (j=1;j<=8;j++){
 				x =j*taille;
 				y= i*taille;
-				//coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
-				piece = "roi";
-				couleur = "blanc";
-				if (piece != null && couleur != null) {
+				coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
+				piece = new Piece(coordJ, coordI , 1 ,"finale");
+				if (piece.getNomPiece() != null && piece.getCouleur() != null) {
 					try {
-					 Image img = ImageIO.read(new File("./images/"+piece+"_"+couleur+".png"));
+					 Image img = ImageIO.read(new File("./images/"+piece.getNomPiece()+"_"+piece.getCouleur()+".png"));
 					 g.drawImage(img, x+z/2, y+z/2, taille-z, taille-z,null);
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -72,6 +74,7 @@ public class Echiquier extends JPanel {
 				}
 
 			}
+			coordI--;
 		}
 	} 
 	

@@ -19,11 +19,13 @@ public class ExecutablePartie extends JFrame {
 	private int hauteur;
 	private int largeur;
 	
-	private JPanel cards;
+	private CardLayout cl = new CardLayout();
+	private JPanel cards = new JPanel();
 	final static String PARTIEENCOURS = "Partie en cours";
 	final static String PARTIETERMINEE = "Partie terminée - Revisionnage";
     private PartieEnCours partieEnCours = new PartieEnCours();
     private PartieTerminee partieTerminee = new PartieTerminee();
+    private JButton boutonQuitter = new JButton("Quitter la partie");
 	
 	public ExecutablePartie(String nomFenetre, int hauteurFenetre, int largeurFenetre) {
 		
@@ -36,37 +38,20 @@ public class ExecutablePartie extends JFrame {
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
 
-	    //JPanel partie = new JPanel();
+	    JPanel partie = new JPanel();
 	    
+	    partie.setLayout(new BorderLayout());
+	    partie.add(partieEnCours);
 	    
-	    cards = new JPanel(new CardLayout());
-	    cards.add(partieEnCours,PARTIEENCOURS);
-	    cards.add(partieTerminee,PARTIETERMINEE);
-	   
-	    this.setContentPane(cards);
-	    
-	  /*  this.setContentPane(echiquier); 
-	    partieEnCours.setLayout(new BorderLayout());
-	    partieEnCours.add(echiquier, BorderLayout.CENTER);
-	    
-	    boutonJouer.addActionListener(new BoutonJouerListener());
 	    boutonQuitter.addActionListener(new BoutonQuitterListener());
 	    
+	    partie.add(boutonQuitter, BorderLayout.NORTH);
 	    
-	    JPanel south = new JPanel();
-	    coup.setPreferredSize(new Dimension(150, 30));
-	    south.add(coup);
-	    south.add(label1);
-	    south.add(boutonJouer);
-	    south.add(boutonQuitter);
-	    partieEnCours.add(south, BorderLayout.SOUTH);
-	    
-	    partieEnCours.add(label2, BorderLayout.NORTH);
-	    
-	    this.setContentPane(partieEnCours); */
-	    
-	    
-	  
+	    cards.setLayout(cl);
+	    cards.add(partie,PARTIEENCOURS);
+	    cards.add(partieTerminee,PARTIETERMINEE);
+	   
+	    this.setContentPane(cards);	  
 	    
 	    this.setVisible(true);
 	  
@@ -75,45 +60,14 @@ public class ExecutablePartie extends JFrame {
 	}
 
 
-	
+	class BoutonQuitterListener implements java.awt.event.ActionListener {
 
-/*	@Override
-	public void jouerUnCoup(ActionEvent arg0) {
-		// trucs graphiques associés pour recojnnaitre l'appui sur le bouton
-		//controleur.verifierCoup(int PosxDep, int PosyDep, int PostxFin, int PosyFin);
-		//afficher_coup();
-		 String str = this.label1.getText();
-		 label2.setText("Vous avez écrit "+str);
-	}
-
-
-	@Override
-	public void quitterPartie(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			cl.show(cards, PARTIETERMINEE);
+		}
 		
-	}
-
-
-
-	@Override
-	public void rejouerPartie(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		
-	}
-
-
-
-	@Override
-	public void coupSuivant(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	} */
-
-	
-	
-	private void afficher_coup() {
-		// TODO Peut etre voir pour associer un controleur...
-		// en fonction des resultats de la verif, on affiche le nouvel echequier et/ou on affiche un texte
 	}
 
 
