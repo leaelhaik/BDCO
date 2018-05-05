@@ -1,6 +1,7 @@
 package Controleur;
 
 import Java.Modele.Fabrique;
+import connection.InsertionJoueur;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,8 +32,14 @@ public class NouveauJoueur {
     }
 
     public boolean envoyerBD() {
-
-        Fabrique.joueurs.ajouterJoueur(nom, prenom, adresse, date);
-        return false;
+        InsertionJoueur nouv = new InsertionJoueur();
+        if (nouv.verifInsertion(nom, prenom)) {
+            Fabrique.joueurs.ajouterJoueur(nom, prenom, adresse, date, nouv);
+            nouv.closeConnection();
+            return false;
+        } else {
+            nouv.closeConnection();
+            return true;
+        }
     }
 }
