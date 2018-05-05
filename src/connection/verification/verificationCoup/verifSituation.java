@@ -1,3 +1,4 @@
+package connection.verification.verificationCoup;
 import java.sql.*;
 public class VerifSituation(){
 

@@ -1,4 +1,4 @@
-package verification;
+package connection.verification.verificationTable;
 
 import java.sql.*;
 

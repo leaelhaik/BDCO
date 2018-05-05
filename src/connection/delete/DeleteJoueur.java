@@ -1,3 +1,4 @@
+package connection.delete;
 import java.sql.*;
 
 public class DeleteJoueur{

@@ -1,3 +1,4 @@
+package connection.insert;
 import java.sql.*;
 
 public class InsertPiece {

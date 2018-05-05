@@ -1,3 +1,4 @@
+package connection.init;
 import java.sql.*;
 
 public class InitRencontre {

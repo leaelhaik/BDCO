@@ -1,3 +1,4 @@
+package connection.init;
 import java.sql.*;
 import java.lang.Math.*;
 public class CreateAffectationCouleur {

@@ -1,3 +1,4 @@
+package connection.create;
 import java.sql.*;
 
 public class CreatePiece {

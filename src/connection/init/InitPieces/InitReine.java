@@ -1,3 +1,4 @@
+package connection.init.InitPieces;
 import java.sql.*;
 
 public class InitReine {

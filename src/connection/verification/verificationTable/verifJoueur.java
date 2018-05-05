@@ -1,3 +1,4 @@
+package connection.verification.verificationTable;
 import java.sql.*;
 
 public class verifJoueur {

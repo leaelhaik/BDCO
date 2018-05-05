@@ -1,4 +1,6 @@
+package connection.verification;
 import java.sql.*;
+
 public class VerifEchec {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
