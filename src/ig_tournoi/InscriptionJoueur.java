@@ -118,8 +118,7 @@ public class InscriptionJoueur extends JPanel {
 				//Feedback : le joueur est déjà dans le tournoi!
 			}
 			//Birth est au format attendu par la BD
-
 		}
-		
+
 	}
 }
