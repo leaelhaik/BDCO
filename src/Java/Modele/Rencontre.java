@@ -45,6 +45,8 @@ public class Rencontre {
     public void informe() {
         for (Joueur j : joueurs) {
             j.miseAJour();
+            zrghozrhgosf
+            
         }
     }
 
