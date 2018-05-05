@@ -1,5 +1,7 @@
 package Java.Modele;
 
+import connection.InsertionJoueur;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -7,6 +9,10 @@ import java.util.ArrayList;
  * Created by ensimag on 01/05/18.
  */
 public class FabriqueJoueurConcrete extends FabriqueJoueur {
+
+    public FabriqueJoueurConcrete() {
+
+    }
 
     @java.lang.Override
     public ListeJoueurs lesJoueurs() {
@@ -23,5 +29,6 @@ public class FabriqueJoueurConcrete extends FabriqueJoueur {
         dateJoueur : date
         adresseJoueur : adresse
          */
+        InsertionJoueur _ = new InsertionJoueur(nom, prenom, date, adresse);
     }
 }

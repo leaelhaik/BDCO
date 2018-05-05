@@ -5,6 +5,10 @@ package Java.Modele;
  */
 public class FabriqueRencontreConcrete extends FabriqueRencontre{
 
+    public FabriqueRencontreConcrete() {
+
+    }
+
     @Override
     public ListeRencontre lesRencontres() {
         String STMT = "select * from rencontres";
