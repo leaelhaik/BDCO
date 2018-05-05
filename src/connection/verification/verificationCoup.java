@@ -8,8 +8,8 @@ public class VerificationCoup {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
 
-  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRenconre, String nomTour, String couleur){
-
+  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRenconre, String nomTour, String couleur, Connection conn){
+    
   }
 
 //verification Joueur, cad que le joueur bouge bien la bonne couleur
@@ -154,6 +154,10 @@ VerifEchec();
   } catch (SQLException e) {
       System.err.println("failed");
       e.printStackTrace(System.err);
+    }
+
+    public static void main(String args[]) {
+      new VerificationCoup(posY,oldY, posX, oldX, numRenconre, nomTour, couleur,conn);
     }
 
 }
