@@ -21,11 +21,13 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testIGEchiquier
+all: testIGEchiquier testIGTournoi
 
 testIGEchiquier:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
 
+testIGTournoi:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGTournoi.java
 
 
 #Execution
@@ -33,7 +35,8 @@ testIGEchiquier:
 exeIGEchiquier:
 	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
 
-
+exeIGTournoi:
+	java -classpath bin:bin/ojdbc6.jar TestIGTournoi
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/**/*.class

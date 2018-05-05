@@ -49,6 +49,7 @@ public class PartieEnCours extends JPanel {
 		public void actionPerformed(ActionEvent arg0) {
 	    	 String str = coup.getText();
 		     label2.setText("Vous avez écrit "+str);
+		     
 			
 		}
 		
