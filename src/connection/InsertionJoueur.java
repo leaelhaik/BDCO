@@ -8,7 +8,6 @@ public class InsertionJoueur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
-  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=? ";
 
   public InsertionJoueur(String nom, String prenom, Date date,String adresse){
     try {
@@ -21,6 +20,7 @@ public class InsertionJoueur {
       Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
       System.out.println("connected");
       // Creation de la requete
+      Statement stmt = conn.createStatement();
       PreparedStatement inser = conn.prepareStatement(STMT);
       nbJoueur ++;
       inser.setInt(1,nbJoueur);
@@ -33,15 +33,6 @@ public class InsertionJoueur {
       // Execution de la requete
       ResultSet rset = stmt.executeQuery(STMT);
 
-      PreparedStatement verif = conn.prepareStatement(STMTVerif);
-      verif.setString(1,nom);
-      verif.setSTMT(2,prenom);
-      verif.executeUpdate();
-
-      ResultSet rset2 = stmt.executeQuery(STMTVerif);
-      if(rset2.getRow()==0){
-        throw new SQLException("Joueur déjà dans la base");
-      }
       // Fermeture
       rset.close();
       stmt.close();
@@ -51,4 +42,5 @@ public class InsertionJoueur {
         e.printStackTrace(System.err);
       }
     }
+
   }
