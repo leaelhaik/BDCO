@@ -41,7 +41,6 @@ public class PartieTerminee extends JPanel {
     
     class BoutonSuivantListener implements java.awt.event.ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 		     label2.setText("Vous avez cliqué sur suivant");
 			
@@ -52,7 +51,6 @@ public class PartieTerminee extends JPanel {
 	
 	class BoutonRevoirListener implements java.awt.event.ActionListener {
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			label2.setText("Remise à zéro");			
 		}

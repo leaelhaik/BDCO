@@ -45,7 +45,6 @@ public class PartieEnCours extends JPanel {
     
     class BoutonJouerListener implements java.awt.event.ActionListener{
 
-		@Override
 		public void actionPerformed(ActionEvent arg0) {
 
 		    String str = coup.getText().toUpperCase().replaceAll(" ", "");
