@@ -1,5 +1,7 @@
 package ig_tournoi;
 
-public class Finale {
+import javax.swing.JPanel;
+
+public class Finale extends JPanel{
 
 }

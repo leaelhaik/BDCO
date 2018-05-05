@@ -1,5 +1,7 @@
 package ig_tournoi;
 
-public class Quart {
+import javax.swing.JPanel;
 
+public class Quart extends JPanel {
+	
 }

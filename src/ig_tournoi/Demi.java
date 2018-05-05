@@ -1,5 +1,7 @@
 package ig_tournoi;
 
-public class Demi {
+import javax.swing.JPanel;
+
+public class Demi extends JPanel {
 
 }
