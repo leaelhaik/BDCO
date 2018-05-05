@@ -12,9 +12,9 @@ public abstract class PhaseFinale extends Tour{
     private ListeJoueurs listeJoueurs;
 
 
-    public PhaseFinale(ListeJoueurs listeJoueurs, String typeFinale){
-        listeJoueurs = new ListeJoueurs();
-        setJoueurs(listeJoueurs); //on set les joueurs
+    public PhaseFinale(String typeFinale){
+//        ListeJoueurs this.listeJoueurs = new ListeJoueurs();
+//        setJoueurs(listeJoueurs); //on set les joueurs
         setType(typeFinale); //on définit le type de finale (c'est un string)
     }
 
@@ -27,12 +27,23 @@ public abstract class PhaseFinale extends Tour{
 
 
 
-    private void setJoueurs(ListeJoueurs listeJoueurs){
+    protected void setJoueurs(ListeJoueurs listeJoueurs){
         //on vérifie si la liste des joueurs est valide
         if(listeJoueurs.isValid()) {
-            //si c'est le cas, on copie les joueurs dans la liste des joueurs
-            for (int i = 0; i < listeJoueurs.getNumberJoueurs(); i++){
-                this.listeJoueurs.ajoutJoueur(listeJoueurs.getJoueur(i));
+            //si c'est le cas, on vérifie qu'on a bien le bon nombre de joueurs par phase
+
+            if((this.getType().equals("quart") && this.listeJoueurs.getNumberJoueurs() == 8) || (this.getType()
+                    .equals("demi") && this.listeJoueurs.getNumberJoueurs() == 4) || (this.getType().equals("finale")
+                    && this.listeJoueurs.getNumberJoueurs() == 2)){
+                //si c'est le cas, on copie les joueurs dans la liste
+                for (int i = 0; i < listeJoueurs.getNumberJoueurs(); i++){
+                    this.listeJoueurs.ajoutJoueur(listeJoueurs.getJoueur(i));
+                }
+            }
+            else{
+                System.out.println("ERREUR : pour le type de phase " + this.getType() + " il faut imperativement le " +
+                        "bon nombre de joueurs dans la liste de joueurs. Or ici il y en a : " + this.listeJoueurs
+                        .getNumberJoueurs()" !!");
             }
         }
         else{

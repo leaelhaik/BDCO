@@ -1,13 +1,15 @@
 package Java.Modele;
 
-import Java.Controleur.Joueur;
+import Java.Modele.Joueur;
 
 /**
  * Created by georgeb on 4/23/18.
  */
 public class QuartFinal extends PhaseFinale{
-    public QuartFinal(){
-        super(j1, j2, "quart");
-
+    private ListeJoueurs listeJoueurs;
+    public QuartFinal(ListeJoueurs listeJoueurs){
+        super("quart");
+        this.listeJoueurs = new ListeJoueurs();
+        super.setJoueurs(listeJoueurs);
     }
 }
