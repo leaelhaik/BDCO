@@ -114,6 +114,7 @@ public class InscriptionJoueur extends JPanel {
 			String birth = year + "-" + month + "-" + day;
 			//Birth est au format attendu par la BD
 			
+			
 		}
 		
 	}
