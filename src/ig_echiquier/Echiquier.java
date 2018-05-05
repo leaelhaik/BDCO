@@ -1,13 +1,20 @@
 package ig_echiquier;
 
+
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -16,6 +23,8 @@ import javax.imageio.ImageIO;
 
 
 public class Echiquier extends JPanel {
+	
+    
 	
 	public void paintComponent(Graphics g) {
 		int taille=echelle(this.getHeight(), this.getWidth());
