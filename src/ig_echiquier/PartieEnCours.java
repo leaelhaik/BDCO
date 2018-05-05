@@ -19,14 +19,9 @@ public class PartieEnCours extends JPanel {
     private JLabel label1 = new JLabel("Votre coup");
     private JLabel label2 = new JLabel("Votre tour");
     private Echiquier echiquier = new Echiquier();
-    private JPanel cards;
-    private CardLayout cl;
     
     
-    public PartieEnCours(JPanel cards, CardLayout cl) {
-    	
-    	this.cards=cards;
-    	this.cl = cl;
+    public PartieEnCours() {
     	
     	this.setLayout(new BorderLayout());
     	this.add(echiquier, BorderLayout.CENTER);
@@ -68,7 +63,6 @@ public class PartieEnCours extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			label2.setText("Vous avez abandonné la partie");
-			//cl.show(cards,)
 			
 		}
 		
