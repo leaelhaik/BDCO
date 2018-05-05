@@ -1,7 +1,7 @@
 package connection.init;
 import java.sql.*;
 import java.lang.Math.*;
-public class CreateAffectationCouleur {
+public class InitAffectationCouleur {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
@@ -27,17 +27,16 @@ public class CreateAffectationCouleur {
       // Creation de la requete
       Statement stmt = conn.createStatement();
       ResultSet rset = stmt.executeQuery(STMT);
-      While(rset.next()){
+      while(rset.next()){
           int j = 1;
-          ResultSet rset2 = rset.next();
+          ResultSet rset2 = stmt.executeQuery(STMT);
+          rset2.next();
           while(rset2.next()){
-            if(Math.rand()){
+            String couleur1="noir";
+            String couleur2="blanc";
+            if(Math.random()==1){
               couleur1 = "blanc";
               couleur2="noir";
-            }
-            else{
-              couleur1="noir";
-              couleur2="blanc";
             }
 
             PreparedStatement sel = conn.prepareStatement(STMT1);
@@ -53,23 +52,24 @@ public class CreateAffectationCouleur {
             j=j+1;
             i=i+1;
           }
+          rset2.close();
       }
       // Execution de la requete
       conn.commit();
-      rset1.close();
-      rset2.close();
-      rset3.close();
-      rset4.close();
-      rset5.close();
-      rset6.close();
-      rset7.close();
-      rset8.close();
-      rset9.close();
-      rset10.close();
-      rset11.close();
-      rset12.close();
-      rset13.close();
-      rset14.close();
+      rset.close();
+
+      // rset3.close();
+      // rset4.close();
+      // rset5.close();
+      // rset6.close();
+      // rset7.close();
+      // rset8.close();
+      // rset9.close();
+      // rset10.close();
+      // rset11.close();
+      // rset12.close();
+      // rset13.close();
+      // rset14.close();
       stmt.close();
       conn.close();
     } catch (SQLException e) {
