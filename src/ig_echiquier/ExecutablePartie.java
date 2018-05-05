@@ -22,8 +22,8 @@ public class ExecutablePartie extends JFrame {
 	private JPanel cards;
 	final static String PARTIEENCOURS = "Partie en cours";
 	final static String PARTIETERMINEE = "Partie terminée - Revisionnage";
-    private PartieEnCours partieEnCours;
-    private PartieTerminee partieTerminee;
+    private PartieEnCours partieEnCours = new PartieEnCours();
+    private PartieTerminee partieTerminee = new PartieTerminee();
 	
 	public ExecutablePartie(String nomFenetre, int hauteurFenetre, int largeurFenetre) {
 		
@@ -36,6 +36,8 @@ public class ExecutablePartie extends JFrame {
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     
 
+	    //JPanel partie = new JPanel();
+	    
 	    
 	    cards = new JPanel(new CardLayout());
 	    cards.add(partieEnCours,PARTIEENCOURS);

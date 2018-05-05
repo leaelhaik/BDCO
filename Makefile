@@ -21,12 +21,7 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
-all: testSimulateur
-
-
-testSimulateur:
-	javac   -d bin -classpath bin/gui.jar:bin/ojdbc6.jar -sourcepath src src/TestSimulateur.java
-
+all: testIGEchiquier
 
 testIGEchiquier:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGEchiquier.java
@@ -37,8 +32,6 @@ testIGEchiquier:
 exeIGEchiquier:
 	java -classpath bin:bin/ojdbc6.jar TestIGEchiquier
 
-exeSimulateur:
-	java -classpath bin:bin/gui.jar:bin/ojdbc6.jar TestSimulateur
 
 
 clean:
