@@ -1,0 +1,16 @@
+[duchennt@ensipc375 BDCO]$ javac -cp ojdbc6.jar SimpleQuery.java
+[duchennt@ensipc375 BDCO]$ java -cp .:./ojdbc6.jar SimpleQuery
+
+
+[duchennt@ensipc375 verificationTable]$ javac -cp ../../ojdbc6.jar verifCouleur.java
+[duchennt@ensipc375 verificationTable]$ java -cp .:../../ojdbc6.jar verifCouleur
+
+Ordre des tables à drop :
+
+Historique
+Piece
+AffectationCouleur
+Rencontre
+Tour
+Joueur
+Couleur

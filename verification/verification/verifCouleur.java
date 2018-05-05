@@ -22,24 +22,28 @@ public class verifCouleur {
         conn.setAutoCommit(false);
         // Creation de la requete
         Statement stmt = conn.createStatement();
-        // Execution de la requete
-        ResultSet rset = stmt.executeQuery(STMT);
 
-      // Parcours de la TABLE
-      System.out.println("*************************");
-      System.out.println("Données contenues dans la table Couleur : ");
-
-      dumpResultSet(rset);
-
-
-      // Fermeture
-      rset.close();
+        this.afficheCouleur(stmt);
       stmt.close();
       conn.close();
     } catch (SQLException e) {
         System.err.println("failed");
         e.printStackTrace(System.err);
       }
+  }
+
+  public void afficheCouleur(Statement stmt) throws SQLException {
+    ResultSet rset = stmt.executeQuery(STMT);
+
+    // Parcours de la TABLE
+    System.out.println("*************************");
+    System.out.println("Données contenues dans la table Couleur : ");
+
+    dumpResultSet(rset);
+
+    // Fermeture
+    rset.close();
+    stmt.close();
   }
 
   private void dumpResultSet(ResultSet rset) throws SQLException {

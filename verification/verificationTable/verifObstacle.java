@@ -1,3 +1,4 @@
+package com.verification;
 import java.sql.*;
 public class VerifObstacle {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";

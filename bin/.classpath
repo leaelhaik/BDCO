@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="delete/|create/|verification/|insert/|src/|verification/verificationCoup/|init/InitPieces/|drop/|init/|verification/verificationTable/" kind="src" path=""/>
+	<classpathentry kind="src" path="create"/>
+	<classpathentry kind="src" path="delete"/>
+	<classpathentry kind="src" path="drop"/>
+	<classpathentry excluding="InitPieces/" kind="src" path="init"/>
+	<classpathentry kind="src" path="init/InitPieces"/>
+	<classpathentry kind="src" path="insert"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="verificationCoup/|verificationTable/" kind="src" path="verification"/>
+	<classpathentry kind="src" path="verification/verificationCoup"/>
+	<classpathentry kind="src" path="verification/verificationTable"/>
+	<classpathentry kind="lib" path="/Users/LoL/Desktop/Professionnel/repoGit/BDCO/BDCO/bin/ojdbc6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
