@@ -1,7 +1,5 @@
 package Java.Modele;
 
-import Java.Controleur.FabriqueJoueur;
-import Java.Controleur.Joueur;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +8,7 @@ import java.util.ArrayList;
 public class FabriqueJoueurConcrete extends FabriqueJoueur {
 
     @java.lang.Override
-    public ArrayList<Joueur> lesJoueurs() {
+    public ListeJoueurs lesJoueurs() {
         return null;
     }
 

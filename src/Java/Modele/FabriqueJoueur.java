@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public abstract class FabriqueJoueur {
 
-    public abstract ArrayList<Joueur> lesJoueurs();
+    public abstract ListeJoueurs lesJoueurs();
 
     public abstract void ajouterJoueur();
 
