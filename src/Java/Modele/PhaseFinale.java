@@ -7,13 +7,14 @@ import Java.Modele.Joueur;
  * Created by georgeb on 4/30/18.
  * Problème : plus de 2 joueurs dans une phase.
  */
-public abstract class PhaseFinale extends Tour{
+public abstract class PhaseFinale extends Tour {
+
     private String typeFinale;
-    private ListeJoueurs listeJoueurs;
+    protected ListeJoueurs listeJoueurs;
 
 
     public PhaseFinale(String typeFinale){
-//        ListeJoueurs this.listeJoueurs = new ListeJoueurs();
+        listeJoueurs = new ListeJoueurs();
 //        setJoueurs(listeJoueurs); //on set les joueurs
         setType(typeFinale); //on définit le type de finale (c'est un string)
     }
@@ -22,7 +23,7 @@ public abstract class PhaseFinale extends Tour{
 
 
     public ListeJoueurs getListeJoueurs(){
-        return this.listeJoueurs;
+        return listeJoueurs;
     }
 
 
@@ -43,7 +44,7 @@ public abstract class PhaseFinale extends Tour{
             else{
                 System.out.println("ERREUR : pour le type de phase " + this.getType() + " il faut imperativement le " +
                         "bon nombre de joueurs dans la liste de joueurs. Or ici il y en a : " + this.listeJoueurs
-                        .getNumberJoueurs()" !!");
+                        .getNumberJoueurs()+" !!");
             }
         }
         else{

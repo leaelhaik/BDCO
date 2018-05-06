@@ -5,4 +5,7 @@ package Java.Modele;
  */
 public abstract class Tour {
     int nombre_joueurs;
+
+    public abstract void genererRencontre();
+
 }
