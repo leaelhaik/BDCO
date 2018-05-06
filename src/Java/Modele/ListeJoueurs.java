@@ -72,4 +72,13 @@ public class ListeJoueurs {
         return true;
     }
 
+    @Override
+    public String toString() {
+        String liste = "";
+        for (Joueur j : myJoueurs) {
+            liste += j.toString() + "\n";
+        }
+        return liste;
+    }
+
 }
