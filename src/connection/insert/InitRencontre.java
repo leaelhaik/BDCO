@@ -1,4 +1,6 @@
 package connection.insert;
+import connection.MultipleQueries;
+
 import java.sql.*;
 
 public class InitRencontre {

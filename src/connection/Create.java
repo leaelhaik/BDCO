@@ -26,7 +26,7 @@ public class Create {
       }
     
     public void CreateRencontre() {
-      Queries.queries.getResult("CREATE TABLE Rencontre(numRencontre integer not null ,nomTour varchar(20) NOT NULL,idJoueur integer NOT NULL,PRIMARY KEY(numRencontre, nomTour),FOREIGN KEY(nomTour) REFERENCES Tour(nomTour),FOREIGN KEY(idJoueur) REFERENCES Joueur(idJoueur))");
+      Queries.queries.getResult("CREATE TABLE Rencontre(numRencontre integer not null ,nomTour varchar(20) NOT NULL,idJoueur integer,PRIMARY KEY(numRencontre, nomTour),FOREIGN KEY(nomTour) REFERENCES Tour(nomTour))");//,FOREIGN KEY(idJoueur) REFERENCES Joueur(idJoueur))");
     }
 
     public void CreateTour() {

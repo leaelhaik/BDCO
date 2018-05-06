@@ -232,7 +232,7 @@ public class VerifSituation {
         }
 
         if(!isVerified){
-          String STMTC= "select idJoueur from AffectationCouleur where nomTour=?,numRenconre=?,couleur=?";
+          String STMTC= "select idJoueur from AffectationCouleur where nomTour=?,numrencontre=?,couleur=?";
           PreparedStatement selC = conn.prepareStatement(STMTC);
           selC.setString(1,nomTour);
           selC.setInt(2,numRencontre);
@@ -242,7 +242,7 @@ public class VerifSituation {
           ResultSet rsetC = selC.executeQuery(STMTC);
 
 
-          String STMTV= "update rencontre set idJoueur=? where nomTour=?, numRenconre=?";
+          String STMTV= "update rencontre set idJoueur=? where nomTour=?, numrencontre=?";
           PreparedStatement selV = conn.prepareStatement(STMTV);
           selV.setInt(1,rsetC.getInt(1));
           selV.setString(2,nomTour);
