@@ -41,7 +41,7 @@ exeIGTournoi:
 	java -classpath bin:bin/ojdbc6.jar TestIGTournoi
 
 exeTestDesTrucs:
-    java -classpath bin:bin/ojdbc6.jar TestDesTrucs
+	java -classpath bin:bin/ojdbc6.jar TestDesTrucs
 
 clean:
 	rm -rf bin/*.class
