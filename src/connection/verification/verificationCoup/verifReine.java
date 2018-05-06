@@ -7,7 +7,7 @@ import java.io.*;
 
 public class VerifReine {
 
-  private boolean isValid = true;
+  private boolean isValid = false;
   private String STMTTour1 = "";
   private String STMTTour2 = "";
   private String STMTFou = "";
@@ -111,11 +111,13 @@ public class VerifReine {
           nbLignes = rset.getRow();
           rset.beforeFirst();
         }
-        System.out.println(nbLignes);
+        //System.out.println(nbLignes);
         if(nbLignes != 0)
-          isValid = false;
+          this.isValid = false;
+        else
+          this.isValid = true;
         rset.close();
-        System.out.println(isValid);
+        //System.out.println(isValid);
       }
 
     } catch(SQLException e) {
