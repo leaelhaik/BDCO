@@ -4,16 +4,15 @@ package Controleur;
 //permet d'obtenir la couleur d'un joueur en fonction de l'Id de la partie
 public class GetCouleur {
 
-    String couleur;
-    int numRencontre
     int iDJoueur;
 
-    public GetCouleur(int iDJoueur, int numRencontre){
-        this.numRencontre = numRencontre;
+    public GetCouleur(int iDJoueur){
         this.iDJoueur = iDJoueur;
     }
 
     public String getCouleur() {
-        return couleur;
+    	Connect co = new Connect;
+    	connection.GetCouleur req = new connection.GetCouleur(this.iDJoueur,co.getConnection());
+        return req.couleur;
     }
 }
