@@ -35,7 +35,7 @@ public class verifJoueur {
     }
   }
 
-  public static ResultSet tousLesJoueurs(Connection conn) throws SQLException{
+  public static ResultSet tousLesJoueurs(Connection conn) {
     //try {
       SimpleQuery req = new SimpleQuery(STMT, conn);
       ResultSet rset = req.getResult();
