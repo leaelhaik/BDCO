@@ -19,6 +19,10 @@ public class ExecutablePartie extends JFrame {
 	private String nom;
 	private int hauteur;
 	private int largeur;
+	private int idRencontre;
+	private int numTour;
+	
+	
 	
 	private CardLayout cl = new CardLayout();
 	private JPanel cards = new JPanel();
