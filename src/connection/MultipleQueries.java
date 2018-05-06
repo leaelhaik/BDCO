@@ -19,7 +19,7 @@ public class MultipleQueries {
     public void closeConnection() {
         connect.closeConnection();
     }
-    
+
     public Connection getConnection() {
     	return connect.getConnection();
     }
