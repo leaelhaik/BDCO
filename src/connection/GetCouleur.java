@@ -1,6 +1,9 @@
 package connection;
 import java.sql.*;
 
+//permet de retourner la couleur d'un joueur. utilisée par le controlleur GetCouleur
+//marche sous reserve que connection marche bien
+
 public class GetCouleur {
 	static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 	static final String USER = "dhouibd"; // A remplacer pour votre compte
