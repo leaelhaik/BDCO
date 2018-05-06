@@ -8,6 +8,8 @@ import Java.Modele.ListeJoueurs;
 import connection.Connect;
 import connection.MultipleQueries;
 import connection.Queries;
+import connection.init.InitCouleur;
+import connection.init.InitTour;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -24,6 +26,8 @@ public class TestControleTournoi {
         //fearme.supprimerBD();
         //fearme.creerBD();
         fearme.effacerBD();
+        new InitTour();
+        new InitCouleur();
         if (ajouterJoueur()) {
 
         } else {
@@ -65,9 +69,7 @@ public class TestControleTournoi {
 
     public static void affiche() {
         ListeJoueurs lj = new ListeJoueurs();
-        Connect co = new Connect();
-        Connection connection = co.getConnection();
-        lj.getAllJoueurs(connection);
+        lj.getAllJoueurs();
         System.out.println(lj.toString());
     }
 }

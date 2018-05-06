@@ -34,12 +34,12 @@ public class ListeJoueurs {
         return null;
     }
 
-    public void getAllJoueurs(Connection conn) {
+    public void getAllJoueurs() {
         /*
         ??? listeBrute = // Appel à une fonction qui éxécute une requete pour récupérer la liste des joueurs sous forme de String
         Puis on transforme chaque ligne en Joueur qu'on ajoute à la liste.
         */
-        ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs(conn);
+        ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs();
         Joueur j;
         try {
             while (rset.next()) {
@@ -48,7 +48,7 @@ public class ListeJoueurs {
             }
             rset.close();
         } catch (SQLException e) {
-            System.err.println("failed");
+            System.err.println("getAllJoueur failed");
             e.printStackTrace();
         }
     }

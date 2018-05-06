@@ -1,5 +1,6 @@
 package connection.verification.verificationTable;
 import connection.Connect;
+import connection.Queries;
 import connection.SimpleQuery;
 
 import java.sql.*;
@@ -35,10 +36,10 @@ public class verifJoueur {
     }
   }
 
-  public static ResultSet tousLesJoueurs(Connection conn) {
+  public static ResultSet tousLesJoueurs() {
     //try {
-      SimpleQuery req = new SimpleQuery(STMT, conn);
-      ResultSet rset = req.getResult();
+      //SimpleQuery req = new SimpleQuery(STMT, conn);
+      ResultSet rset = Queries.queries.getResult(STMT);
       return rset;
       //rset.close();
     /*
