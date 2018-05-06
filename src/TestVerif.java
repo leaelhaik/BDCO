@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import connection.insert.InsertionJoueur;
 import connection.MultipleQueries;
+import connection.Queries;
 
 
 public class TestVerif {
@@ -13,12 +14,11 @@ public class TestVerif {
 	
 	public static void main(String args[]) {
 		
-		queries = new MultipleQueries();
+		Queries.queries = new MultipleQueries();
 		
-		InsertionJoueur ij = new InsertionJoueur("azert","do","rue de lensimag", "01011991", queries);
-		InsertionJoueur ik = new InsertionJoueur("zkjb","lj","rue de phelma", "010119912", queries);
-		InsertionJoueur il = new InsertionJoueur("ajhds","klw","rue de la chmie", "01011993", queries);
-		ResultSet rs = queries.getResult("select * from Joueur ");
+		InsertionJoueur ij = new InsertionJoueur();
+		ij.insereJoueur("azert","do","rue de lensimag "+ (char)(int)(70+1) +"", "01011991");
+		/*ResultSet rs = queries.getResult("select * from Joueur ");
 		try {
 			while (rs.next()) {
 				System.out.println(rs.getString("prenomJoueur"));				
@@ -27,8 +27,8 @@ public class TestVerif {
 			// TODO Auto-generated catch block
 			System.out.println("Coucou");
 			e.printStackTrace();
-		}
+		}*/
 		
-		queries.closeConnection();
+		Queries.queries.closeConnection();
 	}
 }

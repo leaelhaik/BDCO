@@ -15,7 +15,7 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
     private int numRencontre;
 
     public FabriqueRencontreConcrete() {
-        numRencontre = 0;
+        numRencontre = 1;
     }
 
     @Override
@@ -46,5 +46,10 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
         InitAffectationCouleur __ = new InitAffectationCouleur(Queries.queries, "blanc", blanc.getId(), tour, numRencontre);
         InitAffectationCouleur ___ = new InitAffectationCouleur(Queries.queries, "noir", noir.getId(), tour, numRencontre);
         numRencontre ++;
+    }
+
+    @Override
+    public void reset() {
+        numRencontre = 1;
     }
 }
