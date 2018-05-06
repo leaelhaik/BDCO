@@ -10,7 +10,7 @@ public class InsertPiece {
           int n = rsetMaxId.getInt(1);
 
 
-          ResultSet rset1 = queries.getResult("Insert into Piece Values("+ (int)(n+1) +",'tour','A','1','A','1','blanc',\'"+nomTour+"\', "+numrencontre+")");
+          ResultSet rset1 = queries.getResult("Insert into Piece Values("+ (int)(n+1) +",'tour','A','1','A','1','blanc',\'"+nomTour+"\', "+numRencontre+")");
           ResultSet rset2 = queries.getResult("Insert into Piece Values("+ (int)(n+2) +",'tour','H','1','H','1','blanc',\'"+nomTour+"\', "+numRencontre+")");
           ResultSet rset3 = queries.getResult("Insert into Piece Values("+ (int)(n+3) +",'cavalier','B','1','B','1','blanc',\'"+nomTour+"\', "+numRencontre+")");
           ResultSet rset4 = queries.getResult("Insert into Piece Values("+ (int)(n+4) +",'cavalier','G','1','G','1','blanc',\'"+nomTour+"\', "+numRencontre+")");
