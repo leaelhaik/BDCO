@@ -1,5 +1,6 @@
 package connection.insert;
 import connection.MultipleQueries;
+import connection.Queries;
 
 import java.sql.*;
 
@@ -12,8 +13,8 @@ public class InsertionJoueur {
   public InsertionJoueur() {
   }
 
-  public boolean verifInsertion(String nom, String prenom, MultipleQueries queries) {
-      ResultSet rset1 = queries.getResult("select idJoueur from joueur where nomJoueur= \'" + nom+"\' and prenomJoueur= \'"+prenom+"\'");
+  public boolean verifInsertion(String nom, String prenom) {
+      ResultSet rset1 = Queries.queries.getResult("select idJoueur from joueur where nomJoueur= \'" + nom+"\' and prenomJoueur= \'"+prenom+"\'");
       try {
 		if(rset1.next()){
 		    return false;
@@ -29,8 +30,7 @@ public class InsertionJoueur {
   }
 
   public boolean insereJoueur(String nom, String prenom, String adresse, String date) {
-
-  	ResultSet rset = queries.getResult("select count(idJoueur) from joueur");
+  	ResultSet rset = Queries.queries.getResult("select count(idJoueur) from joueur");
 	  try {
 		  while (rset.next())
 			  id=rset.getInt(1);
@@ -40,7 +40,7 @@ public class InsertionJoueur {
 	  }
 	  id ++;
 	  String joueur = "insert into joueur values(" + id + ",\'" +nom+ "\' , \'" +prenom+ "\' , \'" +date+ "\' , \'" +adresse+ "\')";
-	  ResultSet rsetInsert = queries.getResult(joueur);
+	  ResultSet rsetInsert = Queries.queries.getResult(joueur);
 	  return false;
   }
 }
