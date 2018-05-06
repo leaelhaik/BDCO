@@ -64,8 +64,6 @@ public class DropMain{
       }
   }
 
-  public static void main(String args[]) {
-    new DropMain();
-  }
+  //public static void main(String args[]) {
 
 }
