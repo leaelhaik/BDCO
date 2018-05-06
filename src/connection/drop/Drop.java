@@ -3,10 +3,9 @@ import java.sql.*;
 import connection.MultipleQueries;
 
 public class Drop{
-  private MultipleQueries queries;
 
   public Drop() {
-    queries = new MultipleQueries();
+      
   }
 
   public void DropTables(){
@@ -20,31 +19,31 @@ public class Drop{
   }
 
   public void dropPiece() {
-    ResultSet rsetDropRencontre = queries.getResult("Drop TABLE Piece");
+    ResultSet rsetDropRencontre = Queries.queries.getResult("Drop TABLE Piece");
   }
 
   public void dropTour() {
-    ResultSet rsetDropTour = queries.getResult("Drop TABLE Tour");
+    ResultSet rsetDropTour = Queries.queries.getResult("Drop TABLE Tour");
   }
 
   public void dropRencontre() {
-    ResultSet rsetDropRencontre = queries.getResult("Drop TABLE Rencontre");
+    ResultSet rsetDropRencontre = Queries.queries.getResult("Drop TABLE Rencontre");
   }
 
   public void dropJoueur(){
-    ResultSet rsetDropJoueur = queries.getResult("Drop TABLE Joueur");
+    ResultSet rsetDropJoueur = Queries.queries.getResult("Drop TABLE Joueur");
   }
 
   public void dropCouleur(){
-    ResultSet rsetDropCouleur = queries.getResult("Drop TABLE Couleur");
+    ResultSet rsetDropCouleur = Queries.queries.getResult("Drop TABLE Couleur");
   }
 
   public void dropHistorique(){
-    ResultSet rsetDropHistorique = queries.getResult("Drop TABLE Historique");
+    ResultSet rsetDropHistorique = Queries.queries.getResult("Drop TABLE Historique");
   }
 
   public void dropAffectationCouleur(){
-    ResultSet rsetDropHistorique = queries.getResult("Drop TABLE AffectationCouleur");
+    ResultSet rsetDropHistorique = Queries.queries.getResult("Drop TABLE AffectationCouleur");
   }
 
 }
