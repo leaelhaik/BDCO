@@ -1,5 +1,5 @@
 package Controleur;
-
+import connection.*;
 //permet de trouver dans quelle phase on est et de la renvoyer à l'IG
 
 public class ControlleurPhase {
@@ -9,12 +9,12 @@ public class ControlleurPhase {
 
     }
     //permet d'initialiser un tour
-    public setTour(){
+    public void setTour(){
 
     }
     
     public String getMostAdvanceTour(){
-    	Connect co = new Connect;
+    	Connect co = new Connect();
     	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());
         if( req.nomTour != "erreur"){
         	return req.nomTour;

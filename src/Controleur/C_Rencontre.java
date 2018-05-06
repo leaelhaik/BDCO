@@ -4,6 +4,7 @@ import Java.Modele.Joueur;
 import Java.Modele.Qualification;
 import java.sql.*;
 import java.util.ArrayList;
+import connection.connect;
 
 /**
  * Created by ensimag on 06/05/18.
@@ -43,7 +44,7 @@ public class C_Rencontre {
         ArrayList<int> listeRencontres = new ArrayList<int>();
         Connect co = new Connect();
         connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, iDTournoi, co.getConnection());
-        return req.listeRencontres;
+        return req.getListeRencontres();
 
     }
 }
