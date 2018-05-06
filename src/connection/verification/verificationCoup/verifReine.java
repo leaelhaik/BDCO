@@ -111,13 +111,13 @@ public class VerifReine {
           nbLignes = rset.getRow();
           rset.beforeFirst();
         }
-        System.out.println(nbLignes);
+        //System.out.println(nbLignes);
         if(nbLignes != 0)
           this.isValid = false;
         else
           this.isValid = true;
         rset.close();
-        System.out.println(isValid);
+        //System.out.println(isValid);
       }
 
     } catch(SQLException e) {

@@ -35,10 +35,6 @@ public class VerifPion {
         else
           STMTPion3 = "select idPiece, posX, posY from Piece where numRencontre = ? and nomTour = ? and posX = ? and posY = ?";
 
-          System.out.println(STMTPion1);
-          System.out.println(STMTPion2);
-          System.out.println(STMTPion3);
-
         int type = ResultSet.TYPE_SCROLL_INSENSITIVE;
         int mode = ResultSet.CONCUR_UPDATABLE;
         boolean isLast;
@@ -96,9 +92,9 @@ public class VerifPion {
           else
             this.isValid = true;
         }
-        System.out.println(nbLignes);
+        // System.out.println(nbLignes);
         rset.close();
-        System.out.println(this.isValid);
+        // System.out.println(this.isValid);
 
       }
 

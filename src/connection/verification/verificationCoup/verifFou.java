@@ -61,13 +61,13 @@ public class VerifFou {
         nbLignes = rset.getRow();
         rset.beforeFirst();
 
-        System.out.println(nbLignes);
+        // System.out.println(nbLignes);
         if(nbLignes != 0)
           this.isValid = false;
         else
           this.isValid = true;
         rset.close();
-        System.out.println(this.isValid);
+      //  System.out.println(this.isValid);
       }
 
     } catch(SQLException e) {

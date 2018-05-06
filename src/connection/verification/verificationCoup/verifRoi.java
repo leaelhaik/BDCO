@@ -49,9 +49,9 @@ public class VerifRoi {
         else
           this.isValid = true;
 
-        System.out.println(nbLignes);
+        //System.out.println(nbLignes);
         rset.close();
-        System.out.println(this.isValid);
+      //  System.out.println(this.isValid);
 
       }
 

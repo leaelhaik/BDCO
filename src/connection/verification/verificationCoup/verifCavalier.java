@@ -50,9 +50,9 @@ public class VerifCavalier {
         else
           this.isValid = true;
 
-        System.out.println(nbLignes);
+        //System.out.println(nbLignes);
         rset.close();
-        System.out.println(this.isValid);
+        //System.out.println(this.isValid);
 
       }
 
@@ -60,7 +60,7 @@ public class VerifCavalier {
             System.err.println("failed");
             e.printStackTrace();
       }
-      System.out.println(this.isValid);
+      //System.out.println(this.isValid);
 
   }
 
