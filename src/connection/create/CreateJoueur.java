@@ -6,7 +6,7 @@ public class CreateJoueur {
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
-  static final String STMT = "CREATE TABLE Joueur(idJoueur integer, nomJoueur character varying(30),prenomJoueur character varying(30),dateNaissance DATE,adresseJoueur character varying(30),PRIMARY KEY(idJoueur))";
+  static final String STMT = "CREATE TABLE Joueur(idJoueur integer, nomJoueur character varying(30),prenomJoueur character varying(30),dateNaissance character varying(10),adresseJoueur character varying(30),PRIMARY KEY(idJoueur))";
 
   public CreateJoueur()
   // String nom, String prenom, String adresse, Date date)

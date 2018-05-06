@@ -1,4 +1,7 @@
 package connection;
+
+import connection.verification.verificationTable.verifJoueur;
+
 import java.sql.*;
 
 public class InsertionJoueur {
@@ -8,7 +11,7 @@ public class InsertionJoueur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
-  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=?";
+  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=? and prenomJoueur=?";
   Connection conn;
 
   public InsertionJoueur() {
@@ -35,6 +38,8 @@ public class InsertionJoueur {
           verif.setString(2, prenom);
           verif.executeUpdate();
 
+          new verifJoueur(conn);
+
           ResultSet rset2 = verif.executeQuery(STMTVerif);
           rset2.close();
           verif.close();
@@ -46,7 +51,7 @@ public class InsertionJoueur {
       return true;
   }
 
-  public boolean insereJoueur(String nom, String prenom, String adresse, Date date) {
+  public boolean insereJoueur(String nom, String prenom, String adresse, String date) {
       try {
         // Enregistrement du driver Oracle
         System.out.print("Loading Oracle driver... ");
@@ -62,7 +67,7 @@ public class InsertionJoueur {
         inser.setInt(1,nbJoueur);
         inser.setString(2,nom);
         inser.setString(3,prenom);
-        inser.setDate(4,date);
+        inser.setString(4,date);
         inser.setString(5,adresse);
         inser.executeUpdate();
         //commit
@@ -74,7 +79,7 @@ public class InsertionJoueur {
         inser.close();
         return false;
         } catch (SQLException e) {
-            System.err.println("failed");
+            System.err.println("Player insertion failed");
             e.printStackTrace(System.err);
             return true;
       }
@@ -88,5 +93,9 @@ public class InsertionJoueur {
           System.err.println("Connection closing failed");
           e.printStackTrace();
       }
+    }
+
+    public String getter() {
+      return USER;
     }
   }

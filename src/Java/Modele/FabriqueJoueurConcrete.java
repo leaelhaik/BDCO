@@ -20,7 +20,7 @@ public class FabriqueJoueurConcrete extends FabriqueJoueur {
     }
 
     @java.lang.Override
-    public void ajouterJoueur(String nom, String prenom, String adresse, Date date, InsertionJoueur nouv) {
+    public void ajouterJoueur(String nom, String prenom, String adresse, String date, InsertionJoueur nouv) {
         /*
         Ajout d'un joueur dans la BDD
         Nouvelle ligne dans la table Joueur :
