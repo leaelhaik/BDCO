@@ -29,7 +29,7 @@ public class ControlleurPhase {
         Tour suivant;
         ListeJoueurs joueurs = new ListeJoueurs();
         switch (phase) {
-            case "qualification":
+            case "qualifications":
                 DebutQuart dq = new DebutQuart();
                 recuperer(joueurs, dq.getClassement());
                 suivant = new QuartFinal(joueurs);

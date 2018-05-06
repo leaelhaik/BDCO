@@ -8,7 +8,7 @@ public class DebutFinale {
     static final String STMT ="Select idJoueur from Rencontre where nomTour='demFinale'";
     public DebutFinale() {
         int i = 0;
-        ResultSet rsetFin = Queries.queries.getResult("Select idJoueur from Rencontre where nomTour='demFinale'");
+        ResultSet rsetFin = Queries.queries.getResult("Select idJoueur from Rencontre where nomTour='demiFinale'");
         try {
             while (rsetFin.next()) {
                 tabClassement[i] = rsetFin.getInt(1);
