@@ -35,16 +35,17 @@ public class verifJoueur {
     }
   }
 
-  public static ResultSet tousLesJoueurs(Connection conn) {
-    try {
+  public static ResultSet tousLesJoueurs(Connection conn) throws SQLException{
+    //try {
       SimpleQuery req = new SimpleQuery(STMT, conn);
       ResultSet rset = req.getResult();
       return rset;
       //rset.close();
+    /*
     } catch(SQLException e) {
       System.err.println("failed");
       e.printStackTrace();
-    }
+    }*/
   }
 
   public static void main(String args[]) {
