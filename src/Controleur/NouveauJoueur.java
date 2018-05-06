@@ -1,7 +1,7 @@
 package Controleur;
 
 import Java.Modele.Fabrique;
-import connection.InsertionJoueur;
+import connection.insert.InsertionJoueur;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,31 +15,21 @@ public class NouveauJoueur {
     String nom;
     String prenom;
     String adresse;
-    java.sql.Date date;
+    String date;
 
     public NouveauJoueur(String nom, String prenom, String adresse, String date) {
         this.nom = nom;
         this.adresse = adresse;
         this.prenom = prenom;
-        SimpleDateFormat birth = new SimpleDateFormat(date);
-        try {
-            Date parsed = birth.parse("20110210");
-            java.sql.Date dateSQL = new java.sql.Date(parsed.getTime());
-            this.date = dateSQL;
-        } catch (ParseException e) {
-            System.err.println("Echec de la conversion de la date");
-            e.printStackTrace();
-        }
+        this.date = date;
     }
 
     public boolean envoyerBD() {
         InsertionJoueur nouv = new InsertionJoueur();
         if (nouv.verifInsertion(nom, prenom)) {
             Fabrique.joueurs.ajouterJoueur(nom, prenom, adresse, date, nouv);
-            nouv.closeConnection();
             return false;
         } else {
-            nouv.closeConnection();
             return true;
         }
     }

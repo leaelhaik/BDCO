@@ -1,6 +1,6 @@
 package Java.Modele;
 
-import connection.InsertionJoueur;
+import connection.insert.InsertionJoueur;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,6 +12,6 @@ public abstract class FabriqueJoueur {
 
     public abstract ListeJoueurs lesJoueurs();
 
-    public abstract void ajouterJoueur(String nom, String prenom, String adresse, Date date, InsertionJoueur nouv);
+    public abstract void ajouterJoueur(String nom, String prenom, String adresse, String date, InsertionJoueur nouv);
 
 }

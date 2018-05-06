@@ -3,14 +3,10 @@ package donnees;
 import java.sql.*;
 
 import connection.MultipleQueries;
+import connection.Queries;
 
 public class Piece {
-	
-	private MultipleQueries queries;
-
-	
-
-	
+		
 	private Couleur couleur;
 	private String nomPiece;
 
@@ -23,7 +19,7 @@ public class Piece {
 
 		try {
 				
-			ResultSet rset = queries.getResult("SELECT typePiece, couleur FROM Piece WHERE posX = \' " + posX + " \' AND posY = "+ posY + " AND numRencontre = " + numRencontre + " AND nomTour = \' " + nomTour + "\' ");
+			ResultSet rset = Queries.queries.getResult("SELECT typePiece, couleur FROM Piece WHERE posX = \' " + posX + " \' AND posY = "+ posY + " AND numRencontre = " + numRencontre + " AND nomTour = \' " + nomTour + "\' ");
 			
 			String nomCouleur;
 			

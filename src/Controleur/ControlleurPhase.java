@@ -21,4 +21,8 @@ public class ControlleurPhase {
         }
         return "erreur au niveau du contrôleur de phases";
     }
+
+    public boolean nextPhase() {
+
+    }
 }

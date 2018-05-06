@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import donnees.VerificationCoup;
 
 import connection.MultipleQueries;
+import connection.Queries;
 
 public class VerificationEchec {
 
-	private MultipleQueries queries;
 
 	//static final  STMT = "select idPiece,posX,posY,couleur,typePiece from piece where couleur<>?, numRencontre=?,nomTour=?";
 	private boolean enEchec = false ;
@@ -20,7 +20,7 @@ public class VerificationEchec {
 
 		try {
 
-			ResultSet rset = queries.getResult("select idPiece,posX,posY,couleur,typePiece from piece where couleur<> \' " + couleur + "\', numRencontre= " + numRencontre + ",nomTour= \' " + nomTour + "\'");
+			ResultSet rset = Queries.queries.getResult("select idPiece,posX,posY,couleur,typePiece from piece where couleur<> \' " + couleur + "\', numRencontre= " + numRencontre + ",nomTour= \' " + nomTour + "\'");
 			VerificationCoup verif = new VerificationCoup(posY,rset.getInt(posY),posX,rset.getString("posX").charAt(0), numRencontre, nomTour, couleur);
 			while(rset.next() && !enEchec){
 				switch(rset.getString("typePiece")){
