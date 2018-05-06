@@ -11,7 +11,7 @@ public class GetMostAdvanceTour {
 	
 	public GetMostAdvanceTour(Connection conn) {
 		try {
-			// Enregistrement du driver Oracle
+			  // // Enregistrement du driver Oracle
 			  // System.out.print("Loading Oracle driver... ");
 			  // DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			  // System.out.println("loaded");
@@ -27,9 +27,9 @@ public class GetMostAdvanceTour {
 			
 			  ResultSet rset = sel.executeQuery(STMT);
 			  conn.commit();
-			  
-			  int nbNomTour = rset.getString(1);
-			  
+			  rset.next(); //pas sur de ça
+			  int nbNomTour = Integer.parseInt(rset.getString(1));
+
 			  switch(nbNomTour){
 			  	case 1 : this.nomTour = "qualifications";
 			  	break;
@@ -56,17 +56,21 @@ public class GetMostAdvanceTour {
 		  }
 	}
 
-private void dumpResultSet(ResultSet rset) throws SQLException {
-  ResultSetMetaData rsetmd = rset.getMetaData();
-  int i = rsetmd.getColumnCount();
-  // for (int k=1;k<=i;k++)
-  //   System.out.print(rsetmd.getColumnName(k) + "\t");
-  // System.out.println();
-  while (rset.next()) {
-    for (int j = 1; j <= i; j++) {
-      System.out.print(rset.getString(j) + "\t");
-    }
-    System.out.println();
-  }
-}
+	private void dumpResultSet(ResultSet rset) throws SQLException {
+	  ResultSetMetaData rsetmd = rset.getMetaData();
+	  int i = rsetmd.getColumnCount();
+	  // for (int k=1;k<=i;k++)
+	  //   System.out.print(rsetmd.getColumnName(k) + "\t");
+	  // System.out.println();
+	  while (rset.next()) {
+		for (int j = 1; j <= i; j++) {
+		  System.out.print(rset.getString(j) + "\t");
+		}
+		System.out.println();
+	  }
+	}
+
+	public String getNomTour() {
+		return this.nomTour;
+	}
 }

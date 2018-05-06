@@ -1,6 +1,9 @@
 import Controleur.C_Rencontre;
 import Controleur.MasterOfBDD;
 import Controleur.NouveauJoueur;
+import Java.Modele.Fabrique;
+import Java.Modele.FabriqueJoueurConcrete;
+import Java.Modele.FabriqueRencontreConcrete;
 import Java.Modele.ListeJoueurs;
 import connection.Connect;
 
@@ -13,6 +16,8 @@ import java.sql.Date;
 public class TestControleTournoi {
     public static void main(String[] args) {
         MasterOfBDD fearme = new MasterOfBDD();
+        Fabrique.joueurs = new FabriqueJoueurConcrete();
+        Fabrique.rencontres = new FabriqueRencontreConcrete();
         //fearme.supprimerBD();
         //fearme.creerBD();
         fearme.effacerBD();
@@ -25,23 +30,23 @@ public class TestControleTournoi {
 
     public static boolean ajouterJoueur() {
         NouveauJoueur nj;
-        nj = new NouveauJoueur("De la Bruyere", "Claude", "3 rue des Gentianes, 33120 Arcachon", "19801221");
+        nj = new NouveauJoueur("De la Bruyere", "Claude", "3 rue des Gentianes, 33120", "1980-12-21");
         if (nj.envoyerBD()) {
             System.err.println("Annulation de l'insertion...");
             return true;
         }
-        nj = new NouveauJoueur("J", "M", "Quelquepart", "12345678");
+        nj = new NouveauJoueur("J", "M", "Quelquepart", "1234-10-10");
         if (nj.envoyerBD()) {
             System.err.println("Annulation de l'insertion...");
             return true;
         }
-        nj = new NouveauJoueur("Raptor", "Jesus", "Dans nos coeurs", "00000101");
+        nj = new NouveauJoueur("Raptor", "Jesus", "Dans nos coeurs", "0000-01-01");
         if (nj.envoyerBD()) {
             System.err.println("Annulation de l'insertion...");
             return true;
         }
         for (int i = 0; i<4; i++) {
-            nj = new NouveauJoueur(""+i,""+i, ""+i, "20000101");
+            nj = new NouveauJoueur(""+i,""+i, ""+i, "2000-01-01");
             if (nj.envoyerBD()) {
                 System.err.println("Annulation de l'insertion...");
                 return true;

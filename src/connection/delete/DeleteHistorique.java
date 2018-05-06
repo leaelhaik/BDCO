@@ -1,3 +1,5 @@
+package connection.delete;
+
 import java.sql.*;
 import connection.MultipleQueries;
 

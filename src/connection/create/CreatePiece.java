@@ -1,10 +1,8 @@
-package connection.create; 
+package connection.create;
 import java.sql.*;
-import connection.MultipleQueries;
-//package connection.create;
-import java.sql.*;
+ import connection.MultipleQueries;
 
-public class CreatePiece {
+ public class CreatePiece {
 
 
    public CreatePiece(MultipleQueries queries) {
