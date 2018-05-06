@@ -1,11 +1,12 @@
 package Controleur;
 
+import connection.verification.verificationCoup;
 import java.text.ParseException;
 
 public class NouveauCoup {
 
 
-
+//numRencontre est
 
     Character newPosX; //character representant la nouvelle position X
     Character oldPosX; //character representant l'ancienne position X
@@ -17,23 +18,27 @@ public class NouveauCoup {
 
 
     /**
-     * Permet de faire le lien entre l'interface graphique et la base de donnée
+     * Permet de faire le lien entre la BDD et l'IG
+     * @param Pos coordonnes renvoyées par l'IG sous la forme "H6B6"
+     * @param numRencontre numéro de la rencontre
+     * @param nomTour le nom du tour
+     * @param couleur la couleur du coup
      */
-    public NouveauCoup(String Pos, int numRenconre, String nomTour, String
+    public NouveauCoup(String Pos, int numRencontre, String nomTour, String
             couleur){
 
         this.oldPosX = Character.toUpperCase(Pos.charAt(0));
         this.oldPosY = Character.getNumericValue(Pos.charAt(1));
         this.newPosX = Character.toUpperCase(Pos.charAt(2));
         this.newPosY = Character.getNumericValue(Pos.charAt(3));
+        this.numRencontre = numRencontre;
+        this.nomTour = nomTour;
+        this.couleur = couleur;
 
-
-       try {
-           VerificationCoup(this.newPosY, this.oldPosY, this.newPosX, this.oldPosX, numRenconre,
-           nomTour, couleur);
-       } catch (ParseException e){
-           e.printStackTrace();
-       }
+    }
+//TODO : attendre que verificationCoup soit modifié pour pouvoir le finir
+    public boolean envoyerBD(){
+        verificationCoup verifCoup = new verificationCoup();
 
     }
 }
