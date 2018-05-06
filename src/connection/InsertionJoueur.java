@@ -5,52 +5,35 @@ import connection.verification.verificationTable.verifJoueur;
 import java.sql.*;
 
 public class InsertionJoueur {
-
-  private static int nbJoueur=0;
-  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-  static final String USER = "dhouibd"; // A remplacer pour votre compte
-  static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
   static final String STMTVerif = "select idJoueur from joueur where nomJoueur=? and prenomJoueur=?";
-  Connection conn;
+  public int id = 0;
+  private MultipleQueries queries;
 
   public InsertionJoueur() {
-      try {
-          // Enregistrement du driver Oracle
-          System.out.print("Loading Oracle driver... ");
-          DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-          System.out.println("loaded");
-          // Etablissement de la connection
-          System.out.print("Connecting to the database... ");
-          conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-          System.out.println("connected");
-      } catch (SQLException e) {
-          System.err.println("Connection failed");
-          e.printStackTrace();
-      }
+    ResultSet rsetSel = queries.getResult("select idJoueur from joueur where idJoueur=max(idJoueur)");
+    try {
+        id = rsetSel.getInt("idJoueur");
+    } catch (SQLException e) {
+
+    }
   }
 
-  public boolean verifInsertion(String nom, String prenom) {
+  public boolean verifInsertion(String nomJoueur, String prenomJoueur) {
+      ResultSet rset1 = queries.getResult("select idJoueur from joueur where nomJoueur= " + nomJoueur+"and prenomJoueur="+prenomJoueur+"");
       try {
-          // Création de la requête
-          PreparedStatement verif = conn.prepareStatement(STMTVerif);
-          verif.setString(1, nom);
-          verif.setString(2, prenom);
-          verif.executeUpdate();
-
-          new verifJoueur(conn);
-
-          ResultSet rset2 = verif.executeQuery(STMTVerif);
-          rset2.close();
-          verif.close();
-      } catch (SQLException e) {
+          if (rset1.next()) {
+              return false;
+          } else {
+              return true;
+          }
+      } catch (SQLException e){
           System.err.println("Player insertion verification failed");
-          e.printStackTrace(System.err);
+          e.printStackTrace();
           return false;
       }
-      return true;
   }
-
+/*
   public boolean insereJoueur(String nom, String prenom, String adresse, String date) {
       try {
         // Enregistrement du driver Oracle
@@ -84,18 +67,11 @@ public class InsertionJoueur {
             return true;
       }
     }
+*/
 
-    public void closeConnection() {
-      try {
-          // Fermeture
-          conn.close();
-      } catch (SQLException e) {
-          System.err.println("Connection closing failed");
-          e.printStackTrace();
-      }
+    public boolean insereJoueur(String nomJoueur, String prenomJoueur, String adresse, Date date) {
+        ResultSet rsetInsert = queries.getResult("insert into joueur values("+id+","+nomJoueur+","+prenomJoueur+","+date+","+adresse+")");
+        return false;
     }
 
-    public String getter() {
-      return USER;
-    }
-  }
+}
