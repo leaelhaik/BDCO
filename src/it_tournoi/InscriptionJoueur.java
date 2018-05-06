@@ -4,8 +4,8 @@ import java.util.Scanner;
 import java.sql.Connection;
 
 import connection.MultipleQueries;
-import connection.insert;
-import connection.verification.verificationTable;
+import connection.InsertionJoueur;
+import connection.verification.verificationTable.verifJoueur;
 
 public class InscriptionJoueur {
 
@@ -23,10 +23,11 @@ public class InscriptionJoueur {
     this.getPrenom(sc);
     this.getAdresse(sc);
     this.getDate(sc);
-    InsertionJoueur insert = new InsertionJoueur(nom, prenom, adresse, date, queries);
+    InsertionJoueur insert = new InsertionJoueur();
+    boolean bool = insert.insereJoueur(nom, prenom, adresse, date);
 
     Connection conn = queries.getConnection();
-    new VerifJoueur(conn);
+    new verifJoueur(conn);
     queries.closeConnection();
   }
 
@@ -62,11 +63,11 @@ public class InscriptionJoueur {
     this.prenom = prenom;
   }
 
-  public String setAdresse(String adresse) {
+  public void setAdresse(String adresse) {
     this.adresse = adresse;
   }
 
-  public String setDate(String date) {
+  public void setDate(String date) {
     this.date = date;
   }
 

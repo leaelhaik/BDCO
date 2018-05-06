@@ -22,7 +22,7 @@ public class InsertionJoueur {
       }
   }
 
-  public boolean insereJoueur(String nom, String prenom, String adresse, Date date) {
+  public boolean insereJoueur(String nom, String prenom, String adresse, String date) {
     ResultSet rsetInsert = queries.getResult("insert into joueur values("+id+","+nomJoueur+","+prenomJoueur+","+date+","+adresse+")");
   }
 
