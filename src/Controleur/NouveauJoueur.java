@@ -1,7 +1,7 @@
 package Controleur;
 
 import Java.Modele.Fabrique;
-import connection.InsertionJoueur;
+import connection.insert.InsertionJoueur;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,10 +28,8 @@ public class NouveauJoueur {
         InsertionJoueur nouv = new InsertionJoueur();
         if (nouv.verifInsertion(nom, prenom)) {
             Fabrique.joueurs.ajouterJoueur(nom, prenom, adresse, date, nouv);
-            nouv.closeConnection();
             return false;
         } else {
-            nouv.closeConnection();
             return true;
         }
     }
