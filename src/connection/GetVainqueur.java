@@ -1,9 +1,8 @@
 package connection;
 import java.sql.*;
-import connection.MultipleQueries;
 
 public class GetVainqueur {
-  private MultipleQueries queries;
+
   private String prenom ="";
   private String nom="";
 
