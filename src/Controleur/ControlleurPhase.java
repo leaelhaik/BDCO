@@ -19,7 +19,7 @@ public class ControlleurPhase {
         if( req.getNomTour() != "erreur"){
         	return req.getNomTour();
         }
-        return "erreur";
+        return "erreur au niveau du contrôleur de phases";
     }
 
     public boolean nextPhase() {
