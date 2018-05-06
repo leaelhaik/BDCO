@@ -4,7 +4,7 @@ import connection.*;
 
 public class ControlleurPhase {
     String nomTour;
-
+    int idTournoi;
     public ControlleurPhase(){
 
     }
@@ -16,8 +16,9 @@ public class ControlleurPhase {
     public String getMostAdvanceTour(){
     	Connect co = new Connect();
     	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());
-        if( req.nomTour != "erreur"){
-        	return req.nomTour;
-        };
+        if( req.getNomTour() != "erreur"){
+        	return req.getNomTour();
+        }
+        return "erreur";
     }
 }

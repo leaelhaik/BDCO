@@ -28,12 +28,9 @@ testIGEchiquier:
 
 testIGTournoi:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGTournoi.java
-	
-testVerif:
-	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestVerif.java
 
-testCT:
-	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestControleTournoi.java
+testDesTrucs:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestDesTrucs.java
 
 #Execution
 
@@ -42,13 +39,10 @@ exeIGEchiquier:
 
 exeIGTournoi:
 	java -classpath bin:bin/ojdbc6.jar TestIGTournoi
-	
-exeVerif:
-	java -classpath bin:bin/ojdbc6.jar TestVerif
 
-exeCT:
-	java -classpath bin:bin/ojdbc6.jar TestControleTournoi
-	
+exeTestDesTrucs:
+    java -classpath bin:bin/ojdbc6.jar TestDesTrucs
+
 clean:
 	rm -rf bin/*.class
 	rm -rf bin/**/*.class
