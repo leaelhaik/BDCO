@@ -32,7 +32,7 @@ public class InsertionJoueur {
           // Création de la requête
           PreparedStatement verif = conn.prepareStatement(STMTVerif);
           verif.setString(1, nom);
-          verif.setSTMT(2, prenom);
+          verif.setString(2, prenom);
           verif.executeUpdate();
 
           ResultSet rset2 = verif.executeQuery(STMTVerif);

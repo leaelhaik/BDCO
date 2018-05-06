@@ -31,6 +31,13 @@ public class ListeJoueurs {
         return null;
     }
 
+    public void getAllJoueurs() {
+        /*
+        ??? listeBrute = // Appel à une fonction qui éxécute une requete pour récupérer la liste des joueurs sous forme de String
+        Puis on transforme chaque ligne en Joueur qu'on ajoute à la liste.
+        */
+    }
+
     /**
      * Methode servant à supprimer un joueur. Normalement, on en a pas besoin
      * @param i : l'indice du joueur à supprimer
@@ -70,6 +77,10 @@ public class ListeJoueurs {
             }
         }
         return true;
+    }
+
+    public ArrayList<Joueur> getMyJoueurs() {
+        return myJoueurs;
     }
 
     @Override

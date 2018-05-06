@@ -16,6 +16,10 @@ public class C_Rencontre {
         this.tour = tour;
     }
 
+    public void genererRencontresQualif() {
+
+    }
+
     public boolean envoyerBD() {
         return true;
     }

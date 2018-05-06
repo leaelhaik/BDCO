@@ -10,6 +10,7 @@ public abstract class Joueur {
     private int idUnique; //l'id unique du joueur pour le tour
     private String dateNaissance;
     private String adresse;
+    private int nbVictoires;
 
 
     public Joueur(String name) {
@@ -36,8 +37,11 @@ public abstract class Joueur {
         return this.idUnique;
     }
 
+    public int getNbVictoires() {
+        return nbVictoires;
+    }
 
-//-------méthodes------------
+    //-------méthodes------------
     @Override
     public String toString(){
         String s = this.nom + " , " + this.prenom + " , " + this.idUnique;

@@ -9,8 +9,6 @@ public class verificationCoup {
     public verificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,
                             String couleur, Connection conn){
 
-    }
-
 
 
     String STMT = "Select posY,posX from piece where numRencontre=? and nomTour=? and couleur=? and typePiece='roi'";
@@ -123,17 +121,17 @@ public class verificationCoup {
     rset.close();
     rset2.close();
     rset3.close();
-} catch (SQLException e) {
+    } catch (SQLException e) {
         System.err.println("failed");
         e.printStackTrace(System.err);
-        }
+    }
 
-public boolean isValid(){
+    public boolean isValid(){
         return isValid;
-        }
+    }
 
-public static void main(String args[]) {
+    public static void main(String args[]) {
         new VerificationCoup(posY,oldY, posX, oldX, numRencontre, nomTour, couleur,conn);
-        }
+    }
 
-        }
+}
