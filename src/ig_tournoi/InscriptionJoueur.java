@@ -2,6 +2,7 @@ package ig_tournoi;
 
 
 import Controleur.NouveauJoueur;
+import Java.Modele.ListeJoueurs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -130,26 +131,22 @@ public class InscriptionJoueur extends JPanel {
 			
 			ajouterJoueur(name, surname, direction, birth);
 			
-			inscrits.setText(getListeJoueurs().toString());
+			inscrits.setText(getListeJoueurs());
 			
 		}
 
 	}
 	
-	public ArrayList<String> getListeJoueurs() {
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("Joueurs inscrits :");
-		l.add("Joueur1");
-		l.add("Joueur2");
-		return l;
+	public String getListeJoueurs() {
+		ListeJoueurs l = new ListeJoueurs();
+		return l.getMyJoueurs().toString();
 	}
 	
 	public boolean ajouterJoueur(String name, String surname, String direction, String birth) {
-		//ajouter le joueur à la bd
-		/*NouveauJoueur ajout = new NouveauJoueur(name, surname, direction, birth);
+		NouveauJoueur ajout = new NouveauJoueur(name, surname, direction, birth);
 		if (ajout.envoyerBD()) {
-			//Feedback : le joueur est déjà dans le tournoi!
-		} */
+			label.setText("Joueur déja inscrit !");
+		} 
 		return true;
 	}
 }
