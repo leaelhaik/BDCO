@@ -12,7 +12,7 @@ public class ControlleurPhase {
     public void setTour(){
 
     }
-    
+    //TODO : corriger ce truc
     public String getMostAdvanceTour(){
     	Connect co = new Connect();
     	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());

@@ -4,7 +4,7 @@ import Java.Modele.Joueur;
 import Java.Modele.Qualification;
 import java.sql.*;
 import java.util.ArrayList;
-import connection.connect;
+import connection.Connect;
 
 /**
  * Created by ensimag on 06/05/18.
@@ -38,12 +38,13 @@ public class C_Rencontre {
 
     /**
      * Permet de renvoyer toutes les rencontres effectuées par un jour dans le tournoi en cours
-     * @return
+     * @param iDJoueur
+     * @return une ArrayList d'Integers (et non pas d'int) contenant la liste des rencontres
      */
-    public ArrayList<int> getAllRencontres(int iDJoueur, int iDTournoi){
-        ArrayList<int> listeRencontres = new ArrayList<int>();
+    public ArrayList<Integer> getAllRencontres(int iDJoueur){
+        ArrayList<Integer> listeRencontres = new ArrayList<Integer>();
         Connect co = new Connect();
-        connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, iDTournoi, co.getConnection());
+        connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, co.getConnection());
         return req.getListeRencontres();
 
     }
