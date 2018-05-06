@@ -42,8 +42,11 @@ public class ListeJoueurs {
         ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs();
         Joueur j;
         try {
+
+            j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getString(4), rset.getString(5));
+            ajoutJoueur(j);
             while (rset.next()) {
-                j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getDate(4), rset.getString(5));
+                j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getString(4), rset.getString(5));
                 ajoutJoueur(j);
             }
             rset.close();
