@@ -1,4 +1,6 @@
 package Controleur;
+import java.sql.*;
+import java.io.*;
 
 import connection.verification.verificationCoup;
 import java.text.ParseException;
@@ -15,7 +17,7 @@ public class NouveauCoup {
     int numRencontre;
     String nomTour;
     String couleur;
-
+    Connection conn;
 
     /**
      * Permet de faire le lien entre la BDD et l'IG
@@ -24,6 +26,9 @@ public class NouveauCoup {
      * @param nomTour le nom du tour
      * @param couleur la couleur du coup
      */
+
+//TODO: attendre que numRencontre soir implementé pour pouvoir finir tout ça
+
     public NouveauCoup(String Pos, int numRencontre, String nomTour, String
             couleur){
 
@@ -34,11 +39,26 @@ public class NouveauCoup {
         this.numRencontre = numRencontre;
         this.nomTour = nomTour;
         this.couleur = couleur;
-
     }
-//TODO : attendre que verificationCoup soit modifié pour pouvoir le finir
+
+    /**
+     * envoie à la BD le nouveau coup
+     * @return true si ça a marché, false sinon
+     */
     public boolean envoyerBD(){
-        verificationCoup verifCoup = new verificationCoup();
-
+        try{
+            Connect co = new Connect();
+            this.conn = co.getConnection();
+            verificationCoup verifCoup = new verificationCoup(this.newPosY, this.oldPosY, this.newPosX, this.oldPosX,
+                    this.numRencontre, this.nomTour, this.couleur, this.conn);
+        } catch(SQLException e){
+            System.err.println("failed");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
+
+
+
 }
