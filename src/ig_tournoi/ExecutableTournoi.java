@@ -57,7 +57,7 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 	    JPanel creationTournoi = new JPanel();
 	    creationTournoi.setLayout(new BorderLayout());
 	    JButton boutonValiderJoueurs = new JButton("Validez les joueurs");
-	    boutonValiderJoueurs.addActionListener(new BoutonSuivantListener());
+	    boutonValiderJoueurs.addActionListener(new BoutonValiderJoueursListener());
 	    
 	    creationTournoi.add(new JLabel("Tournoi " + getIDTournoi()), BorderLayout.NORTH);
 	    creationTournoi.add(ins,BorderLayout.CENTER);
@@ -193,6 +193,18 @@ class BoutonSuivantListener implements java.awt.event.ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		//tester le nombre de joueurs
+		cl.next(cards);
+		
+	}
+	
+}
+
+
+class BoutonValiderJoueursListener implements java.awt.event.ActionListener {
+
+	public void actionPerformed(ActionEvent arg0) {
+		//tester le nombre de joueurs
+		//creer les rencontres en BD
 		cl.next(cards);
 		
 	}

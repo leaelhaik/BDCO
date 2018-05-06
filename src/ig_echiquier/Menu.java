@@ -13,6 +13,7 @@ public class Menu extends JPanel {
 	private JComboBox<String> choixRencontre = new JComboBox<String>();
 	private JLabel label = new JLabel("Selectionnez vote rencontre");
 	private JPanel rencontre = new JPanel();
+	private int ren;
 
 	public Menu(int n) {
 		
@@ -23,8 +24,26 @@ public class Menu extends JPanel {
 		}
 		choixRencontre.addActionListener(new ChoixRencontreListener());
 		top.add(choixRencontre);
-		this.add(top, BorderLayout.NORTH);
-		this.add(rencontre,BorderLayout.CENTER);
+		
+		
+		rencontre.setLayout(new BoxLayout(rencontre, BoxLayout.LINE_AXIS));
+		//rencontre.add(new JLabel("blablablabla"));
+		
+		rencontre.add(new JLabel("Rencontre : " + choixRencontre.getSelectedItem())); //+ r.getJoueur("blanc") + " vs " + r.getJoueur("noir") + "\n"));
+		//if (r1.getVainqueur()==null) {
+		rencontre.add(new JLabel(" -- en cours")); 
+		//} else {
+		//	rencontre.add(new JLabel("Vainqueur : " + r.getVainqueur));
+		//}
+		JPanel page = new JPanel();
+		
+		page.setLayout(new BoxLayout(page,BoxLayout.PAGE_AXIS));
+
+		page.add(top);
+		
+
+		page.add(rencontre);
+		this.add(page, BorderLayout.CENTER);
 		
 
 	}
@@ -32,18 +51,18 @@ public class Menu extends JPanel {
 	class ChoixRencontreListener implements java.awt.event.ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
+			
+			String renc =  choixRencontre.getSelectedItem().toString();
 			//Rencontre r = new Rencontre(idRencontre);
-			rencontre.setLayout(new BoxLayout(rencontre, BoxLayout.LINE_AXIS));
-			rencontre.add(new JLabel("Rencontre : " )); //+ r.getJoueur("blanc") + " vs " + r.getJoueur("noir") + "\n"));
-			//if (r1.getVainqueur()==null) {
-			rencontre.add(new JLabel(" -- en cours")); 
-			//} else {
-			//	rencontre.add(new JLabel("Vainqueur : " + r.getVainqueur));
-			//}
+			
 			
 		}
 		
 	}
+	
+	
+	
+	
 	
 
 	

@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.BoxLayout;
@@ -12,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class InscriptionJoueur extends JPanel {
@@ -24,7 +26,8 @@ public class InscriptionJoueur extends JPanel {
 	private JTextField AnneeNaissance = new JTextField();
 	private JButton boutonAjouterJoueur = new JButton("Ajouter un  joueur");
     private JLabel label = new JLabel("");
-	
+    private JPanel listeJoueurs = new JPanel();
+	private JTextArea inscrits = new JTextArea("Liste des joueurs inscrits : ");
 	
 	public InscriptionJoueur() {
 		
@@ -67,6 +70,10 @@ public class InscriptionJoueur extends JPanel {
 		pan7.setLayout(new BoxLayout(pan7, BoxLayout.LINE_AXIS));		
 		pan7.add(label);
 		
+		listeJoueurs.setLayout(new BoxLayout(listeJoueurs, BoxLayout.LINE_AXIS));
+		listeJoueurs.add(inscrits);
+		
+		
 		JPanel pan6 = new JPanel();
 		pan6.setLayout(new BoxLayout(pan6, BoxLayout.PAGE_AXIS));
 		pan6.add(pan1);
@@ -74,6 +81,8 @@ public class InscriptionJoueur extends JPanel {
 		pan6.add(pan3);
 		pan6.add(pan4);
 		pan6.add(pan5);
+
+		pan6.add(listeJoueurs);
 		pan6.add(pan7);
 		
 		this.add(pan6, BorderLayout.CENTER);
@@ -114,8 +123,23 @@ public class InscriptionJoueur extends JPanel {
 			String birth = year + "-" + month + "-" + day;
 			//Birth est au format attendu par la BD
 			
+			ajouterJoueur(name, surname, direction, birth);
+			
+			inscrits.setText(getListeJoueurs().toString());
 			
 		}
 		
+	}
+	
+	public ArrayList<String> getListeJoueurs() {
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("Joueurs inscrits :");
+		l.add("Joueur1");
+		l.add("Joueur2");
+		return l;
+	}
+	
+	public void ajouterJoueur(String nom, String prenom, String adresse, String dateNaissance) {
+		//ajouter le joueur à la bd
 	}
 }
