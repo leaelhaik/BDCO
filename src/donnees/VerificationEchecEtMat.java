@@ -16,7 +16,7 @@ public class VerificationEchecEtMat {
 			int i,j = 0;
 			char k= (char) (rsetRoi.getInt("posX")+j);
 
-			VerificationEchec verifEchec= new VerificationEchec(rsetRoi.getInt("posY")+i,k,numRencontre,nomTour,couleur);
+			VerificationEchec verifEchec = new VerificationEchec(rsetRoi.getInt("posY")+i,k,numRencontre,nomTour,couleur);
 
 			//verification etat echec
 			if(verifEchec.enEchec()){
