@@ -3,12 +3,16 @@ import java.sql.*;
 
 public class DebutQuart {
   private int[] tabClassement = new int[8];
-  public DebutQuart(Connection conn) {
+  public DebutQuart() {
     int i=0;
     ResultSet rsetQuart = Queries.queries.getResult("Select idJoueur,count(nomTour) from Rencontre where nomTour='qualifications' group by(idJoueur) LIMIT 0,8 ORDER by count(nomTour) ASC");
-    while(rsetQuart.next()){
-      tabClassement[i]=rset.getInt(1);
-      i++;
+    try {
+      while (rsetQuart.next()) {
+        tabClassement[i] = rsetQuart.getInt(1);
+        i++;
+      }
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
   }
 
