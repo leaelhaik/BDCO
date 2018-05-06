@@ -10,6 +10,15 @@ public class VerificationCoup {
 
   }
 
+    String STMTC = " Select posX,posY from historique where idCoup=max(idCoup)";
+    Statement stmtc = conn.createStatement();
+    ResultSet rsetc = stmtc.executeQuery(STMTC);
+
+    String STMTCouleur = " Select couleur from piece where posX=?,posY=?)";
+    PreparedStatement stmtcouleur = conn.prepareStatement(STMTCouleur);
+    stmtcouleur.setObject(1,rsetc.getString(1),Type.CHAR);
+    stmtcouleur.setInt(2,posY);
+    ResultSet rsetcoul = stmtcouleur.executeQuery(STMTCouleur);
 
 
     String STMT = "Select posY,posX from piece where numRencontre=? and nomTour=? and couleur=? and typePiece='roi'";
@@ -62,8 +71,8 @@ public class VerificationCoup {
           sel.setString(2,nomTour);
           sel.setInt(3,posY);
           sel.setObject(4,posX,Type.CHAR);
-          roi.executeUpdate();
-          ResultSet rsetSel = stmt.executeQuery(STMT);
+          sel.executeUpdate();
+          ResultSet rsetSel = sel.executeQuery(STMT);
           if(rsetSel.getString(1)==couleur){
             isValid=false;
           }
@@ -77,7 +86,7 @@ public class VerificationCoup {
             del.executeUpdate();
             // Execution de la requete
             startTransact(conn);
-            ResultSet rset = stmt.executeQuery(STMT1);
+            ResultSet rset = del.executeQuery(STMT1);
 
             String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? where posX = ? , posY = ?";
             PreparedStatement nouv = conn.prepareStatement(STMT3);
@@ -87,10 +96,10 @@ public class VerificationCoup {
             nouv.setInt(4,posY);
             nouv.setObject(5,oldX,Type.CHAR);
             nouv.setInt(6,oldY);
-            inse.executeUpdate();
+            nouv.executeUpdate();
             //commit
             // Execution de la requete
-            ResultSet rset3 = stmt.executeQuery(STMT3);
+            ResultSet rset3 = nouv.executeQuery(STMT3);
 
             if(VerifEchec(rsetRoi.getInt(1),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
               rollFunction(conn);
@@ -117,11 +126,17 @@ public class VerificationCoup {
 
     // Fermeture
     type.close();
+    rsetc.close();
+    stmtc.close();
     rsetRoi.close();
     rsetSel.close();
     rset.close();
     rset2.close();
     rset3.close();
+    inse.close();
+    del.close();
+    nouv.close();
+    sel.close();
   } catch (SQLException e) {
       System.err.println("failed");
       e.printStackTrace(System.err);

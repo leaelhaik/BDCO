@@ -223,11 +223,35 @@ public class VerifSituation(){
           }
         }
 
+        if(!isVerified){
+          String STMTC= "select idJoueur from AffectationCouleur where nomTour=?,numRenconre=?,couleur=?";
+          PreparedStatement selC = conn.prepareStatement(STMTC);
+          selC.setString(1,nomTour);
+          selC.setInt(2,numRenconre);
+          selC.setString(3,couleur);
+          selC.executeUpdate();
 
+          ResultSet rsetC = selC.executeQuery(STMTC);
+
+
+          String STMTV= "update rencontre set idJoueur=? where nomTour=?, numRenconre=?";
+          PreparedStatement selV = conn.prepareStatement(STMTV);
+          selV.setString(1,rsetC.getInt(1));
+          selV.setString(2,nomTour);
+          selV.setInt(3,numRenconre);
+          selV.executeUpdate();
+
+          ResultSet rsetV = selV.executeQuery(STMTV);
+        }
+
+        rsetV.close();
+        rsetC.close();
         rsetRoi.close();
         rsetPic.close();
         rset.close();
         rset2.close();
+        selV.close();
+        selC.close();
       }
     } catch (SQLException e) {
         System.err.println("failed");
@@ -249,7 +273,7 @@ public class VerifSituation(){
     sel.setString(3,idPiece);
     sel.executeUpdate();
 
-    ResultSet rsetRoi = stmt.executeQuery(setSTMT);
+    ResultSet rsetRoi = sel.executeQuery(setSTMT);
   }
 
   public void rollFunction(Connection conn){
