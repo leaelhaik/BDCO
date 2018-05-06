@@ -1,5 +1,6 @@
 package connection;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class MultipleQueries {
@@ -17,5 +18,9 @@ public class MultipleQueries {
 
     public void closeConnection() {
         connect.closeConnection();
+    }
+    
+    public Connection getConnection() {
+    	return connect.getConnection();
     }
 }
