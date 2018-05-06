@@ -1,4 +1,7 @@
-//package connection.verification.verificationTable;
+package connection.verification.verificationTable;
+import connection.Connect;
+import connection.SimpleQuery;
+
 import java.sql.*;
 
 public class verifJoueur {
@@ -29,6 +32,18 @@ public class verifJoueur {
         System.out.print(rset.getString(j) + "\t");
       }
       System.out.println();
+    }
+  }
+
+  public static ResultSet tousLesJoueurs(Connection conn) {
+    try {
+      SimpleQuery req = new SimpleQuery(STMT, conn);
+      ResultSet rset = req.getResult();
+      return rset;
+      //rset.close();
+    } catch(SQLException e) {
+      System.err.println("failed");
+      e.printStackTrace();
     }
   }
 

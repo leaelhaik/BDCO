@@ -1,5 +1,6 @@
 package Java.Modele;
 
+import connection.Connect;
 import connection.init.InitAffectationCouleur;
 import connection.insert.InsertRencontre;
 

@@ -2,6 +2,7 @@ import Controleur.C_Rencontre;
 import Controleur.MasterOfBDD;
 import Controleur.NouveauJoueur;
 import Java.Modele.ListeJoueurs;
+import connection.Connect;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -37,9 +38,9 @@ public class TestControleTournoi {
 
     public static void affiche() {
         ListeJoueurs lj = new ListeJoueurs();
-        //Connect co = new Connect();
-        //Connection connection = co.getConnection();
-        //lj.getAllJoueurs(connection);
+        Connect co = new Connect();
+        Connection connection = co.getConnection();
+        lj.getAllJoueurs(connection);
         System.out.println(lj.toString());
     }
 }
