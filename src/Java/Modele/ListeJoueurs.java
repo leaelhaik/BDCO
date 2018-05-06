@@ -34,21 +34,24 @@ public class ListeJoueurs {
         return null;
     }
 
-    public void getAllJoueurs(Connection conn) {
+    public void getAllJoueurs() {
         /*
         ??? listeBrute = // Appel à une fonction qui éxécute une requete pour récupérer la liste des joueurs sous forme de String
         Puis on transforme chaque ligne en Joueur qu'on ajoute à la liste.
         */
-        ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs(conn);
+        ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs();
         Joueur j;
         try {
+
+            j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getString(4), rset.getString(5));
+            ajoutJoueur(j);
             while (rset.next()) {
-                j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getDate(4), rset.getString(5));
+                j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getString(4), rset.getString(5));
                 ajoutJoueur(j);
             }
             rset.close();
         } catch (SQLException e) {
-            System.err.println("failed");
+            System.err.println("getAllJoueur failed");
             e.printStackTrace();
         }
     }

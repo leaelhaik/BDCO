@@ -12,7 +12,7 @@ class JoueurConcret extends Joueur {
         super(name);
     }
 
-    public JoueurConcret(String nom, String prenom, int id, Date date, String adresse) {
+    public JoueurConcret(String nom, String prenom, int id, String date, String adresse) {
         super(nom, prenom, id, date, adresse);
     }
 }
