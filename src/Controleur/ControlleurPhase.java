@@ -32,16 +32,19 @@ public class ControlleurPhase {
             case "qualifications":
                 DebutQuart dq = new DebutQuart();
                 recuperer(joueurs, dq.getClassement());
+                Fabrique.rencontres.reset();
                 suivant = new QuartFinal(joueurs);
                 break;
             case "quartFinale":
                 DebutDemi dd = new DebutDemi();
                 recuperer(joueurs, dd.getClassement());
+                Fabrique.rencontres.reset();
                 suivant = new DemiFinal(joueurs);
                 break;
             case "demiFinale":
                 DebutFinale df = new DebutFinale();
                 recuperer(joueurs, df.getClassement());
+                Fabrique.rencontres.reset();
                 suivant = new FinaleFinal(joueurs);
                 break;
         }

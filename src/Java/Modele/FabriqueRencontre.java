@@ -8,4 +8,6 @@ public abstract class FabriqueRencontre {
     public abstract ListeRencontre lesRencontres();
 
     public abstract void nouvelleRencontre(Joueur blanc, Joueur noir, String tour);
+
+    public abstract void reset();
 }
