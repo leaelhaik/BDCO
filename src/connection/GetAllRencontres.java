@@ -7,10 +7,9 @@ public class GetAllRencontres {
     static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
     static final String USER = "dhouibd"; // A remplacer pour votre compte
     static final String PASSWD = "dhouibd";
-    static final String STMT = "SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.Joueur.idJoueur" +
-            " =?";
+    static final String STMT = "SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.idJoueur=?";
 
-    private ArrayList<> listeRencontres;
+    private ArrayList<Integer> listeRencontres;
 
     public GetAllRencontres(int idJoueur, Connection conn) {
         try {
@@ -65,7 +64,7 @@ public class GetAllRencontres {
         }
     }
 
-    public ArrayList<int> getListeRencontres(){
+    public ArrayList<Integer> getListeRencontres(){
         return this.listeRencontres;
     }
 
