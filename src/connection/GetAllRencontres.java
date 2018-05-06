@@ -1,15 +1,15 @@
 package connection;
-import java.sql.*
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllRencontres {
     static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
     static final String USER = "dhouibd"; // A remplacer pour votre compte
     static final String PASSWD = "dhouibd";
-    static final String STMT = "SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.Joueur.idJoueur" +
-            " =?"
+    static final String STMT = "SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.idJoueur=?";
 
-    private List<int> listeRencontres;
+    private ArrayList<Integer> listeRencontres;
 
     public GetAllRencontres(int idJoueur, Connection conn) {
         try {
@@ -30,7 +30,7 @@ public class GetAllRencontres {
 
             ResultSet rset = sel.executeQuery(STMT);
             conn.commit();
-            listeRencontres = new List<int>;
+            listeRencontres = new ArrayList<>();
             while(!(rset.isLast())){
                 listeRencontres.add(rset.getInt(1));
                 rset.next();
@@ -64,7 +64,7 @@ public class GetAllRencontres {
         }
     }
 
-    public List<int> getListeRencontres(){
+    public ArrayList<Integer> getListeRencontres(){
         return this.listeRencontres;
     }
 

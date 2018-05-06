@@ -2,22 +2,20 @@ package donnees;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import connection.MultipleQueries;
 
 public class VerificationCoup {
-	
+
 	private MultipleQueries queries;
 	private boolean isValid = false ;
 	private String typePiece;
-	
-	
+
+
 	public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,
-            String couleur){
+			String couleur){
 		queries = new MultipleQueries();
 		ResultSet rsetDerPiece = queries.getResult(" Select posX,posY from historique where idCoup=max(idCoup)");
 		ResultSet rsetCoul = null;
@@ -26,108 +24,277 @@ public class VerificationCoup {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
-		
+
 		typePiece="roi";
 		try {
-			ResultSet rsetroi = queries.getResult("Select posY,posX from piece where numRencontre=" + numRencontre + "and nomTour=" + nomTour + "and couleur=\'" + rsetCoul.getString("Couleur")+ "\' and typePiece="+typePiece+"");
+			ResultSet rsetroi = queries.getResult("Select posY,posX from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and couleur=\'" + rsetCoul.getString("Couleur")+ "\' and typePiece=\'"+typePiece+"\'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		ResultSet rsetType = queries.getResult("select typePiece from piece where numRencontre=" + numRencontre +" and nomTour=" + nomTour +" and posY = " + posY + " and posX ="+posX+"");
-	
+
+
+		ResultSet rsetType = queries.getResult("select typePiece from piece where numRencontre=" + numRencontre +" and nomTour=\'" + nomTour +" \' and posY = " + posY + " and posX =\'" + posX + "\'");
+
 		try {
 			typePiece=rsetType.getString("typePiece");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	    switch(typePiece){
 
-		        case "tour" : isValid = VerifTour(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		        	break;
-		
-		        case "fou" : isValid = VerifFou(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		            break;
-		
-		        case "roi" : isValid = VerifRoi(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		            break;
-		
-		        case "cavalier" : isValid = VerifCavalier(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		            break;
-		
-		        case "reine" : isValid = VerifReine(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		            break;
-		
-		        case "pion" : isValid = VerifPion(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
-		            break;
-	    }
-	    
-        if(isValid){
-    		ResultSet rsetCoul2 = queries.getResult("Select couleur from piece where numRencontre= " + numRencontre + " and nomTour="+nomTour +" and posY = " + posY+" and posX ="+ posX +"");
-        
-	        if(rsetCoul2.getString("Couleur")==couleur){
-	            isValid=false;
-	        }	    
-	    
-        }
-        else{
-        	startTransact(conn);
-        	ResultSet rsetDel = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour="+nomTour+" and posY ="+posY+" and posX ="+posX+"");
-        }
-    	ResultSet rsetUp = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour="+nomTour+" and posY ="+posY+" and posX ="+posX+"");
+		switch(typePiece){
+
+		case "tour" : isValid = VerifTour(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+
+		case "fou" : isValid = VerifFou(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+
+		case "roi" : isValid = VerifRoi(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+
+		case "cavalier" : isValid = VerifCavalier(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+
+		case "reine" : isValid = VerifReine(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+
+		case "pion" : isValid = VerifPion(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		break;
+		}
+
+		if(isValid){
+			ResultSet rsetCoul2 = queries.getResult("Select couleur from piece where numRencontre= " + numRencontre + " and nomTour= \'"+nomTour +"\' and posY = " + posY + " and posX =\'" + posX + "\'");
+
+			try {
+				if(rsetCoul2.getString("Couleur")==couleur){
+					isValid=false;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	    
+
+		}
+		else{
+			startTransact(queries.getConnection());
+			ResultSet rsetDel = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour= \' "+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
+		}
+		ResultSet rsetUp = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour=\'"+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
 
 
-            String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? where posX = ? , posY = ?";
-            PreparedStatement nouv = conn.prepareStatement(STMT3);
-            nouv.setObject(1,posX,Types.CHAR);
-            nouv.setInt(2,posY);
-            nouv.setObject(3,oldX,Types.CHAR);
-            nouv.setInt(4,oldY);
-            nouv.setObject(5,oldX,Types.CHAR);
-            nouv.setInt(6,oldY);
-            nouv.executeUpdate();
-            //commit
-            // Execution de la requete
-            ResultSet rset3 = nouv.executeQuery(STMT3);
-        }
-	
-	
-	
-	
-	
+		ResultSet rsetUpdate = queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
+		
+	}
+
+
+
+
+
 	/* --------------------------------Verif Cavalier ----------------------------------*/
-	public boolean VerifCavalier(int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour, String couleur) {
+	public boolean VerifCavalier(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour, String couleur) {
+		boolean bool=false;
+		try {
+			byte[] tabOldX = null;
+			byte[] tabPosX = null;
 
+			try {
+				tabOldX = oldX.toString().getBytes("UTF-8");
+				tabPosX = posX.toString().getBytes("UTF-8");
+			} catch (IOException ioe) {
+
+			}
+			ResultSet rsetCavalier = null;
+			if(((Math.abs(posY-oldY)==2) && (Math.abs(tabPosX[0]-tabOldX[0]))==1) || ((Math.abs(tabPosX[0]-tabOldX[0])==2) && (Math.abs(posY-oldY)==1))) {
+
+				rsetCavalier = queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre +" and nomTour = \'"+ nomTour + "\' and couleur = \'"+ couleur +"\' and posX = \'" + posX + "\' and posY = " + posY + "");
+
+			}
+			bool=!(rsetCavalier.next());
+
+		} catch(SQLException e) {
+			System.err.println("failed");
+			e.printStackTrace();
+		}
+		return bool;
+
+	}
+
+
+
+	/* ---------------------------------Verif Fou ----------------------------------------*/
+	public boolean VerifFou(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
+		boolean bool = false;
+		try {
+			byte[] tabOldX = null;
+			byte[] tabPosX = null;
+
+			try {
+				tabOldX = oldX.toString().getBytes("UTF-8");
+				tabPosX = posX.toString().getBytes("UTF-8");
+			} catch (IOException ioe) {
+
+			}
+
+			if(Math.abs(tabOldX[0]-tabPosX[0])==Math.abs(oldY-posY)) {
+
+				ResultSet rsetFou;
+				if (tabPosX[0] < tabOldX[0]) {
+					if (posY < oldY) {
+						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + posY + " and " + oldY + "");
+					} else {
+						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\' )=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + oldY + " and " + posY + "");
+					}
+				} else {
+					if (posY < oldY) {
+						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
+					} else {
+						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
+					}
+
+				}
+
+				bool=!(rsetFou.next());
+			}
+
+		} catch(SQLException e) {
+			System.err.println("failed");
+			e.printStackTrace();
+		}
+		return bool;
+
+	}
+
+	/* -------------------------------- Verif Pion ------------------------------ */
+	public boolean VerifPion(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour, String couleur) {
+		boolean bool= false;
+		try {
+			byte[] tabOldX = null;
+			byte[] tabPosX = null;
+
+			try {
+				tabOldX = oldX.toString().getBytes("UTF-8");
+				tabPosX = posX.toString().getBytes("UTF-8");
+			} catch (IOException ioe) {
+
+			}
+
+			ResultSet rsetPion1, rsetPion2;
+
+			if(((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur))) {
+				if((tabOldX[0]-tabPosX[0])==1)  {// Veut manger à gauche
+			  		rsetPion1 = queries.getResult("select idPiece, couleur, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
+					bool=!(rsetPion1.next());
+				} else {
+					rsetPion2 = queries.getResult("select idPiece, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
+					bool=!(rsetPion2.next());
+				}
+			}
+
+
+		} catch(SQLException e) {
+			System.err.println("failed");
+			e.printStackTrace();
+		}
+		return bool;
+
+	}
+
+
+
+	/* ----------------------------------- Verif Reine ----------------------------- */
+
+	public boolean VerifReine(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
+		boolean bool;
+
+		byte[] tabOldX = null;
+		byte[] tabPosX = null;
+
+		try {
+			tabOldX = oldX.toString().getBytes("UTF-8");
+			tabPosX = posX.toString().getBytes("UTF-8");
+		} catch (IOException ioe) {
+
+		}
+
+		if((tabPosX[0]==tabOldX[0])||(posY==oldY)) {
+			bool=VerifTour(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		} else {
+			bool=VerifFou(posY,oldY,posX,oldX,numRencontre,nomTour, couleur);
+		}
+		return bool;
+	}
+
+
+	/* ----------------------------------- Verif Roi ----------------------------- */
+
+	public boolean VerifRoi(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
+		boolean bool = false;
+
+
+		try {
+			byte[] tabOldX = null;
+			byte[] tabPosX = null;
+
+			try {
+				tabOldX = oldX.toString().getBytes("UTF-8");
+				tabPosX = posX.toString().getBytes("UTF-8");
+			} catch (IOException ioe) {
+
+			}
+
+			ResultSet rsetRoi = null;
+
+			if((Math.abs(posY-oldY)==1) || (Math.abs(tabPosX[0]-tabOldX[0]))==1 || ((Math.abs(tabPosX[0]-tabOldX[0])==1) && (Math.abs(posY-oldY)==1))) {
+				rsetRoi = queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + " \' and couleur = \' " + couleur + " \' and posX = \'" + posX + "\' and posY = " + posY + "");
+			}
+			bool=!(rsetRoi.next());
+
+		} catch(SQLException e) {
+			System.err.println("failed");
+			e.printStackTrace();
+		}
+
+
+		return bool;
+
+	}
+	
+	/* ----------------------------------- Verif Tour ----------------------------- */
+		
+	public boolean VerifTour(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
+		boolean bool = false;
 	    try {
 	      byte[] tabOldX = null;
 	      byte[] tabPosX = null;
-	      int nbLignes = 0;
 
 	      try {
-	        tabOldX = oldX.getBytes("UTF-8");
-	        tabPosX = posX.getBytes("UTF-8");
+	        tabOldX = oldX.toString().getBytes("UTF-8");
+	        tabPosX = posX.toString().getBytes("UTF-8");
 	      } catch (IOException ioe) {
 
 	      }
 
-	      if(((Math.abs(posY-oldY)==2) && (Math.abs(tabPosX[0]-tabOldX[0]))==1) || ((Math.abs(tabPosX[0]-tabOldX[0])==2) && (Math.abs(posY-oldY)==1))) {
-
-	        ResultSet rsetCavalier = queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre +" and nomTour = \'"+ nomTour + "\' and couleur = \'"+ couleur +"\' and posX = "+posX+" and posY = "+posY+"");
-
-	        
-	        verifNbLignes(rsetCavalier);
-	        nbLignes = rsetCavalier.getRow();
-	        rsetCavalier.beforeFirst();
-	        if(nbLignes != 0)
-	          this.isValid = false;
-	        else
-	          this.isValid = true;
+	      ResultSet rsetTour1, rsetTour2;
+	      if((tabPosX[0]==tabOldX[0]) || (posY==oldY)) {
+	        if(posY==oldY) {
+	        	if(tabPosX[0] < tabOldX[0]) {
+	        		rsetTour1 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + posX + "\' and  \'" + oldX + "\' and posY =" + posY + " ");
+	        	} else {
+	        		rsetTour1 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + oldX + "\' and \'" + posX + "\' and posY = " + posY + "");
+	        	}
+	        	bool=!(rsetTour1.next());
+	        } else {
+	        	if(tabPosX[0] < tabOldX[0]) {
+	  	          rsetTour2 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
+	        	} else {
+	  	          rsetTour2 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
+	        	}
+	        	bool=!(rsetTour2.next());
+	        }
 
 	      }
 
@@ -135,10 +302,30 @@ public class VerificationCoup {
 	            System.err.println("failed");
 	            e.printStackTrace();
 	      }
-		return isValid;
+	    
+		return bool;
 
 	  }
+	
+	
+	 /* --------------------- Situation de mise en échec -------------------------*/
+	  public void startTransact(Connection conn){
+	      ResultSet rset = queries.getResult("Start Transaction;");
+	  }
 
+	  public ResultSet setFunction(int idPiece,Character posX, int posY, Connection conn){
+	    ResultSet rsetSel = queries.getResult("update piece set posX=\' " + posX + " \' ,posY= " + posY + " where idPiece=" + idPiece + "");
+	    return rsetSel;
+	  }
 
+	  public void rollFunction(Connection conn){
+	    ResultSet rset = queries.getResult("Rollback;");
+	    queries.closeConnection();
+	  }
+
+	  public void commit(Connection conn){
+		    ResultSet rset = queries.getResult("Commit;");
+		    queries.closeConnection();
+	  }
 
 }

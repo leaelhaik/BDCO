@@ -27,6 +27,7 @@ public class NouveauJoueur {
             java.sql.Date dateSQL = new java.sql.Date(parsed.getTime());
             this.date = dateSQL;
         } catch (ParseException e) {
+            System.err.println("Echec de la conversion de la date");
             e.printStackTrace();
         }
     }

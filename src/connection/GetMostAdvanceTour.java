@@ -5,11 +5,11 @@ public class GetMostAdvanceTour {
 	static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 	static final String USER = "dhouibd"; // A remplacer pour votre compte
 	static final String PASSWD = "dhouibd";
-	static final String STMT = "select couleur from joueur where joueur.idjoueur=? ";
+	static final String STMT = "select count(distinct nomTour) from rencontre ";
 	
-	private String couleur;
+	private String nomTour;
 	
-	public GetMostAdvanceTour(int idJoueur, Connection conn) {
+	public GetMostAdvanceTour(Connection conn) {
 		try {
 			// Enregistrement du driver Oracle
 			  // System.out.print("Loading Oracle driver... ");
@@ -23,13 +23,24 @@ public class GetMostAdvanceTour {
 			  // Statement stmt = conn.createStatement();
 			
 			  PreparedStatement sel = conn.prepareStatement(STMT);
-			  sel.setInt(1,idJoueur);
 			  sel.executeUpdate();
 			
 			  ResultSet rset = sel.executeQuery(STMT);
 			  conn.commit();
 			  
-			  this.couleur = rset.getString(1);
+			  int nbNomTour = rset.getString(1);
+			  
+			  switch(nbNomTour){
+			  	case 1 : this.nomTour = "qualifications";
+			  	break;
+			  	case 2 : this.nomTour = "quartFinale";
+			  	break;
+			  	case 3 : this.nomTour = "demiFinale";
+		  		break;
+			  	case 4 : this.nomTour = "finale";
+		  		break;
+		  		default : this.nomTour = "erreur";
+			  }
 			  
 			  // Affichage du resultat
 			  //dumpResultSet(rset);
