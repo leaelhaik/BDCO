@@ -3,7 +3,6 @@ package ig_echiquier;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.*;
 
 import javax.swing.BoxLayout;
@@ -39,6 +38,7 @@ public class ExecutablePartie extends JFrame {
     private JButton boutonRetour = new JButton("Retour");
 	private JTextField nomJoueur = new JTextField("");
 	private JTextField prenomJoueur = new JTextField("");
+	private JLabel labelIdRencontre = new JLabel("Rencontre n°0");
     
 	public ExecutablePartie(String nomFenetre, int hauteurFenetre, int largeurFenetre) {
 		
@@ -96,6 +96,7 @@ public class ExecutablePartie extends JFrame {
 	    boutonRetour.addActionListener(new BoutonRetourListener());
 	    JPanel north = new JPanel();
 	    north.setLayout(new BoxLayout(north,BoxLayout.LINE_AXIS));
+	    north.add(labelIdRencontre);
 	    north.add(boutonRetour);
 	    north.add(boutonPat);
 	    north.add(boutonQuitter);
@@ -115,6 +116,14 @@ public class ExecutablePartie extends JFrame {
 	    
 	}
 
+	
+	public int getIdRencontre() {
+		return this.idRencontre;
+	}
+	
+	public void setIdRencontre(int i) {
+		this.idRencontre = i;
+	}
 
 	class BoutonQuitterListener implements java.awt.event.ActionListener {
 
@@ -142,8 +151,13 @@ public class ExecutablePartie extends JFrame {
 			//if (getVainqueur() != null ) {
 			//	cl.show(cards, PARTIETERMINEE);
 			//} else {
+
+				setIdRencontre(menu.getIdRencontre());
+				System.out.println("id rencontre = "+getIdRencontre());
+				labelIdRencontre.setText("Rencontre n°"+getIdRencontre());
 				cl.show(cards, PARTIEENCOURS);
 			//}
+
 			
 		}
 		

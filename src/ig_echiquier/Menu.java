@@ -2,6 +2,8 @@ package ig_echiquier;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,29 +15,34 @@ public class Menu extends JPanel {
 	private JComboBox<String> choixRencontre = new JComboBox<String>();
 	private JLabel label = new JLabel("Selectionnez vote rencontre");
 	private JPanel rencontre = new JPanel();
-	private int ren;
-
+	private JPanel page = new JPanel();
+	private int idRencontre;
+	private JLabel labelRencontre = new JLabel("Rencontre n°1 - Machin contre truc");
+	private JLabel labelStatut = new JLabel(" --- en cours");
+	
+	
 	public Menu(int n) {
+		
+		
+		idRencontre=1;
+		//premiere rencontre de l aliste idRencontre=listRencontres.first();
 		
 		JPanel top = new JPanel();
 		top.add(label);
 		for (int i=1; i<=n; i++) {
-			choixRencontre.addItem("Rencontre "+i);
+			choixRencontre.addItem(""+i);
 		}
-		choixRencontre.addActionListener(new ChoixRencontreListener());
+		
+		ChoixRencontreListener ch = new ChoixRencontreListener();
+		choixRencontre.addActionListener(ch);
 		top.add(choixRencontre);
 		
 		
 		rencontre.setLayout(new BoxLayout(rencontre, BoxLayout.LINE_AXIS));
-		//rencontre.add(new JLabel("blablablabla"));
+		rencontre.add(labelRencontre);
+		rencontre.add(labelStatut);
+
 		
-		rencontre.add(new JLabel("Rencontre : " + choixRencontre.getSelectedItem())); //+ r.getJoueur("blanc") + " vs " + r.getJoueur("noir") + "\n"));
-		//if (r1.getVainqueur()==null) {
-		rencontre.add(new JLabel(" -- en cours")); 
-		//} else {
-		//	rencontre.add(new JLabel("Vainqueur : " + r.getVainqueur));
-		//}
-		JPanel page = new JPanel();
 		
 		page.setLayout(new BoxLayout(page,BoxLayout.PAGE_AXIS));
 
@@ -52,15 +59,26 @@ public class Menu extends JPanel {
 
 		public void actionPerformed(ActionEvent arg0) {
 			
-			String renc =  choixRencontre.getSelectedItem().toString();
-			//Rencontre r = new Rencontre(idRencontre);
-			
-			
+			int i = Integer.parseInt(choixRencontre.getSelectedItem().toString());
+			setIdRencontre(i);
+			labelRencontre.setText("Rencontre n°"+getIdRencontre() +" - Machin contre Truc");
+			//if (r1.getVainqueur()==null) {
+			labelStatut.setText(" -- en cours"); 
+			//} else {
+			//	rencontre.add(new JLabel("Vainqueur : " + r.getVainqueur));
+			//}
 		}
 		
 	}
 	
 	
+	public int getIdRencontre() {
+		return this.idRencontre;
+	}
+	
+	public void setIdRencontre(int i) {
+		this.idRencontre = i;
+	}
 	
 	
 	
