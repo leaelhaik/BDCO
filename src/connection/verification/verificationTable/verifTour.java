@@ -36,9 +36,15 @@ public class verifTour {
   }
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    new verifTour(conn);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      new verifTour(conn);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 }

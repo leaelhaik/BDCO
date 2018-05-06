@@ -109,7 +109,7 @@ CREATE TABLE Piece(
 -- 	numRencontre integer not null,
 -- 	PRIMARY KEY(idPieceCavalier),
 -- 	foreign key(idPieceCavalier) REFERENCES Piece(idPiece),
--- 	foreign key(numRenconre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
+-- 	foreign key(numRencontre,nomTour) REFERENCES Rencontre(numRencontre,nomTour)
 -- );
 
 CREATE TABLE Rencontre(

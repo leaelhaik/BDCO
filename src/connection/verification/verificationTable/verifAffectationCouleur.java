@@ -35,10 +35,16 @@ public class verifAffectationCouleur {
   }
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    new verifAffectationCouleur(conn);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      new verifAffectationCouleur(conn);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 
 }

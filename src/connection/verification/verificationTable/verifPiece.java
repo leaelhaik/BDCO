@@ -2,16 +2,16 @@
 
 import java.sql.*;
 
-public class verifPiece {
+public class VerifPiece {
 
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "select * from Piece";
 
-  public verifPiece(Connection conn) {
+  public VerifPiece(Connection conn) {
     try {
-      SimpleQuery req = new SimpleQuery(STMT, conn);
+      SimpleQuery req = new (STMT, conn);
       ResultSet rset = req.getResult();
       dumpResultSet(rset);
       rset.close();
@@ -19,7 +19,6 @@ public class verifPiece {
             System.err.println("failed");
             e.printStackTrace();
       }
-
 
   }
 
@@ -38,9 +37,15 @@ public class verifPiece {
   }
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    new verifPiece(conn);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      new VerifPiece(conn);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 }

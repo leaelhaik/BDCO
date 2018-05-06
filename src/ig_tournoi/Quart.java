@@ -14,7 +14,7 @@ public class Quart extends JPanel {
 		JPanel rencontre1 = new JPanel();
 		//Rencontre r1 = new Rencontre(1);
 		rencontre1.setLayout(new BoxLayout(rencontre1, BoxLayout.LINE_AXIS));
-		rencontre1.add(new JLabel("Rencontre1 : " )); //+ r1.getJoueurBlanc() + " vs " + r1.getJoeurNoir() + "\n"));
+		rencontre1.add(new JLabel("Rencontre1 : " )); //+ r1.getJoueur("blanc") + " vs " + r1.getJoueur("noir") + "\n"));
 		//if (r1.getVainqueur()==null) {
 		rencontre1.add(new JLabel(" -- en cours")); 
 		//} else {
@@ -24,7 +24,7 @@ public class Quart extends JPanel {
 		JPanel rencontre2 = new JPanel();
 		//Rencontre r2 = new Rencontre(2);
 		rencontre2.setLayout(new BoxLayout(rencontre2, BoxLayout.LINE_AXIS));
-		rencontre2.add(new JLabel("Rencontre2 : " )); //+ r2.getJoueurBlanc() + " vs " + r2.getJoeurNoir() ));
+		rencontre2.add(new JLabel("Rencontre2 : " )); //+ r2.getJoueur("blanc") + " vs " + r2.getJoueur("noir") ));
 		//if (r2.getVainqueur()==null) {
 		rencontre2.add(new JLabel(" -- en cours")); 
 		//} else {
@@ -34,7 +34,7 @@ public class Quart extends JPanel {
 		JPanel rencontre3 = new JPanel();
 		//Rencontre r3 = new Rencontre(3);
 		rencontre3.setLayout(new BoxLayout(rencontre3, BoxLayout.LINE_AXIS));
-		rencontre3.add(new JLabel("Rencontre3 : " )); //+ r3.getJoueurBlanc() + " vs " + r3.getJoeurNoir() ));
+		rencontre3.add(new JLabel("Rencontre3 : " )); //+ r3.getJoueur("blanc") + " vs " + r3.getJoueur("noir") ));
 		//if (r3.getVainqueur()==null) {
 		rencontre3.add(new JLabel(" -- en cours")); 
 		//} else {
@@ -44,7 +44,7 @@ public class Quart extends JPanel {
 		JPanel rencontre4 = new JPanel();
 		//Rencontre r4 = new Rencontre(4);
 		rencontre4.setLayout(new BoxLayout(rencontre4, BoxLayout.LINE_AXIS));
-		rencontre4.add(new JLabel("Rencontre4 : " )); //+ r4.getJoueurBlanc()+ " vs " + r4.getJoeurNoir() ));
+		rencontre4.add(new JLabel("Rencontre4 : " )); //+ r4.getJoueur("blanc")+ " vs " + r4.getJoueur("noir")) ));
 		//if (r4.getVainqueur()==null) {
 		rencontre4.add(new JLabel(" -- en cours")); 
 		//} else {

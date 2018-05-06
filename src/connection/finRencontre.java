@@ -6,12 +6,12 @@ static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensio
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
 
-static final String STMT0 = "select posX,posY from Historique where idCoup=max(idCoup),nomTour=?,numRenconre=?";
+static final String STMT0 = "select posX,posY from Historique where idCoup=max(idCoup),nomTour=?,numRencontre=?";
 static final String STMT3 = "select couleur from piece where numRencontre=?,nomTour=?,posX=?,posY=?";
-static final String STMT = "select idJoueur from AffectationCouleur where numRenconre=?,nomTour=?,couleur=?";
-static final String STMT2 = "update Rencontre set idJoueur=? where numRenconre=?,nomTour=?";
+static final String STMT = "select idJoueur from AffectationCouleur where numRencontre=?,nomTour=?,couleur=?";
+static final String STMT2 = "update Rencontre set idJoueur=? where numRencontre=?,nomTour=?";
 
-public FinRencontre(int numRenconre, String nomTour) {
+public FinRencontre(int numRencontre, String nomTour) {
 try {
 // Enregistrement du driver Oracle
   System.out.print("Loading Oracle driver... ");
@@ -24,14 +24,14 @@ try {
 
   PreparedStatement selPos = conn.prepareStatement(STMT0);
   selPos.setString(1,nomTour);
-  selPos.setInt(2,numRenconre);
+  selPos.setInt(2,numRencontre);
   selPos.executeUpdate();
 
   ResultSet rsetPos = stmt.executeQuery(STMT0);
 
   PreparedStatement selCol = conn.prepareStatement(STMT3);
   selCol.setString(1,nomTour);
-  selCol.setInt(2,numRenconre);
+  selCol.setInt(2,numRencontre);
   selCol.setInt(4,rsetPos.getInt(2));
   selCol.setString(3,rsetPos.getString(3));
   selCol.executeUpdate();
@@ -40,7 +40,7 @@ try {
 
   PreparedStatement selJou = conn.prepareStatement(STMT);
   selJou.setString(2,nomTour);
-  selJou.setInt(1,numRenconre);
+  selJou.setInt(1,numRencontre);
   selJou.setString(3,rsetCol.getString(1));
   selJou.executeUpdate();
 
@@ -48,7 +48,7 @@ try {
 
   PreparedStatement selUp = conn.prepareStatement(STMT2);
   selUp.setString(3,nomTour);
-  selUp.setInt(2,numRenconre);
+  selUp.setInt(2,numRencontre);
   selUp.setString(1,rsetJou.getInt(1));
   selUp.executeUpdate();
 
