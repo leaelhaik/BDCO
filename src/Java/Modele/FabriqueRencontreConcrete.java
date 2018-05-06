@@ -1,5 +1,8 @@
 package Java.Modele;
 
+import connection.init.InitAffectationCouleur;
+import connection.insert.InsertRencontre;
+
 /**
  * Created by ensimag on 05/05/18.
  */
@@ -31,5 +34,7 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
         numRencontre : id   | id
         nomCouleur : blanc  | noir
          */
+        InsertRencontre _ = new InsertRencontre();
+        InitAffectationCouleur __ = new InitAffectationCouleur();
     }
 }
