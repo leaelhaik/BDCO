@@ -46,7 +46,9 @@ exeIGEchiquier:
 
 exeIGTournoi:
 	java -classpath bin:bin/ojdbc6.jar TestIGTournoi
-
+	
+exeVerif:
+	java -classpath bin:bin/ojdbc6.jar TestVerif
 
 exeCreate:
 	java -classpath bin:bin/ojdbc6.jar TestCreate
