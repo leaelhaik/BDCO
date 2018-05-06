@@ -1,5 +1,7 @@
 package Java.Modele;
 
+import connection.Connect;
+
 import java.sql.Connection;
 
 /**
@@ -13,7 +15,7 @@ public class Qualification extends Tour {
         ListeJoueurs participants = new ListeJoueurs();
         Connect co = new Connect();
         Connection conn = co.getConnection();
-        participants.getAllJoueurs();
+        participants.getAllJoueurs(conn);
         this.participants = participants;
     }
 
