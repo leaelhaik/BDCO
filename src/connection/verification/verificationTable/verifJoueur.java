@@ -1,4 +1,7 @@
 //package connection.verification.verificationTable;
+import connection.Connect;
+import connection.SimpleQuery;
+
 import java.sql.*;
 
 public class verifJoueur {
