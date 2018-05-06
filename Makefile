@@ -35,6 +35,8 @@ testVerif:
 testCreate:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestCreate.java
 
+testCT:
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestControleTournoi.java
 
 testDesTrucs:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestDesTrucs.java
