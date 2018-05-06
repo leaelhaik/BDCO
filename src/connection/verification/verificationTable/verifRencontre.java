@@ -36,9 +36,15 @@ public class verifRencontre {
   }
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    new verifRencontre(conn);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      new verifRencontre(conn);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 }

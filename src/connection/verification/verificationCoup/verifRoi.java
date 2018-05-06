@@ -82,16 +82,22 @@ public class VerifRoi {
 
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    int posY = 6;
-    int oldY = 5;
-    String posX = "C";
-    String oldX = "B";
-    int numRencontre = 1;
-    String nomTour = "qualifications";
-    String couleur = "blanc";
-    new VerifRoi(conn, posY, oldY, posX, oldX, numRencontre, nomTour, couleur);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      int posY = 6;
+      int oldY = 5;
+      String posX = "C";
+      String oldX = "B";
+      int numRencontre = 1;
+      String nomTour = "qualifications";
+      String couleur = "blanc";
+      new VerifRoi(conn, posY, oldY, posX, oldX, numRencontre, nomTour, couleur);
+      conn.closed();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 }
