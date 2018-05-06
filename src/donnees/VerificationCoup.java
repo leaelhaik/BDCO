@@ -75,7 +75,7 @@ public class VerificationCoup {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}	    
+			}
 
 		}
 		else{
@@ -86,7 +86,7 @@ public class VerificationCoup {
 
 
 		ResultSet rsetUpdate = Queries.queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
-		
+
 	}
 
 
@@ -261,9 +261,9 @@ public class VerificationCoup {
 		return bool;
 
 	}
-	
+
 	/* ----------------------------------- Verif Tour ----------------------------- */
-		
+
 	public boolean VerifTour(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
 		boolean bool = false;
 	    try {
@@ -301,28 +301,28 @@ public class VerificationCoup {
 	            System.err.println("failed");
 	            e.printStackTrace();
 	      }
-	    
+
 		return bool;
 
 	  }
-	
-	
+
+
 	 /* --------------------- Situation de mise en échec -------------------------*/
-	  public void startTransact(Connection conn){
+	  public void startTransact(){
 	      ResultSet rset = Queries.queries.getResult("Start Transaction;");
 	  }
 
-	  public ResultSet setFunction(int idPiece,Character posX, int posY, Connection conn){
+	  public ResultSet setFunction(int idPiece,Character posX, int posY){
 	    ResultSet rsetSel = Queries.queries.getResult("update piece set posX=\' " + posX + " \' ,posY= " + posY + " where idPiece=" + idPiece + "");
 	    return rsetSel;
 	  }
 
-	  public void rollFunction(Connection conn){
+	  public void rollFunction(){
 	    ResultSet rset = Queries.queries.getResult("Rollback;");
 	    Queries.queries.closeConnection();
 	  }
 
-	  public void commit(Connection conn){
+	  public void commit(){
 		    ResultSet rset = Queries.queries.getResult("Commit;");
 		    Queries.queries.closeConnection();
 	  }

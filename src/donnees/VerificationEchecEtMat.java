@@ -1,26 +1,17 @@
 package donnees;
 
 import java.sql.*;
-
+import verificationCoup;
 import connection.MultipleQueries;
 
 public class VerificationEchecEtMat {
 
-	private MultipleQueries queries= new MultipleQueries();
-
-	//  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-	//  static final String USER = "dhouibd"; // A remplacer pour votre compte
-	//  static final String PASSWD = "dhouibd";
-	static final String STMTRoi = "select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur=?, numRencontre=?,nomTour=?";
 	boolean isVerified = false;
 
 	public VerificationEchecEtMat(int numRencontre, String nomTour, int idJoueur, String couleur){
 
 		try {
-
-
-			ResultSet rsetRoi = queries.getResult("select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur= \' " + couleur + "\' , numRencontre= " + numRencontre + ",nomTour=\' " + nomTour + "\'");
-
+			ResultSet rsetRoi = Queries.queries.getResult("select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur= \' " + couleur + "\' , numRencontre= " + numRencontre + ",nomTour=\' " + nomTour + "\'");
 
 			int i,j = 0;
 			char k= (char) (rsetRoi.getInt("posX")+j);
@@ -46,13 +37,8 @@ public class VerificationEchecEtMat {
 					//verification etat mat : verification de prise de la piece qui nous met en échec
 
 					// on selectionne la piece qui nous met en échec(son id et sa position)
-					String STMTPic = "select idPiece,posX,posY from historique where idCoup=max(idCoup), numRencontre=?,nomTour=?";
-					PreparedStatement selPic = conn.prepareStatement(STMTPic);
-					selPic.setInt(1,numRencontre);
-					selPic.setString(2,nomTour);
-					selPic.executeUpdate();
+					ResultSet rsetPic = Queries.queries.getResult("select idPiece,posX,posY from historique where idCoup=count(idCoup), numRencontre= " + numRenconre + ",nomTour=\' " + nomTour + "\'");
 
-					ResultSet rsetPic = selPic.executeQuery(STMTPic);
 
 					//on selectionne toutes les pièces de la couleur qu'on veut qui puissent prendre la piece
 					String STMTP = "select idPiece,posX,posY,typePiece from piece where couleur=?, numRencontre=?,nomTour=?";
@@ -62,39 +48,27 @@ public class VerificationEchecEtMat {
 					sele.setString(3,nomTour);
 					sele.executeUpdate();
 
-					ResultSet rset2 = sele.executeQuery(STMTP);
+					ResultSet rset2 = Queries.queries.getResult("select idPiece,posX,posY,typePiece from piece where couleur=\'" + couleur + "\', numRencontre= " + numRenconre + ",nomTour=\' " + nomTour + "\'");
 					while(rset2.next()&&!isVerified){
 						switch(rset2.getString(4)){
 
 						//verification Tour :
-						case "tour" : if(new verificationCoup.VerifTour(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "tour" : isVerified = new verificationCoup.VerifTour(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						//verification Fou:
-						case "fou" : if(VerifFou(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "fou" : isVerified = new VerificationCoup.VerifFou(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						//verification Roi:
-						case "roi" : if(VerifRoi(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "roi" : isVerified= new VerificationCoup.VerifRoi(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						//verification cavalier:
-						case "cavalier" :  if(VerifCavalier(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "cavalier" : isVerified= new VerificationCoup.VerifCavalier(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						//verification reine:
-						case "reine" : if(VerifReine(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "reine" : isVerified=new VerificationCoup.VerifReine(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						//verification pion
-						case "pion" :  if(VerifPion(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
-							isVerified=true;
-						}
+						case "pion" : isVerified= new VerificationCoup.VerifPion(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur);
 						break;
 						}
 						if(isVerified){
@@ -111,9 +85,6 @@ public class VerificationEchecEtMat {
 						else{
 							rset2.next(); // essayer toutes les positions possibles
 						}
-						rset2.close();
-						rsetPic.close();
-
 
 					}
 					// Faire un rollFunction()
@@ -241,6 +212,7 @@ public class VerificationEchecEtMat {
 
 
 					String STMTV= "update rencontre set idJoueur=? where nomTour=?, numRenconre=?";
+
 					PreparedStatement selV = conn.prepareStatement(STMTV);
 					selV.setInt(1,rsetC.getInt(1));
 					selV.setString(2,nomTour);
@@ -248,14 +220,8 @@ public class VerificationEchecEtMat {
 					selV.executeUpdate();
 
 					ResultSet rsetV = selV.executeQuery(STMTV);
-					rsetV.close();
-					rsetC.close();
-					selV.close();
-					selC.close();
 
 				}
-
-				rsetRoi.close();
 			}
 		} catch (SQLException e) {
 			System.err.println("failed");
@@ -263,37 +229,4 @@ public class VerificationEchecEtMat {
 		}
 	}
 
-	public void startTransact(Connection conn){
-		String Trans = "Start Transaction;" ;
-		Statement stmt = conn.createStatement();
-		ResultSet rset = stmt.executeQuery(Trans);
-	}
-
-	public ResultatSet setFunction(int idPiece,Character posX, int posY, Connection conn){
-		String setSTMT= "update piece set posX=?,posY=? where idPiece=?";
-		PreparedStatement sel = conn.prepareStatement(setSTMT);
-		sel.setObject(1,posX,Types.CHAR);
-		sel.setInt(2,posY);
-		sel.setObject(3,idPiece,Types.CHAR);
-		sel.executeUpdate();
-
-		ResultSet rsetSel = sel.executeQuery(setSTMT);
-		return rsetSel;
-	}
-
-	public void rollFunction(Connection conn){
-		String Roll = "Rollback;" ;
-		Statement stmt = conn.createStatement();
-		ResultSet rset = stmt.executeQuery(Roll);
-		rset.close();
-		stmt.close();
-	}
-
-	public void commit(Connection conn){
-		String com = "Commit;" ;
-		Statement stmt = conn.createStatement();
-		ResultSet rset = stmt.executeQuery(com);
-		rset.close();
-		stmt.close();
-	}
 }
