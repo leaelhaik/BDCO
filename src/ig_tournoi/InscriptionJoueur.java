@@ -6,11 +6,10 @@ import Controleur.NouveauJoueur;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-<<<<<<< HEAD
-=======
+
 import java.text.DateFormat;
 import java.util.ArrayList;
->>>>>>> IG
+
 import java.util.Calendar;
 
 import javax.swing.BoxLayout;
