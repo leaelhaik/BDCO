@@ -6,21 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.MultipleQueries;
+import connection.Queries;
 
 public class VerificationCoup {
 
-	private MultipleQueries queries;
 	private boolean isValid = false ;
 	private String typePiece;
 
 
 	public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,
 			String couleur){
-		queries = new MultipleQueries();
-		ResultSet rsetDerPiece = queries.getResult(" Select posX,posY from historique where idCoup=max(idCoup)");
+		ResultSet rsetDerPiece = Queries.queries.getResult(" Select posX,posY from historique where idCoup=max(idCoup)");
 		ResultSet rsetCoul = null;
 		try {
-			rsetCoul = queries.getResult(" Select couleur from piece where posX=\'" +rsetDerPiece.getString("posX")+ "\',posY=\'" +rsetDerPiece.getString("posY")+"\'");
+			rsetCoul = Queries.queries.getResult(" Select couleur from piece where posX=\'" +rsetDerPiece.getString("posX")+ "\',posY=\'" +rsetDerPiece.getString("posY")+"\'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -29,14 +28,14 @@ public class VerificationCoup {
 
 		typePiece="roi";
 		try {
-			ResultSet rsetroi = queries.getResult("Select posY,posX from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and couleur=\'" + rsetCoul.getString("Couleur")+ "\' and typePiece=\'"+typePiece+"\'");
+			ResultSet rsetroi = Queries.queries.getResult("Select posY,posX from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and couleur=\'" + rsetCoul.getString("Couleur")+ "\' and typePiece=\'"+typePiece+"\'");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 
-		ResultSet rsetType = queries.getResult("select typePiece from piece where numRencontre=" + numRencontre +" and nomTour=\'" + nomTour +" \' and posY = " + posY + " and posX =\'" + posX + "\'");
+		ResultSet rsetType = Queries.queries.getResult("select typePiece from piece where numRencontre=" + numRencontre +" and nomTour=\'" + nomTour +" \' and posY = " + posY + " and posX =\'" + posX + "\'");
 
 		try {
 			typePiece=rsetType.getString("typePiece");
@@ -67,7 +66,7 @@ public class VerificationCoup {
 		}
 
 		if(isValid){
-			ResultSet rsetCoul2 = queries.getResult("Select couleur from piece where numRencontre= " + numRencontre + " and nomTour= \'"+nomTour +"\' and posY = " + posY + " and posX =\'" + posX + "\'");
+			ResultSet rsetCoul2 = Queries.queries.getResult("Select couleur from piece where numRencontre= " + numRencontre + " and nomTour= \'"+nomTour +"\' and posY = " + posY + " and posX =\'" + posX + "\'");
 
 			try {
 				if(rsetCoul2.getString("Couleur")==couleur){
@@ -80,13 +79,13 @@ public class VerificationCoup {
 
 		}
 		else{
-			startTransact(queries.getConnection());
-			ResultSet rsetDel = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour= \' "+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
+			startTransact(Queries.queries.getConnection());
+			ResultSet rsetDel = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour= \' "+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
 		}
-		ResultSet rsetUp = queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour=\'"+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
+		ResultSet rsetUp = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour=\'"+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
 
 
-		ResultSet rsetUpdate = queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
+		ResultSet rsetUpdate = Queries.queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
 		
 	}
 
@@ -110,7 +109,7 @@ public class VerificationCoup {
 			ResultSet rsetCavalier = null;
 			if(((Math.abs(posY-oldY)==2) && (Math.abs(tabPosX[0]-tabOldX[0]))==1) || ((Math.abs(tabPosX[0]-tabOldX[0])==2) && (Math.abs(posY-oldY)==1))) {
 
-				rsetCavalier = queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre +" and nomTour = \'"+ nomTour + "\' and couleur = \'"+ couleur +"\' and posX = \'" + posX + "\' and posY = " + posY + "");
+				rsetCavalier = Queries.queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre +" and nomTour = \'"+ nomTour + "\' and couleur = \'"+ couleur +"\' and posX = \'" + posX + "\' and posY = " + posY + "");
 
 			}
 			bool=!(rsetCavalier.next());
@@ -144,15 +143,15 @@ public class VerificationCoup {
 				ResultSet rsetFou;
 				if (tabPosX[0] < tabOldX[0]) {
 					if (posY < oldY) {
-						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + posY + " and " + oldY + "");
+						rsetFou = Queries.queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + posY + " and " + oldY + "");
 					} else {
-						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\' )=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + oldY + " and " + posY + "");
+						rsetFou = Queries.queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)- \'" + tabOldX[0] + "\' )=abs(posY-" + oldY + ") and posX between \'" + posX + "\' and \'" + oldX + "\' and posY between " + oldY + " and " + posY + "");
 					}
 				} else {
 					if (posY < oldY) {
-						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
+						rsetFou = Queries.queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
 					} else {
-						rsetFou = queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
+						rsetFou = Queries.queries.getResult("select idPiece from piece where numRencontre=" + numRencontre + "and nomTour= \'" + nomTour + "\' and abs(ascii(posX)-\'" + tabOldX[0] + "\')=abs(posY-" + oldY + ") and posX between \'" + oldX + "\' and \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
 					}
 
 				}
@@ -186,10 +185,10 @@ public class VerificationCoup {
 
 			if(((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur))) {
 				if((tabOldX[0]-tabPosX[0])==1)  {// Veut manger à gauche
-			  		rsetPion1 = queries.getResult("select idPiece, couleur, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
+			  		rsetPion1 = Queries.queries.getResult("select idPiece, couleur, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
 					bool=!(rsetPion1.next());
 				} else {
-					rsetPion2 = queries.getResult("select idPiece, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
+					rsetPion2 = Queries.queries.getResult("select idPiece, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
 					bool=!(rsetPion2.next());
 				}
 			}
@@ -249,7 +248,7 @@ public class VerificationCoup {
 			ResultSet rsetRoi = null;
 
 			if((Math.abs(posY-oldY)==1) || (Math.abs(tabPosX[0]-tabOldX[0]))==1 || ((Math.abs(tabPosX[0]-tabOldX[0])==1) && (Math.abs(posY-oldY)==1))) {
-				rsetRoi = queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + " \' and couleur = \' " + couleur + " \' and posX = \'" + posX + "\' and posY = " + posY + "");
+				rsetRoi = Queries.queries.getResult("select idPiece from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + " \' and couleur = \' " + couleur + " \' and posX = \'" + posX + "\' and posY = " + posY + "");
 			}
 			bool=!(rsetRoi.next());
 
@@ -282,16 +281,16 @@ public class VerificationCoup {
 	      if((tabPosX[0]==tabOldX[0]) || (posY==oldY)) {
 	        if(posY==oldY) {
 	        	if(tabPosX[0] < tabOldX[0]) {
-	        		rsetTour1 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + posX + "\' and  \'" + oldX + "\' and posY =" + posY + " ");
+	        		rsetTour1 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + posX + "\' and  \'" + oldX + "\' and posY =" + posY + " ");
 	        	} else {
-	        		rsetTour1 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + oldX + "\' and \'" + posX + "\' and posY = " + posY + "");
+	        		rsetTour1 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + oldX + "\' and \'" + posX + "\' and posY = " + posY + "");
 	        	}
 	        	bool=!(rsetTour1.next());
 	        } else {
 	        	if(tabPosX[0] < tabOldX[0]) {
-	  	          rsetTour2 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
+	  	          rsetTour2 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + posY + " and " + oldY + "");
 	        	} else {
-	  	          rsetTour2 = queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
+	  	          rsetTour2 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX = \'" + posX + "\' and posY between " + oldY + " and " + posY + "");
 	        	}
 	        	bool=!(rsetTour2.next());
 	        }
@@ -310,22 +309,22 @@ public class VerificationCoup {
 	
 	 /* --------------------- Situation de mise en échec -------------------------*/
 	  public void startTransact(Connection conn){
-	      ResultSet rset = queries.getResult("Start Transaction;");
+	      ResultSet rset = Queries.queries.getResult("Start Transaction;");
 	  }
 
 	  public ResultSet setFunction(int idPiece,Character posX, int posY, Connection conn){
-	    ResultSet rsetSel = queries.getResult("update piece set posX=\' " + posX + " \' ,posY= " + posY + " where idPiece=" + idPiece + "");
+	    ResultSet rsetSel = Queries.queries.getResult("update piece set posX=\' " + posX + " \' ,posY= " + posY + " where idPiece=" + idPiece + "");
 	    return rsetSel;
 	  }
 
 	  public void rollFunction(Connection conn){
-	    ResultSet rset = queries.getResult("Rollback;");
-	    queries.closeConnection();
+	    ResultSet rset = Queries.queries.getResult("Rollback;");
+	    Queries.queries.closeConnection();
 	  }
 
 	  public void commit(Connection conn){
-		    ResultSet rset = queries.getResult("Commit;");
-		    queries.closeConnection();
+		    ResultSet rset = Queries.queries.getResult("Commit;");
+		    Queries.queries.closeConnection();
 	  }
 
 }

@@ -4,6 +4,8 @@ import connection.Queries;
 
 import java.sql.*;
 
+import connection.MultipleQueries;
+
 public class InsertionJoueur {
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
   public int id=0;

@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import connection.MultipleQueries;
+
 public class PartieEnCours extends JPanel {
 
 	private JButton boutonJouer = new JButton("Jouer un coup");
@@ -21,7 +23,6 @@ public class PartieEnCours extends JPanel {
     
     
     public PartieEnCours() {
-    	
     	this.setLayout(new BorderLayout());
     	this.add(echiquier, BorderLayout.CENTER);
     	

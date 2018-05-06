@@ -7,6 +7,9 @@ import java.awt.Graphics;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import connection.MultipleQueries;
+
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +20,7 @@ import donnees.Couleur;
 
 
 public class Echiquier extends JPanel {
+
 	
 	public void paintComponent(Graphics g) {
 		int taille=echelle(this.getHeight(), this.getWidth());
