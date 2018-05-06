@@ -1,4 +1,4 @@
-  package connection.drop;
+  package connection.create;
   import java.sql.*;
   import connection.MultipleQueries;
 

@@ -2,10 +2,10 @@ package connection.drop;
 import java.sql.*;
 import connection.MultipleQueries;
 
-public class DropPiece{
+public class DropAffectationCouleur{
   private MultipleQueries queries;
 
-  public DropPiece() {
+  public DropAffectationCouleur() {
     ResultSet rsetDropAffectationCouleur = queries.getResult("Drop TABLE AffectationCouleur");
   }
 
