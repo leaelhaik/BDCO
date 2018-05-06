@@ -59,6 +59,11 @@ public class NouveauCoup {
         return true;
     }
 
-
+    @Override
+    public String toString(){
+        String s = this.oldPosX + this.oldPosY + this.newPosX + this.newPosY + this.numRencontre + this.nomTour +
+                this.couleur;
+        return s;
+    }
 
 }

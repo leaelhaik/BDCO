@@ -64,4 +64,8 @@ public class GetAllRencontres {
         }
     }
 
+    public List<int> getListeRencontres(){
+        return this.listeRencontres;
+    }
+
 }
