@@ -33,7 +33,7 @@ testVerif:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestVerif.java
 
 testCT:
-	javac -d bin -classpath bin/ojdb6.jar -sourcepath src src/TestControleTournoi.java
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestControleTournoi.java
 
 #Execution
 
