@@ -7,7 +7,7 @@ import java.io.*;
 
 public class VerifPion {
 
-  private boolean isValid = true;
+  private boolean isValid = false;
   private String STMTPion1 = "";
   private String STMTPion2 = "";
   private String STMTPion3 = "";
@@ -132,12 +132,12 @@ public class VerifPion {
     Connect co = new Connect();
     Connection conn = co.getConnection();
     int posY = 2;
-    int oldY = 3;
-    String posX = "C";
-    String oldX = "B";
+    int oldY = 1;
+    String posX = "B";
+    String oldX = "A";
     int numRencontre = 1;
     String nomTour = "qualifications";
-    String couleur = "noir";
+    String couleur = "blanc";
     new VerifPion(conn, posY, oldY, posX, oldX, numRencontre, nomTour, couleur);
     co.closeConnection();
   }

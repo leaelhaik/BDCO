@@ -7,7 +7,7 @@ import java.io.*;
 
 public class VerifReine {
 
-  private boolean isValid = true;
+  private boolean isValid = false;
   private String STMTTour1 = "";
   private String STMTTour2 = "";
   private String STMTFou = "";
