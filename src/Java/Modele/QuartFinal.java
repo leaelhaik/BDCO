@@ -15,8 +15,8 @@ public class QuartFinal extends PhaseFinale {
 
     @Override
     public void genererRencontre() {
-        for (Joueur j : listeJoueurs.getMyJoueurs()) {
-
+        for (int i = 0; i < 3; i++) {
+            Fabrique.rencontres.nouvelleRencontre(listeJoueurs.getJoueur(i), listeJoueurs.getJoueur(7-i), "quartFinale");
         }
     }
 }

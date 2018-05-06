@@ -1,12 +1,23 @@
 package Java.Modele;
 
+import java.sql.Connection;
+
 /**
  * Created by ensimag on 05/05/18.
  */
-public class Qualification extends Tour{
+public class Qualification extends Tour {
+
+    ListeJoueurs participants;
+
+    public Qualification() {
+        ListeJoueurs participants = new ListeJoueurs();
+        Connect co = new Connect();
+        Connection conn = co.getConnection();
+        participants.getAllJoueurs();
+        this.participants = participants;
+    }
 
     public void genererRencontre() {
-        ListeJoueurs participants = getJoueurs();
         for (int i =0; i < participants.getNumberJoueurs() - 1; i++) {
             for (int j = i + 1; j < participants.getNumberJoueurs(); j++) {
                 if (Math.random() > 0.5) {
@@ -18,9 +29,7 @@ public class Qualification extends Tour{
         }
     }
 
-    public ListeJoueurs getJoueurs() {
-        ListeJoueurs participants = new ListeJoueurs();
-        participants.getAllJoueurs();
-        return participants;
+    public boolean verifierNb() {
+        return this.participants.getNumberJoueurs() >= 8;
     }
 }
