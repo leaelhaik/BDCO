@@ -6,6 +6,8 @@ import Java.Modele.FabriqueJoueurConcrete;
 import Java.Modele.FabriqueRencontreConcrete;
 import Java.Modele.ListeJoueurs;
 import connection.Connect;
+import connection.MultipleQueries;
+import connection.Queries;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,6 +20,7 @@ public class TestControleTournoi {
         MasterOfBDD fearme = new MasterOfBDD();
         Fabrique.joueurs = new FabriqueJoueurConcrete();
         Fabrique.rencontres = new FabriqueRencontreConcrete();
+        Queries.queries = new MultipleQueries();
         //fearme.supprimerBD();
         //fearme.creerBD();
         fearme.effacerBD();
@@ -26,6 +29,7 @@ public class TestControleTournoi {
         } else {
             qualifications();
         }
+        Queries.queries.closeConnection();
     }
 
     public static boolean ajouterJoueur() {
@@ -45,7 +49,7 @@ public class TestControleTournoi {
             System.err.println("Annulation de l'insertion...");
             return true;
         }
-        for (int i = 0; i<4; i++) {
+        for (int i = 0; i<5; i++) {
             nj = new NouveauJoueur(""+i,""+i, ""+i, "2000-01-01");
             if (nj.envoyerBD()) {
                 System.err.println("Annulation de l'insertion...");
