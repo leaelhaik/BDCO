@@ -29,6 +29,8 @@ testIGEchiquier:
 testIGTournoi:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestIGTournoi.java
 
+testCT:
+	javac -d bin -classpath bin/ojdb6.jar -sourcepath src src/TestControleTournoi.java
 
 #Execution
 
