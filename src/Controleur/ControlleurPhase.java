@@ -21,4 +21,8 @@ public class ControlleurPhase {
         }
         return "erreur";
     }
+
+    public boolean nextPhase() {
+
+    }
 }
