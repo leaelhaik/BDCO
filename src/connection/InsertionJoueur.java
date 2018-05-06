@@ -9,6 +9,7 @@ public class InsertionJoueur {
   static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
   static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=? ";
+  Connection conn;
 
   public InsertionJoueur() {
       try {
@@ -31,7 +32,7 @@ public class InsertionJoueur {
           // Création de la requête
           PreparedStatement verif = conn.prepareStatement(STMTVerif);
           verif.setString(1, nom);
-          verif.setSTMT(2, prenom);
+          verif.setString(2, prenom);
           verif.executeUpdate();
 
           ResultSet rset2 = verif.executeQuery(STMTVerif);
