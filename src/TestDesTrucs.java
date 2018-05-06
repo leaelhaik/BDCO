@@ -8,8 +8,6 @@ public class TestDesTrucs {
         ControlleurPhase contr = new ControlleurPhase();
 
         System.out.println(contr.getMostAdvanceTour());
-		System.out.println("coucou");
-		
 
     }
 }

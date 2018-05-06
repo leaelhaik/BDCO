@@ -1,6 +1,6 @@
 package Controleur;
 
-
+import connection.Connect;
 //permet d'obtenir la couleur d'un joueur en fonction de l'Id de la partie
 public class GetCouleur {
 
@@ -11,8 +11,8 @@ public class GetCouleur {
     }
 
     public String getCouleur() {
-    	Connect co = new Connect;
+    	Connect co = new Connect();
     	connection.GetCouleur req = new connection.GetCouleur(this.iDJoueur,co.getConnection());
-        return req.couleur;
+        return req.getCouleur();
     }
 }
