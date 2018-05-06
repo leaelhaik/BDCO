@@ -12,4 +12,12 @@ public class ControlleurPhase {
     public setTour(){
 
     }
+    
+    public String getMostAdvanceTour(){
+    	Connect co = new Connect;
+    	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());
+        if( req.nomTour != "erreur"){
+        	return req.nomTour;
+        };
+    }
 }
