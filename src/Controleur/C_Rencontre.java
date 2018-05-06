@@ -19,7 +19,7 @@ public class C_Rencontre {
         this.tour = tour;
     }
 
-    public boolean genererRencontresQualif() {
+    public static boolean genererRencontresQualif() {
         Qualification qualification = new Qualification();
         if (qualification.verifierNb()) {
             qualification.genererRencontre();
@@ -39,9 +39,9 @@ public class C_Rencontre {
      * Permet de renvoyer toutes les rencontres effectuées par un jour dans le tournoi en cours
      * @return
      */
-    public List<int> getAllRencontres(int iDJoueur, int iDTournoi){
-        List<int> listeRencontres = new ArrayList<>();
-        Connect co = new Connect;
+    public ArrayList<int> getAllRencontres(int iDJoueur, int iDTournoi){
+        ArrayList<int> listeRencontres = new ArrayList<int>();
+        Connect co = new Connect();
         connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, iDTournoi, co.getConnection());
         return req.listeRencontres;
 
