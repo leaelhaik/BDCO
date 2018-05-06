@@ -1,6 +1,6 @@
 package Java.Modele;
 
-import connection.InsertionJoueur;
+import connection.insert.InsertionJoueur;
 
 import java.sql.Date;
 import java.util.ArrayList;
