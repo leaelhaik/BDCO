@@ -29,9 +29,15 @@ public class VerifMain {
 
 
   public static void main(String args []) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    new VerifMain(conn);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      new VerifMain(conn);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+      System.err.println("failed");
+      e.printStackTrace();
+    }
   }
 }

@@ -125,16 +125,22 @@ public class VerifPion {
 
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    int posY = 2;
-    int oldY = 1;
-    String posX = "B";
-    String oldX = "A";
-    int numRencontre = 1;
-    String nomTour = "qualifications";
-    String couleur = "blanc";
-    new VerifPion(conn, posY, oldY, posX, oldX, numRencontre, nomTour, couleur);
-    co.closeConnection();
+    try {Connect co = new Connect();
+      Connection conn = co.getConnection();
+      int posY = 2;
+      int oldY = 1;
+      String posX = "B";
+      String oldX = "A";
+      int numRencontre = 1;
+      String nomTour = "qualifications";
+      String couleur = "blanc";
+      new VerifPion(conn, posY, oldY, posX, oldX, numRencontre, nomTour, couleur);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+      System.err.println("failed");
+      e.printStackTrace();
+    }
   }
+  
 }

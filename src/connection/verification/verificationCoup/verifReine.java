@@ -143,15 +143,21 @@ public class VerifReine {
 
 
   public static void main(String args[]) {
-    Connect co = new Connect();
-    Connection conn = co.getConnection();
-    int posY = 3;
-    int oldY = 6;
-    String posX = "A";
-    String oldX = "D";
-    int numRencontre = 1;
-    String nomTour = "qualifications";
-    new VerifReine(conn, posY, oldY, posX, oldX, numRencontre, nomTour);
-    co.closeConnection();
+    try {
+      Connect co = new Connect();
+      Connection conn = co.getConnection();
+      int posY = 3;
+      int oldY = 6;
+      String posX = "A";
+      String oldX = "D";
+      int numRencontre = 1;
+      String nomTour = "qualifications";
+      new VerifReine(conn, posY, oldY, posX, oldX, numRencontre, nomTour);
+      conn.close();
+      co.closeConnection();
+    } catch(SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+      }
   }
 }

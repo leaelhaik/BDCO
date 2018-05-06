@@ -5,19 +5,16 @@ boolean blanc = true ;
 public class VerificationCoup {
 
   public boolean isValid = false ;
-  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-  static final String USER = "dhouibd"; // A remplacer pour votre compte
-  static final String PASSWD = "dhouibd";
 
-  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRenconre, String nomTour, String couleur, Connection conn){
+  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour, String couleur, Connection conn){
 
   }
 
 
 
-    String STMT = "Select posY,posX from piece where numRenconre=? and nomTour=? and couleur=? and typePiece='roi'";
+    String STMT = "Select posY,posX from piece where numRencontre=? and nomTour=? and couleur=? and typePiece='roi'";
     PreparedStatement roi = conn.prepareStatement(STMT);
-    roi.setInt(1,numRenconre);
+    roi.setInt(1,numRencontre);
     roi.setString(2,nomTour);
     roi.setString(3,couleur);
     roi.executeUpdate();
@@ -25,10 +22,10 @@ public class VerificationCoup {
 
 
     //verification si obstacle en vue : invalide
-    static final String STMTType = "select typePiece from piece where numRenconre=? and nomTour=? and posY = ? and posX = ? ";
+    static final String STMTType = "select typePiece from piece where numRencontre=? and nomTour=? and posY = ? and posX = ? ";
 
     PreparedStatement hav = conn.prepareStatement(STMTType);
-    hav.setInt(1,numRenconre);
+    hav.setInt(1,numRencontre);
     hav.setString(2,nomTour);
     hav.setInt(3,posY);
     hav.setInt(4,posX);
@@ -39,29 +36,29 @@ public class VerificationCoup {
 
     switch(type.getString(1)){
 
-          case "tour" : isValid = VerifTour(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "tour" : isValid = VerifTour(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                         break;
 
-          case "fou" : isValid = VerifFou(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "fou" : isValid = VerifFou(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                        break;
 
-          case "roi" : isValid = VerifRoi(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "roi" : isValid = VerifRoi(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                        break;
 
-          case "cavalier" : isValid = VerifCavalier(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "cavalier" : isValid = VerifCavalier(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                             break;
 
-          case "reine" : isValid = VerifReine(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "reine" : isValid = VerifReine(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                          break;
 
-          case "pion" : isValid = VerifPion(conn,posY,oldY,posX,oldX,numRenconre,nomTour).getIsValid();
+          case "pion" : isValid = VerifPion(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
                         break;
     }
 
         if(isValid){
-          String STMT = "Select couleur from piece where numRenconre=? and nomTour= ? and posY = ? and posX = ?;";
+          String STMT = "Select couleur from piece where numRencontre=? and nomTour= ? and posY = ? and posX = ?;";
           PreparedStatement sel = conn.prepareStatement(STMT);
-          sel.setInt(1,numRenconre);
+          sel.setInt(1,numRencontre);
           sel.setString(2,nomTour);
           sel.setInt(3,posY);
           sel.setObject(4,posX,Type.CHAR);
@@ -71,9 +68,9 @@ public class VerificationCoup {
             isValid=false;
           }
           else{
-            String STMT1 = "Delete from piece where numRenconre=? and nomTour=? and posY = ? and posX = ?;";
+            String STMT1 = "Delete from piece where numRencontre=? and nomTour=? and posY = ? and posX = ?;";
             PreparedStatement del = conn.prepareStatement(STMT1);
-            del.setInt(1,numRenconre);
+            del.setInt(1,numRencontre);
             del.setString(2,nomTour);
             del.setInt(3,posY);
             del.setObject(4,posX,Type.CHAR);
@@ -95,7 +92,7 @@ public class VerificationCoup {
             // Execution de la requete
             ResultSet rset3 = stmt.executeQuery(STMT3);
 
-            if(VerifEchec(rsetRoi.getInt(1),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+            if(VerifEchec(rsetRoi.getInt(1),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
               rollFunction(conn);
               isValid=false;
             }
@@ -103,7 +100,7 @@ public class VerificationCoup {
               String STMTHIST = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES(?,?,?,?,?,?);";
               PreparedStatement inse = conn.prepareStatement(STMTHIST);
               inse.setString(1,nomTour);
-              inse.setInt(2,numRenconre);
+              inse.setInt(2,numRencontre);
               inse.setInt(3,posY);
               inse.setInt(4,posX);
               inse.setInt(5,oldY);
@@ -135,7 +132,7 @@ public class VerificationCoup {
     }
 
     public static void main(String args[]) {
-      new VerificationCoup(posY,oldY, posX, oldX, numRenconre, nomTour, couleur,conn);
+      new VerificationCoup(posY,oldY, posX, oldX, numRencontre, nomTour, couleur,conn);
     }
 
 }
