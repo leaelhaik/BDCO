@@ -41,7 +41,7 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
          */
         Connect co = new Connect();
         Connection conn = co.getConnection();
-        InsertRencontre _ = new InsertRencontre(conn, tour, numRencontre);
+        InsertRencontre _ = new InsertRencontre(tour, numRencontre);
         InitAffectationCouleur __ = new InitAffectationCouleur(conn, "blanc", blanc.getId(), tour, numRencontre);
         InitAffectationCouleur ___ = new InitAffectationCouleur(conn, "noir", noir.getId(), tour, numRencontre);
         numRencontre ++;
