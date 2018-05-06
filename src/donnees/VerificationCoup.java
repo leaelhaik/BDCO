@@ -319,12 +319,10 @@ public class VerificationCoup {
 
 	  public void rollFunction(){
 	    ResultSet rset = Queries.queries.getResult("Rollback;");
-	    Queries.queries.closeConnection();
 	  }
 
 	  public void commit(){
 		    ResultSet rset = Queries.queries.getResult("Commit;");
-		    Queries.queries.closeConnection();
 	  }
 
 }
