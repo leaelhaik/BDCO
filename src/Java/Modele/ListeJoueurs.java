@@ -1,6 +1,9 @@
 package Java.Modele;
 import Java.Modele.Joueur;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 /**
  * Created by georgeb on 4/30/18.
@@ -31,11 +34,24 @@ public class ListeJoueurs {
         return null;
     }
 
-    public void getAllJoueurs() {
+    public void getAllJoueurs(Connection conn) {
         /*
         ??? listeBrute = // Appel à une fonction qui éxécute une requete pour récupérer la liste des joueurs sous forme de String
         Puis on transforme chaque ligne en Joueur qu'on ajoute à la liste.
         */
+        ResultSet rset = connection.verification.verificationTable.verifJoueur.tousLesJoueurs(conn);
+        Joueur j;
+        try {
+            while (!(rset.isLast())) {
+                j = new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getDate(4), rset.getString(5));
+                ajoutJoueur(j);
+                rset.next();
+            }
+            rset.close();
+        } catch (SQLException e) {
+            System.err.println("failed");
+            e.printStackTrace();
+        }
     }
 
     /**
