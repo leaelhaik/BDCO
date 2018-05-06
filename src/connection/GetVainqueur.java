@@ -5,8 +5,8 @@ public class GetVainqueur {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
-static final String STMT = "select prenomJoueur,nomJoueur from joueur,rencontre where joueur.idJoueur=rencontre.idJoueur,rencontre.numRenconre=?,rencontre.nomTour=?";
-public GetVainqueur(String nomTour, int numRenconre, Connection conn) {
+static final String STMT = "select prenomJoueur,nomJoueur from joueur,rencontre where joueur.idJoueur=rencontre.idJoueur,rencontre.numRencontre=?,rencontre.nomTour=?";
+public GetVainqueur(String nomTour, int numRencontre, Connection conn) {
 try {
 // Enregistrement du driver Oracle
   // System.out.print("Loading Oracle driver... ");
@@ -20,7 +20,7 @@ try {
   Statement stmt = conn.createStatement();
 
   PreparedStatement sel = conn.prepareStatement(STMT);
-  sel.setInt(2,numRenconre);
+  sel.setInt(2,numRencontre);
   sel.setString(3,nomTour);
   sel.executeUpdate();
 

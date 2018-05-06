@@ -5,8 +5,8 @@ public class GetJoueur {
 static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
 static final String USER = "dhouibd"; // A remplacer pour votre compte
 static final String PASSWD = "dhouibd";
-static final String STMT = "select prenomJoueur,nomJoueur from joueur,affectationCouleur where joueur.idJoueur=affectationCouleur.idJoueur, affectationCouleur.nomCouleur=?,affectationCouleur.numRenconre=?,affectationCouleur.nomTour=?";
-public GetJoueur(String nomTour, int numRenconre, String couleur, Connection conn) {
+static final String STMT = "select prenomJoueur,nomJoueur from joueur,affectationCouleur where joueur.idJoueur=affectationCouleur.idJoueur, affectationCouleur.nomCouleur=?,affectationCouleur.numRencontre=?,affectationCouleur.nomTour=?";
+public GetJoueur(String nomTour, int numRencontre, String couleur, Connection conn) {
 try {
 // Enregistrement du driver Oracle
   System.out.print("Loading Oracle driver... ");
@@ -21,7 +21,7 @@ try {
   // Creation de la requete
   PreparedStatement sel = conn.prepareStatement(STMT);
   sel.setString(1,couleur);
-  sel.setInt(2,numRenconre);
+  sel.setInt(2,numRencontre);
   sel.setString(3,nomTour);
   sel.executeUpdate();
 

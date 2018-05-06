@@ -5,10 +5,10 @@ public class VerifSituation(){
   static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
-  static final String STMTRoi = "select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur=?, numRenconre=?,nomTour=?";
+  static final String STMTRoi = "select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur=?, numRencontre=?,nomTour=?";
   boolean isVerified = false;
 
-  public VerifSituation(int numRenconre, String nomTour, int idJoueur, String couleur,Connection conn){
+  public VerifSituation(int numRencontre, String nomTour, int idJoueur, String couleur,Connection conn){
     try {
     // Enregistrement du driver Oracle
       // System.out.print("Loading Oracle driver... ");
@@ -21,19 +21,19 @@ public class VerifSituation(){
 
       PreparedStatement selRoi = conn.prepareStatement(STMTRoi);
       selRoi.setString(1,couleur);
-      selRoi.setInt(2,numRenconre);
+      selRoi.setInt(2,numRencontre);
       selRoi.setString(3,nomTour);
       selRoi.executeUpdate();
 
       ResultSet rsetRoi = stmt.executeQuery(STMTRoi);
 
       //verification etat echec
-      if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+      if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
         //verification etat mat : verification des déplacements possibles du roi
         for(int i=-1;i<2;i++){
           for(int j=-1;j<2;j++){
             if(!(i==0 && j==0)){
-                if(!VerifEchec(rsetRoi.getInt(3)+i,char(ascii(rsetRoi.getInt(2))+j),numRenconre,nomTour,couleur).enEchec())
+                if(!VerifEchec(rsetRoi.getInt(3)+i,char(ascii(rsetRoi.getInt(2))+j),numRencontre,nomTour,couleur).enEchec())
                   isVerified=true;
                   break;
             }
@@ -45,19 +45,19 @@ public class VerifSituation(){
           //verification etat mat : verification de prise de la piece qui nous met en échec
 
           // on selectionne la piece qui nous met en échec(son id et sa position)
-          String STMTPic = "select idPiece,posX,posY from historique where idCoup=max(idCoup), numRenconre=?,nomTour=?";
+          String STMTPic = "select idPiece,posX,posY from historique where idCoup=max(idCoup), numRencontre=?,nomTour=?";
           PreparedStatement selPic = conn.prepareStatement(STMTPic);
-          selPic.setInt(1,numRenconre);
+          selPic.setInt(1,numRencontre);
           selPic.setString(2,nomTour);
           selPic.executeUpdate();
 
           ResultSet rsetPic = stmt.executeQuery(STMTPic);
 
           //on selectionne toutes les pièces de la couleur qu'on veut qui puissent prendre la piece
-          String STMTP = "select idPiece,posX,posY,typePiece from piece where couleur=?, numRenconre=?,nomTour=?";
+          String STMTP = "select idPiece,posX,posY,typePiece from piece where couleur=?, numRencontre=?,nomTour=?";
           PreparedStatement sele = conn.prepareStatement(STMTP);
           sele.setString(1,couleur);
-          sele.setInt(2,numRenconre);
+          sele.setInt(2,numRencontre);
           sele.setString(3,nomTour);
           sele.executeUpdate();
 
@@ -99,7 +99,7 @@ public class VerifSituation(){
              if(isVerified){
                startTransact();
                setFunction(rset2.getInt(1),rsetPic.getInt(2),rsetPic.getInt(3));
-               if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+               if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                  rollFunction();
                  rset.next();
                }
@@ -127,7 +127,7 @@ public class VerifSituation(){
                                   if(VerifTour(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
@@ -144,7 +144,7 @@ public class VerifSituation(){
                                   if(VerifFou(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
@@ -160,7 +160,7 @@ public class VerifSituation(){
                                   if(VerifRoi(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
@@ -176,7 +176,7 @@ public class VerifSituation(){
                                   if(VerifCavalier(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
@@ -192,7 +192,7 @@ public class VerifSituation(){
                                   if(VerifReine(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
@@ -208,7 +208,7 @@ public class VerifSituation(){
                                   if(VerifPion(i,rset.getInt(3),j,rset.getString(2)).getIsValid()){
                                     startTransact(conn);
                                     setFunction(rset.getInt(1),j,i,conn);
-                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRenconre,nomTour,couleur).enEchec()){
+                                    if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                                       rollFunction(conn);
                                     }
                                     else{
