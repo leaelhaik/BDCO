@@ -12,7 +12,7 @@ public class VerifReine {
   private String STMTTour2 = "";
   private String STMTFou = "";
 
-  public VerifReine(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour) {
+  public VerifReine(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour,String couleur) {
 
     try {
       byte[] tabOldX = null;
