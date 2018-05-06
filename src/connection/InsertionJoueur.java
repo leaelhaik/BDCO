@@ -26,13 +26,4 @@ public class InsertionJoueur {
     ResultSet rsetInsert = queries.getResult("insert into joueur values("+id+","+nomJoueur+","+prenomJoueur+","+date+","+adresse+")");
   }
 
-    public void closeConnection() {
-      try {
-          // Fermeture
-          conn.close();
-      } catch (SQLException e) {
-          System.err.println("Connection closing failed");
-          e.printStackTrace();
-      }
-    }
-  }
+}
