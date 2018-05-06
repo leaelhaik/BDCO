@@ -1,4 +1,8 @@
 package Controleur;
+import Java.Modele.ListeJoueurs;
+import Java.Modele.QuartFinal;
+import Java.Modele.Tour;
+import com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBaseTraversers;
 import connection.*;
 //permet de trouver dans quelle phase on est et de la renvoyer à l'IG
 
@@ -23,6 +27,16 @@ public class ControlleurPhase {
     }
 
     public boolean nextPhase() {
-
+        String phase = getMostAdvanceTour();
+        Tour suivant;
+        ListeJoueurs joueurs;
+        switch (phase) {
+            case "qualification":
+                DebutQuart dq = new DebutQuart();
+                dq.getClassement();
+                suivant = new QuartFinal();
+                break;
+        }
+        return false;
     }
 }
