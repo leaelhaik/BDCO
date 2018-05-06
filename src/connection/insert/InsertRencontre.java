@@ -46,9 +46,9 @@ public class InsertRencontre {
       PreparedStatement statement = conn.prepareStatement(STMT);
       statement.setInt(1,numRenconre);
       statement.setString(2,nomTour);
-      statement.setNull(3);
+      statement.setNull(3, 0);
       statement.executeUpdate();
-      ResultatSet rset = statement.executeQuery(STMT);
+      ResultSet rset = statement.executeQuery(STMT);
       statement.close();
       //System.out.println(i);
       //   }
@@ -74,8 +74,8 @@ public class InsertRencontre {
     //   }
     //   return S;
     // }
-
+/*
     public static void main(String args[]) {
       new InsertRencontre(conn,"qualifications",1);
-    }
+    }*/
   }
