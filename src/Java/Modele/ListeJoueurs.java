@@ -79,6 +79,10 @@ public class ListeJoueurs {
         return true;
     }
 
+    public ArrayList<Joueur> getMyJoueurs() {
+        return myJoueurs;
+    }
+
     @Override
     public String toString() {
         String liste = "";
