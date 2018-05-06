@@ -13,23 +13,41 @@ import java.sql.Date;
 public class TestControleTournoi {
     public static void main(String[] args) {
         MasterOfBDD fearme = new MasterOfBDD();
+        //fearme.supprimerBD();
+        //fearme.creerBD();
         fearme.effacerBD();
-        ajouterJoueur();
-        qualifications();
+        if (ajouterJoueur()) {
+
+        } else {
+            qualifications();
+        }
     }
 
-    public static void ajouterJoueur() {
+    public static boolean ajouterJoueur() {
         NouveauJoueur nj;
         nj = new NouveauJoueur("De la Bruyere", "Claude", "3 rue des Gentianes, 33120 Arcachon", "19801221");
-        nj.envoyerBD();
+        if (nj.envoyerBD()) {
+            System.err.println("Annulation de l'insertion...");
+            return true;
+        }
         nj = new NouveauJoueur("J", "M", "Quelquepart", "12345678");
-        nj.envoyerBD();
+        if (nj.envoyerBD()) {
+            System.err.println("Annulation de l'insertion...");
+            return true;
+        }
         nj = new NouveauJoueur("Raptor", "Jesus", "Dans nos coeurs", "00000101");
-        nj.envoyerBD();
+        if (nj.envoyerBD()) {
+            System.err.println("Annulation de l'insertion...");
+            return true;
+        }
         for (int i = 0; i<4; i++) {
             nj = new NouveauJoueur(""+i,""+i, ""+i, "20000101");
-            nj.envoyerBD();
+            if (nj.envoyerBD()) {
+                System.err.println("Annulation de l'insertion...");
+                return true;
+            }
         }
+        return false;
     }
 
     public static void qualifications() {
