@@ -4,156 +4,135 @@ boolean blanc = true ;
 
 public class VerificationCoup {
 
-  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-  static final String USER = "dhouibd"; // A remplacer pour votre compte
-  static final String PASSWD = "dhouibd";
+  public boolean isValid = false ;
 
-  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRenconre, String nomTour, String couleur){
+  public VerificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour, String couleur, Connection conn){
 
   }
 
-//verification Joueur, cad que le joueur bouge bien la bonne couleur
-// if((blanc && couleur=="blanc") || (!blanc && couleur=="noir"){
-//   isValid=true;
-// }
-//
-//
-// //l'état echec à définir
-// //select les pièces de l'autre couleur
-//
-//
-//
-// boolean isValid = false ;
-//
-// boolean enEchec = false ;
-//
-// if((Math.abs(oldX-posX)+Math.abs(oldY-posY))>0){
-//
-//  switch(typePiece){
-//
-//     case "tour" : VerifTour(posY,oldY,posX,oldX);
-//                   static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
-//                   where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py between {$oldY} and {$posY} and px between {$oldX} and {$posX}";
-//                   VerifTour();
-//
-//     case "fou" : VerifFou(posY,oldY,posX,oldX);
-//                  static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
-//                  where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py between {$oldY} and {$posY} and px between {$oldX} and {$posX}";
-//                  VerifFou();
-//
-//     case "roi" : VerifRoi(posY,oldY,posX,oldX);
-//
-//     case "cavalier" : VerifCavalier(posY,oldY,posX,oldX);
-//
-//     case "reine" : VerifReine(posY,oldY,posX,oldX);
-//
-//     case "pion" : VerifPion(posY,oldY,posX,oldX);
-// }
-//
-//
-// //Savoir si le roi est en échec ou pas
-// static final String STMT= "select posX,posY from piece where numRencontre={$numRencontre} and nomTour={$nomTour} and typePiece='roi'";
-// //appliquer les verifs sur toutes les pièces noires en prenant posX celle du roi blanc
-//
-// if(isValid){
-//   //Si le coup est vérifié, insertion dans l'historique + mise à jour de la position de la pièce
-//   static final String STMT = "select idPiece,couleur as coul,numRencontre as nr, nomTour as nt, posX as px,posY as py from piece
-//   where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py ={$posY} and px={$posX}";
-//   //si il y a des pièces qui vont être mangées
-//   static final String STMT = "Delete from piece where nr={$numRencontre} and nt={$nomTour} and coul<>{$couleur} and py ={$posY} and px={$posX};";
-//
-//   static final String STMT = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES();";
-//
-//   static final String STMT = "update Piece SET oldX=posX, oldY=posY ;";
-//
-//   blanc = !blanc;
 
 
+    String STMT = "Select posY,posX from piece where numRencontre=? and nomTour=? and couleur=? and typePiece='roi'";
+    PreparedStatement roi = conn.prepareStatement(STMT);
+    roi.setInt(1,numRencontre);
+    roi.setString(2,nomTour);
+    roi.setString(3,couleur);
+    roi.executeUpdate();
+    ResultSet rsetRoi = stmt.executeQuery(STMT);
 
 
+    //verification si obstacle en vue : invalide
+    static final String STMTType = "select typePiece from piece where numRencontre=? and nomTour=? and posY = ? and posX = ? ";
 
-
-//verification si obstacle en vue : invalide
-static final String STMT = "select * from piece where numRenconre=? and nomTour=? and posY between ? and ? and posX between ? and ?";
-
-PreparedStatement hav = conn.prepareStatement(STMT);
-hav.setInt(1,numRenconre);
-hav.setString(2,nomTour);
-hav.setInt(3,oldY);
-hav.setInt(4,posY);
-hav.setInt(5,oldX);
-hav.setInt(6,posX);
-hav.executeUpdate();
-//commit
-// Execution de la requete
-ResultSet rset = stmt.executeQuery(STMT);  //Piece dans l'entourage puis selon type de la piece on change
-
-
-
-//prise d'une autre pièce adverse
-
-//ne pas être en état échec
-VerifEchec();
-
-
-//Si valide
-  static final String STMT1 = "Delete from piece where numRenconre=? and nomTour=? and couleur<>? and posY =?and posX=?;";
-
-  static final String STMT2 = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES(?,?,?,?,?,?);";
-
-  static final String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? ;";
-
-  try {
-  // Enregistrement du driver Oracle
-    System.out.print("Loading Oracle driver... ");
-    DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-    System.out.println("loaded");
-    // Etablissement de la connection
-    System.out.print("Connecting to the database... ");
-    Connection conn = DriverManager.getConnection(CONN_URL, USER, PASSWD);
-    System.out.println("connected");
-    // Creation de la requete
-    PreparedStatement del = conn.prepareStatement(STMT1);
-    del.setInt(1,numRenconre);
-    del.setString(2,nomTour);
-    del.setString(3,couleur);
-    del.setInt(4,posY);
-    del.setInt(5,posX);
-    del.executeUpdate();
+    PreparedStatement hav = conn.prepareStatement(STMTType);
+    hav.setInt(1,numRencontre);
+    hav.setString(2,nomTour);
+    hav.setInt(3,posY);
+    hav.setInt(4,posX);
+    hav.executeUpdate();
     //commit
     // Execution de la requete
-    ResultSet rset = stmt.executeQuery(STMT1);
+    ResultSet type = stmt.executeQuery(STMT);  //Piece dans l'entourage puis selon type de la piece on change
 
-    PreparedStatement inse = conn.prepareStatement(STMT2);
-    inse.setString(1,nomTour);
-    inse.setInt(2,numRenconre);
-    inse.setInt(3,posY);
-    inse.setInt(4,posX);
-    inse.setInt(5,oldY);
-    inse.setInt(6,oldX);
-    inse.executeUpdate();
-    //commit
-    // Execution de la requete
-    ResultSet rset2 = stmt.executeQuery(STMT2);
+    switch(type.getString(1)){
 
-    PreparedStatement nouv = conn.prepareStatement(STMT3);
-    nouv.setInt(1,null);
-    nouv.setInt(2,null);
-    nouv.setInt(3,posX);
-    nouv.setInt(4,posY);
-    inse.executeUpdate();
-    //commit
-    // Execution de la requete
-    ResultSet rset3 = stmt.executeQuery(STMT3);
+          case "tour" : isValid = VerifTour(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                        break;
+
+          case "fou" : isValid = VerifFou(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                       break;
+
+          case "roi" : isValid = VerifRoi(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                       break;
+
+          case "cavalier" : isValid = VerifCavalier(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                            break;
+
+          case "reine" : isValid = VerifReine(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                         break;
+
+          case "pion" : isValid = VerifPion(conn,posY,oldY,posX,oldX,numRencontre,nomTour, couleur).getIsValid();
+                        break;
+    }
+
+        if(isValid){
+          String STMT = "Select couleur from piece where numRencontre=? and nomTour= ? and posY = ? and posX = ?;";
+          PreparedStatement sel = conn.prepareStatement(STMT);
+          sel.setInt(1,numRencontre);
+          sel.setString(2,nomTour);
+          sel.setInt(3,posY);
+          sel.setObject(4,posX,Type.CHAR);
+          roi.executeUpdate();
+          ResultSet rsetSel = stmt.executeQuery(STMT);
+          if(rsetSel.getString(1)==couleur){
+            isValid=false;
+          }
+          else{
+            String STMT1 = "Delete from piece where numRencontre=? and nomTour=? and posY = ? and posX = ?;";
+            PreparedStatement del = conn.prepareStatement(STMT1);
+            del.setInt(1,numRencontre);
+            del.setString(2,nomTour);
+            del.setInt(3,posY);
+            del.setObject(4,posX,Type.CHAR);
+            del.executeUpdate();
+            // Execution de la requete
+            startTransact(conn);
+            ResultSet rset = stmt.executeQuery(STMT1);
+
+            String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? where posX = ? , posY = ?";
+            PreparedStatement nouv = conn.prepareStatement(STMT3);
+            nouv.setInt(1,null);
+            nouv.setInt(2,null);
+            nouv.setObject(3,posX),Type.CHAR;
+            nouv.setInt(4,posY);
+            nouv.setObject(5,oldX,Type.CHAR);
+            nouv.setInt(6,oldY);
+            inse.executeUpdate();
+            //commit
+            // Execution de la requete
+            ResultSet rset3 = stmt.executeQuery(STMT3);
+
+            if(VerifEchec(rsetRoi.getInt(1),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
+              rollFunction(conn);
+              isValid=false;
+            }
+            else{
+              String STMTHIST = "Insert into historique(nomTour,numRencontre,posY,posX,oldY,oldX) VALUES(?,?,?,?,?,?);";
+              PreparedStatement inse = conn.prepareStatement(STMTHIST);
+              inse.setString(1,nomTour);
+              inse.setInt(2,numRencontre);
+              inse.setInt(3,posY);
+              inse.setInt(4,posX);
+              inse.setInt(5,oldY);
+              inse.setInt(6,oldX);
+              inse.executeUpdate();
+              //commit
+              // Execution de la requete
+              ResultSet rset2 = stmt.executeQuery(STMTHIST);
+              commit();
+            }
+          }
+        }
 
 
     // Fermeture
+    type.close();
+    rsetRoi.close();
+    rsetSel.close();
     rset.close();
-    stmt.close();
-    conn.close();
+    rset2.close();
+    rset3.close();
   } catch (SQLException e) {
       System.err.println("failed");
       e.printStackTrace(System.err);
+    }
+
+    public boolean isValid(){
+      return isValid;
+    }
+
+    public static void main(String args[]) {
+      new VerificationCoup(posY,oldY, posX, oldX, numRencontre, nomTour, couleur,conn);
     }
 
 }
