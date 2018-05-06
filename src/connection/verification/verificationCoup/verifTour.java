@@ -12,7 +12,7 @@ public class VerifTour {
   private String STMTTour1 = "";
   private String STMTTour2 = "";
 
-  public VerifTour(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour) {
+  public VerifTour(Connection conn, int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,String couleur) {
 
     try {
       byte[] tabOldX = null;

@@ -1,6 +1,7 @@
 package connection.verification;
 import java.sql.*;
-boolean blanc = true ;
+
+//boolean blanc = true ;
 
 public class verificationCoup {
 
@@ -9,6 +10,15 @@ public class verificationCoup {
     public verificationCoup(int posY, int oldY, Character posX, Character oldX, int numRencontre, String nomTour,
                             String couleur, Connection conn){
 
+    String STMTC = " Select posX,posY from historique where idCoup=max(idCoup)";
+    Statement stmtc = conn.createStatement();
+    ResultSet rsetc = stmtc.executeQuery(STMTC);
+
+    String STMTCouleur = " Select couleur from piece where posX="+rsetc.getString(arg0)+",posY="+posY;
+    PreparedStatement stmtcouleur = conn.prepareStatement(STMTCouleur);
+    stmtcouleur.setObject(1,rsetc.getString(1),Types.CHAR);
+    stmtcouleur.setInt(2,posY);
+    ResultSet rsetcoul = stmtcouleur.executeQuery(STMTCouleur);
 
 
     String STMT = "Select posY,posX from piece where numRencontre=? and nomTour=? and couleur=? and typePiece='roi'";
@@ -17,11 +27,11 @@ public class verificationCoup {
     roi.setString(2,nomTour);
     roi.setString(3,couleur);
     roi.executeUpdate();
-    ResultSet rsetRoi = stmt.executeQuery(STMT);
+    ResultSet rsetRoi = roi.executeQuery(STMT);
 
 
     //verification si obstacle en vue : invalide
-    static final String STMTType = "select typePiece from piece where numRencontre=? and nomTour=? and posY = ? and posX = ? ";
+    String STMTType = "select typePiece from piece where numRencontre=? and nomTour=? and posY = ? and posX = ? ";
 
     PreparedStatement hav = conn.prepareStatement(STMTType);
     hav.setInt(1,numRencontre);
@@ -31,7 +41,7 @@ public class verificationCoup {
     hav.executeUpdate();
     //commit
     // Execution de la requete
-    ResultSet type = stmt.executeQuery(STMT);  //Piece dans l'entourage puis selon type de la piece on change
+    ResultSet type = hav.executeQuery(STMT);  //Piece dans l'entourage puis selon type de la piece on change
 
     switch(type.getString(1)){
 
@@ -55,15 +65,17 @@ public class verificationCoup {
     }
 
         if(isValid){
-        String STMT = "Select couleur from piece where numRencontre=? and nomTour= ? and posY = ? and posX = ?;";
+        	
+        String STMT2 = "Select couleur from piece where numRencontre=? and nomTour= ? and posY = ? and posX = ?;";
         PreparedStatement sel = conn.prepareStatement(STMT);
         sel.setInt(1,numRencontre);
         sel.setString(2,nomTour);
         sel.setInt(3,posY);
-        sel.setObject(4,posX,Type.CHAR);
-        roi.executeUpdate();
-        ResultSet rsetSel = stmt.executeQuery(STMT);
+        sel.setObject(4,posX,Types.CHAR);
+        sel.executeUpdate();
+        ResultSet rsetSel = sel.executeQuery(STMT2);
         if(rsetSel.getString(1)==couleur){
+
             isValid=false;
         }
         else{
@@ -72,24 +84,24 @@ public class verificationCoup {
             del.setInt(1,numRencontre);
             del.setString(2,nomTour);
             del.setInt(3,posY);
-            del.setObject(4,posX,Type.CHAR);
+            del.setObject(4,posX,Types.CHAR);
             del.executeUpdate();
             // Execution de la requete
             startTransact(conn);
-            ResultSet rset = stmt.executeQuery(STMT1);
+            ResultSet rset = del.executeQuery(STMT1);
 
             String STMT3 = "update Piece SET posX=?, posY = ?, oldX=?, oldY=? where posX = ? , posY = ?";
             PreparedStatement nouv = conn.prepareStatement(STMT3);
-            nouv.setInt(1,null);
-            nouv.setInt(2,null);
-            nouv.setObject(3,posX),Type.CHAR;
-            nouv.setInt(4,posY);
-            nouv.setObject(5,oldX,Type.CHAR);
+            nouv.setObject(1,posX,Types.CHAR);
+            nouv.setInt(2,posY);
+            nouv.setObject(3,oldX,Types.CHAR);
+            nouv.setInt(4,oldY);
+            nouv.setObject(5,oldX,Types.CHAR);
             nouv.setInt(6,oldY);
-            inse.executeUpdate();
+            nouv.executeUpdate();
             //commit
             // Execution de la requete
-            ResultSet rset3 = stmt.executeQuery(STMT3);
+            ResultSet rset3 = nouv.executeQuery(STMT3);
 
             if(VerifEchec(rsetRoi.getInt(1),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                 rollFunction(conn);
@@ -107,31 +119,35 @@ public class verificationCoup {
                 inse.executeUpdate();
                 //commit
                 // Execution de la requete
-                ResultSet rset2 = stmt.executeQuery(STMTHIST);
+                ResultSet rset2 = inse.executeQuery(STMTHIST);
                 commit();
+                rset2.close();
+                inse.close();
             }
+            rset.close();
+            rset3.close();
+            del.close();
+            nouv.close();
         }
+        // Fermeture
+        type.close();
+        rsetc.close();
+        stmtc.close();
+        rsetRoi.close();
+        rsetSel.close();
+        sel.close();
     }
 
 
-    // Fermeture
-    type.close();
-    rsetRoi.close();
-    rsetSel.close();
-    rset.close();
-    rset2.close();
-    rset3.close();
-    } catch (SQLException e) {
-        System.err.println("failed");
-        e.printStackTrace(System.err);
-    }
+
+ 
 
     public boolean isValid(){
         return isValid;
     }
 
     public static void main(String args[]) {
-        new VerificationCoup(posY,oldY, posX, oldX, numRencontre, nomTour, couleur,conn);
+       // new VerificationCoup(posY,oldY, posX, oldX, numRencontre, nomTour, couleur,conn);
     }
 
 }

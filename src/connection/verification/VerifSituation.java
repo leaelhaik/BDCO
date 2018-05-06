@@ -1,10 +1,13 @@
-package connection.verification.verificationCoup;
+package connection.verification;
 import java.sql.*;
-public class VerifSituation(){
+import verificationCoup;
 
-  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
-  static final String USER = "dhouibd"; // A remplacer pour votre compte
-  static final String PASSWD = "dhouibd";
+import connection.Verification;
+public class VerifSituation {
+
+//  static final String CONN_URL = "jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1";
+//  static final String USER = "dhouibd"; // A remplacer pour votre compte
+//  static final String PASSWD = "dhouibd";
   static final String STMTRoi = "select idPiece,posX,posY,couleur from piece where typePiece='roi', couleur=?, numRencontre=?,nomTour=?";
   boolean isVerified = false;
 
@@ -25,7 +28,7 @@ public class VerifSituation(){
       selRoi.setString(3,nomTour);
       selRoi.executeUpdate();
 
-      ResultSet rsetRoi = stmt.executeQuery(STMTRoi);
+      ResultSet rsetRoi = selRoi.executeQuery(STMTRoi);
 
       //verification etat echec
       if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
@@ -51,7 +54,7 @@ public class VerifSituation(){
           selPic.setString(2,nomTour);
           selPic.executeUpdate();
 
-          ResultSet rsetPic = stmt.executeQuery(STMTPic);
+          ResultSet rsetPic = selPic.executeQuery(STMTPic);
 
           //on selectionne toutes les pièces de la couleur qu'on veut qui puissent prendre la piece
           String STMTP = "select idPiece,posX,posY,typePiece from piece where couleur=?, numRencontre=?,nomTour=?";
@@ -61,37 +64,37 @@ public class VerifSituation(){
           sele.setString(3,nomTour);
           sele.executeUpdate();
 
-          ResultSet rset2 = stmt.executeQuery(STMTP);
+          ResultSet rset2 = sele.executeQuery(STMTP);
           while(rset2.next()&&!isVerified){
             switch(rset2.getString(4)){
 
                //verification Tour :
-               case "tour" : if(VerifTour(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "tour" : if(new verificationCoup.VerifTour(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                 isVerified=true;
                              }
                              break;
                //verification Fou:
-               case "fou" : if(VerifFou(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "fou" : if(VerifFou(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                isVerified=true;
                             }
                             break;
                //verification Roi:
-               case "roi" : if(VerifRoi(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "roi" : if(VerifRoi(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                isVerified=true;
                             }
                             break;
                //verification cavalier:
-               case "cavalier" :  if(VerifCavalier(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "cavalier" :  if(VerifCavalier(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                     isVerified=true;
                                   }
                             break;
                //verification reine:
-               case "reine" : if(VerifReine(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "reine" : if(VerifReine(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                 isVerified=true;
                               }
                             break;
                //verification pion
-               case "pion" :  if(VerifPion(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2)).getIsValid()){
+               case "pion" :  if(VerifPion(rsetPic.getInt(3),rset2.getInt(3),rsetPic.getInt(2),rset2.getInt(2),couleur).getIsValid()){
                                 isVerified=true;
                               }
                             break;
@@ -101,7 +104,7 @@ public class VerifSituation(){
                setFunction(rset2.getInt(1),rsetPic.getInt(2),rsetPic.getInt(3));
                if(VerifEchec(rsetRoi.getInt(3),rsetRoi.getInt(2),numRencontre,nomTour,couleur).enEchec()){
                  rollFunction();
-                 rset.next();
+                 rset2.next();
                }
                else{
                  break;
@@ -110,13 +113,16 @@ public class VerifSituation(){
              else{
                rset2.next(); // essayer toutes les positions possibles
              }
+             rset2.close();
+             rsetPic.close();
+
 
           }
           // Faire un rollFunction()
 
           //verification etat mat : verification de déplacement de piece pour ne plus être en échec
 
-          rset = stmt.executeQuery(STMTP);
+          ResultatSet rset = sele.executeQuery(STMTP);
 
           while(rset.next()&&!isVerified){
 
@@ -221,13 +227,37 @@ public class VerifSituation(){
              }
              rset.next(); // essayer toutes les positions possibles
           }
+          rset.close();
+          sele.close();
         }
 
+        if(!isVerified){
+          String STMTC= "select idJoueur from AffectationCouleur where nomTour=?,numRenconre=?,couleur=?";
+          PreparedStatement selC = conn.prepareStatement(STMTC);
+          selC.setString(1,nomTour);
+          selC.setInt(2,numRencontre);
+          selC.setString(3,couleur);
+          selC.executeUpdate();
+
+          ResultSet rsetC = selC.executeQuery(STMTC);
+
+
+          String STMTV= "update rencontre set idJoueur=? where nomTour=?, numRenconre=?";
+          PreparedStatement selV = conn.prepareStatement(STMTV);
+          selV.setInt(1,rsetC.getInt(1));
+          selV.setString(2,nomTour);
+          selV.setInt(3,numRencontre);
+          selV.executeUpdate();
+
+          ResultSet rsetV = selV.executeQuery(STMTV);
+          rsetV.close();
+          rsetC.close();
+          selV.close();
+          selC.close();
+
+        }
 
         rsetRoi.close();
-        rsetPic.close();
-        rset.close();
-        rset2.close();
       }
     } catch (SQLException e) {
         System.err.println("failed");
@@ -241,15 +271,16 @@ public class VerifSituation(){
       ResultSet rset = stmt.executeQuery(Trans);
   }
 
-  public ResultatSet setFunction(int idPiece,int posX, int posY, Connection conn){
+  public ResultatSet setFunction(int idPiece,Character posX, int posY, Connection conn){
     String setSTMT= "update piece set posX=?,posY=? where idPiece=?";
     PreparedStatement sel = conn.prepareStatement(setSTMT);
-    sel.setString(1,posX);
+    sel.setObject(1,posX,Types.CHAR);
     sel.setInt(2,posY);
-    sel.setString(3,idPiece);
+    sel.setObject(3,idPiece,Types.CHAR);
     sel.executeUpdate();
 
-    ResultSet rsetRoi = stmt.executeQuery(setSTMT);
+    ResultSet rsetSel = sel.executeQuery(setSTMT);
+    return rsetSel;
   }
 
   public void rollFunction(Connection conn){

@@ -10,7 +10,7 @@ public class VerifFou {
   private boolean isValid = false;
   private String STMTFou = "";
 
-  public VerifFou(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour) {
+  public VerifFou(Connection conn, int posY, int oldY, String posX, String oldX, int numRencontre, String nomTour,String couleur) {
 
     try {
       byte[] tabOldX = null;
