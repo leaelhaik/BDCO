@@ -45,6 +45,9 @@ exeIGTournoi:
 	
 exeVerif:
 	java -classpath bin:bin/ojdbc6.jar TestVerif
+
+exeCT:
+	java -classpath bin:bin/ojdbc6.jar TestControleTournoi
 	
 clean:
 	rm -rf bin/*.class
