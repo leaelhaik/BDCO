@@ -1,4 +1,6 @@
 package connection.insert;
+import connection.MultipleQueries;
+
 import java.sql.*;
 
 public class InsertionJoueur {
@@ -13,7 +15,6 @@ public class InsertionJoueur {
     	  while (rset.next())
     		  id=rset.getInt(1);
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	  String joueur = "insert into joueur values(" + id + ",\'" +nom+ "\' , \'" +prenom+ "\' , \'" +date+ "\' , \'" +adresse+ "\')";
@@ -30,10 +31,9 @@ public class InsertionJoueur {
 		    return true;
 		  }
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
+		return false;
 	}
-	return false;
 
   }
 
