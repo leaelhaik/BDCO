@@ -23,9 +23,9 @@ public class Qualification extends Tour {
         for (int i =0; i < participants.getNumberJoueurs() - 1; i++) {
             for (int j = i + 1; j < participants.getNumberJoueurs(); j++) {
                 if (Math.random() > 0.5) {
-                    Fabrique.rencontres.nouvelleRencontre(participants.getJoueur(i), participants.getJoueur(j), "qualification");
+                    Fabrique.rencontres.nouvelleRencontre(participants.getJoueur(i), participants.getJoueur(j), "qualifications");
                 } else {
-                    Fabrique.rencontres.nouvelleRencontre(participants.getJoueur(j), participants.getJoueur(i), "qualification");
+                    Fabrique.rencontres.nouvelleRencontre(participants.getJoueur(j), participants.getJoueur(i), "qualifications");
                 }
             }
         }

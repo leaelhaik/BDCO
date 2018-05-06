@@ -1,8 +1,7 @@
 package Controleur;
 
-import connection.delete.*;
-import connection.create.*;
-import connection.drop.*;
+import connection.*;
+import connection.drop.Drop;
 
 /**
  * Created by ensimag on 06/05/18.
@@ -14,33 +13,36 @@ public class MasterOfBDD {
     }
 
     public static void supprimerBD() {
-        new DropHistorique();
-        new DropPiece();
-        new DropAffectationCouleur();
-        new DropRencontre();
-        new DropTour();
-        new DropJoueur();
-        new DropCouleur();
+       Drop d = new Drop();
+       d.dropHistorique();
+       d.dropPiece();
+       d.dropAffectationCouleur();
+       d.dropRencontre();
+       d.dropTour();
+       d.dropJoueur();
+       d.dropCouleur();
     }
 
     public static void creerBD() {
-        new CreateJoueur();
-        new CreateTour();
-        new CreateRencontre();
-        new CreateCouleur();
-        new CreateHistorique();
-        new CreatePiece();
-        new CreateAffectationCouleur();
+        Create d = new Create();
+        d.CreateJoueur();
+        d.CreateTour();
+        d.CreateRencontre();
+        d.CreateCouleur();
+        d.CreateHistorique();
+        d.CreatePiece();
+        d.CreateAffectationCouleur();
     }
 
     public static void effacerBD() {
-        new DeleteAffectationCouleur();
-        new DeleteCouleur();
-        new DeleteHistorique();
-        new DeleteJoueur();
-        new DeletePiece();
-        new DeleteRencontre();
-        new DeleteTour();
+        Delete d = new Delete();
+        d.DeleteAffectationCouleur();
+        d.DeleteCouleur();
+        d.DeleteHistorique();
+        d.DeleteJoueur();
+        d.DeletePiece();
+        d.DeleteRencontre();
+        d.DeleteTour();
     }
 
 }

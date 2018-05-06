@@ -1,6 +1,7 @@
 package connection.drop;
 import java.sql.*;
 import connection.MultipleQueries;
+import connection.Queries;
 
 public class Drop{
 
