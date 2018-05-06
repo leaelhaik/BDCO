@@ -7,11 +7,8 @@ public class CreateTour{
   private MultipleQueries queries;
 
   public CreateTour() {
+	  queries = new MultipleQueries();
     ResultSet rsetCreateTour = queries.getResult("CREATE TABLE Tour(nomTour varchar(20) NOT NULL CHECK(nomTour in ('finale','demiFinale','quartFinale','qualifications')),PRIMARY KEY(nomTour))");
-  }
-
-  public static void main(String args[]) {
-    new CreateTour();
   }
 
 }

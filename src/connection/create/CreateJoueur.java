@@ -14,6 +14,7 @@ public class CreateJoueur {
     }
 */
   public CreateJoueur() {
-    ResultSet rsetCreateJoueur = queries.getResult("CREATE TABLE Joueur(idJoueur integer, nomJoueur character varying(30),prenomJoueur character varying(30),dateNaissance DATE,adresseJoueur character varying(30),PRIMARY KEY(idJoueur))");
+	  queries = new MultipleQueries();
+    ResultSet rsetCreateJoueur = queries.getResult("CREATE TABLE Joueur(idJoueur integer, nomJoueur character varying(30),prenomJoueur character varying(30),dateNaissance character varying(30),adresseJoueur character varying(30),PRIMARY KEY(idJoueur))");
   }
 }

@@ -8,8 +8,9 @@ public class InsertPiece {
   public InsertPiece(int numRenconre, String nomTour) {
           ResultSet rsetMaxId = queries.getResult("Select idPiece from piece where idPiece=max(idPiece)");
           int n = rsetMaxId.getInt(1);
+          
 
-          ResultSet rset1 = queries.getResult("Insert into Piece Values("+ int.toString(n+1) +",'tour','A','1','A','1','blanc',"+nomTour+", "numRenconre")";);
+          ResultSet rset1 = queries.getResult("Insert into Piece Values("+ (int)(n+1) +",'tour','A','1','A','1','blanc',"+nomTour+", "numRenconre")";);
           ResultSet rset2 = queries.getResult("Insert into Piece Values("+ int.toString(n+2) +",'tour','H','1','H','1','blanc',"+nomTour+", "numRenconre")";);
           ResultSet rset3 = queries.getResult("Insert into Piece Values("+ int.toString(n+3) +",'cavalier','B','1','B','1','blanc',"+nomTour+", "numRenconre")";);
           ResultSet rset4 = queries.getResult("Insert into Piece Values("+ int.toString(n+4) +",'cavalier','G','1','G','1','blanc',"+nomTour+", "numRenconre")";);
