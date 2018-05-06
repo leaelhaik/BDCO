@@ -8,7 +8,7 @@ public class InsertionJoueur {
   static final String USER = "dhouibd"; // A remplacer pour votre compte
   static final String PASSWD = "dhouibd";
   static final String STMT = "insert into joueur values(?,?,?,?,?)";
-  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=? ";
+  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=?, prenomJoueur=?";
   Connection conn;
 
   public InsertionJoueur() {
