@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controleur.ControlleurPhase;
+
 public class ExecutableTournoi extends JFrame {
 	
 	private String nom;
@@ -167,11 +169,11 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 
 private int getPhase() {
 	// TODO retourner 0,1,2 ou 3 en fonction de la phase, autre chose si tournoi non commencé
-	return 0;
-}
+	return ControlleurPhase.getMostAdvanceTour();
+	}
 
 private int getIDTournoi() {
-	return 5646;
+	return 0;
 }
 
 class BoutonSuivreTournoiListener implements java.awt.event.ActionListener {

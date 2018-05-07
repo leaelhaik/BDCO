@@ -1,5 +1,6 @@
 package connection;
 import java.sql.*;
+
 import connection.MultipleQueries;
 
 public class GetIdJoueur {
@@ -19,10 +20,6 @@ public class GetIdJoueur {
 
   public int getId(){
     return this.id;
-  }
-
-  public static ResultSet getJoueurFromId(int idUnique) {
-      return Queries.queries.getResult("Select * from Joueur where idJoueur =" + idUnique);
   }
 
 }

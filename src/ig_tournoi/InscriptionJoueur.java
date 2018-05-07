@@ -23,9 +23,9 @@ import javax.swing.JTextField;
 
 public class InscriptionJoueur extends JPanel {
 
-	private JTextField nom = new JTextField();
-	private JTextField prenom = new JTextField();
-	private JTextField addr = new JTextField();
+	private JTextField nom = new JTextField("");
+	private JTextField prenom = new JTextField("");
+	private JTextField addr = new JTextField("");
 	private JTextField JourNaissance = new JTextField();
 	private JTextField MoisNaissance = new JTextField();
 	private JTextField AnneeNaissance = new JTextField();
@@ -33,6 +33,7 @@ public class InscriptionJoueur extends JPanel {
     private JLabel label = new JLabel("");
     private JPanel listeJoueurs = new JPanel();
 	private JTextArea inscrits = new JTextArea("Liste des joueurs inscrits : ");
+	private ListeJoueurs l = new ListeJoueurs();
 	
 	public InscriptionJoueur() {
 		
@@ -129,16 +130,24 @@ public class InscriptionJoueur extends JPanel {
 			String birth = year+month+day;
 			//Birth est au format attendu par la BD
 			
-			ajouterJoueur(name, surname, direction, birth);
-			
+			if ("".equals(name) || "".equals(surname) || "".equals(direction)) {
+				label.setText("Joueur invalide");
+			} else {
+				ajouterJoueur(name, surname, direction, birth);
+			}
 			inscrits.setText(getListeJoueurs());
+			nom.setText("");
+			prenom.setText("");
+			addr.setText("");
+			JourNaissance.setText("");
+			MoisNaissance.setText("");
+			AnneeNaissance.setText("");
 			
 		}
 
 	}
 	
 	public String getListeJoueurs() {
-		ListeJoueurs l = new ListeJoueurs();
 		return l.getMyJoueurs().toString();
 	}
 	
@@ -147,6 +156,7 @@ public class InscriptionJoueur extends JPanel {
 		if (ajout.envoyerBD()) {
 			label.setText("Joueur déja inscrit !");
 		} 
+
 		return true;
 	}
 }
