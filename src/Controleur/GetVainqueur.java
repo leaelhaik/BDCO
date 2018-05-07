@@ -1,7 +1,6 @@
 package Controleur;
 
 import connection.Connect;
-//permet d'obtenir la couleur d'un joueur en fonction de l'Id de la partie
 public class GetVainqueur {
 
     String nomTour;
