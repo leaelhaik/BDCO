@@ -19,7 +19,7 @@ public class ExecutablePartie extends JFrame {
 	private int hauteur;
 	private int largeur;
 	private int idRencontre;
-	private int numTour;
+	private String nomTour;
 	
 	
 	
@@ -123,6 +123,14 @@ public class ExecutablePartie extends JFrame {
 	
 	public void setIdRencontre(int i) {
 		this.idRencontre = i;
+	}
+	
+	public String getNomTour() {
+		return this.nomTour;
+	}
+	
+	public void setNomTour(String s) {
+		this.nomTour=s;
 	}
 
 	class BoutonQuitterListener implements java.awt.event.ActionListener {

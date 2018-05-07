@@ -11,8 +11,7 @@ public class GetCouleur {
     }
 
     public String getCouleur() {
-    	Connect co = new Connect();
-    	connection.GetCouleur req = new connection.GetCouleur(this.iDJoueur,co.getConnection());
+    	connection.GetCouleur req = new connection.GetCouleur(this.iDJoueur);
         return req.getCouleur();
     }
 }

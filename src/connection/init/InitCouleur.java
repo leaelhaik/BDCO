@@ -1,6 +1,7 @@
 package connection.init;
 import java.sql.*;
 import connection.MultipleQueries;
+import connection.Queries;
 
 
 public class InitCouleur {

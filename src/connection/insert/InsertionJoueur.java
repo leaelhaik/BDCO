@@ -7,25 +7,20 @@ import java.sql.*;
 import connection.MultipleQueries;
 
 public class InsertionJoueur {
-  static final String STMT = "insert into joueur values(?,?,?,?,?)";
   public int id=0;
-  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=? and prenomJoueur=? ";
-  //private MultipleQueries queries;
 
   public InsertionJoueur() {
   }
 
   public boolean verifInsertion(String nom, String prenom) {
       ResultSet rset1 = Queries.queries.getResult("select idJoueur from joueur where nomJoueur= \'" + nom+"\' and prenomJoueur= \'"+prenom+"\'");
+      
+      
       try {
-		if(rset1.next()){
-		    return false;
-		  }
-		  else{
-		    return true;
-		  }
+		rset1.next();
+		return true;
 	} catch (SQLException e) {
-		e.printStackTrace();
+		//e.printStackTrace();
 		return false;
 	}
 

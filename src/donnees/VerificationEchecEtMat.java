@@ -16,7 +16,7 @@ public class VerificationEchecEtMat {
 			int i,j = 0;
 			char k= (char) (rsetRoi.getInt("posX")+j);
 
-			VerificationEchec verifEchec = new VerificationEchec(rsetRoi.getInt("posY")+i,k,numRencontre,nomTour,couleur);
+			VerificationEchec verifEchec= new VerificationEchec(rsetRoi.getInt("posY")+i,k,numRencontre,nomTour,couleur);
 
 			//verification etat echec
 			if(verifEchec.enEchec()){
@@ -37,11 +37,18 @@ public class VerificationEchecEtMat {
 					//verification etat mat : verification de prise de la piece qui nous met en échec
 
 					// on selectionne la piece qui nous met en échec(son id et sa position)
-					ResultSet rsetPic = Queries.queries.getResult("select idPiece,posX,posY from historique where idCoup=count(idCoup), numRencontre= " + numrencontre + ",nomTour=\' " + nomTour + "\'");
+					ResultSet rsetPic = Queries.queries.getResult("select idPiece,posX,posY from historique where idCoup=count(idCoup), numRencontre= " + numRenconre + ",nomTour=\' " + nomTour + "\'");
 
 
 					//on selectionne toutes les pièces de la couleur qu'on veut qui puissent prendre la piece
-					ResultSet rset2 = Queries.queries.getResult("select idPiece,posX,posY,typePiece from piece where couleur=\'" + couleur + "\', numRencontre= " + numrencontre + ",nomTour=\' " + nomTour + "\'");
+					String STMTP = "select idPiece,posX,posY,typePiece from piece where couleur=?, numRencontre=?,nomTour=?";
+					PreparedStatement sele = conn.prepareStatement(STMTP);
+					sele.setString(1,couleur);
+					sele.setInt(2,numRencontre);
+					sele.setString(3,nomTour);
+					sele.executeUpdate();
+
+					ResultSet rset2 = Queries.queries.getResult("select idPiece,posX,posY,typePiece from piece where couleur=\'" + couleur + "\', numRencontre= " + numRenconre + ",nomTour=\' " + nomTour + "\'");
 					while(rset2.next()&&!isVerified){
 						switch(rset2.getString(4)){
 
@@ -84,7 +91,7 @@ public class VerificationEchecEtMat {
 
 					//verification etat mat : verification de déplacement de piece pour ne plus être en échec
 
-					ResultatSet rset = Queries.queries.getResult("select idPiece,posX,posY,typePiece from piece where couleur=\'" + couleur + "\', numRencontre= " + numrencontre + ",nomTour=\' " + nomTour + "\'");
+					ResultatSet rset = sele.executeQuery(STMTP);
 
 					while(rset.next()&&!isVerified){
 
@@ -189,13 +196,30 @@ public class VerificationEchecEtMat {
 						}
 						rset.next(); // essayer toutes les positions possibles
 					}
+					rset.close();
+					sele.close();
 				}
 
 				if(!isVerified){
+					String STMTC= "select idJoueur from AffectationCouleur where nomTour=?,numRenconre=?,couleur=?";
+					PreparedStatement selC = conn.prepareStatement(STMTC);
+					selC.setString(1,nomTour);
+					selC.setInt(2,numRencontre);
+					selC.setString(3,couleur);
+					selC.executeUpdate();
 
-					ResultSet rsetC = Queries.queries.getResult("select idJoueur from AffectationCouleur where nomTour=\' " + nomTour + "\',numRencontre = " + numrencontre + ",couleur=\'"+couleur+"");
+					ResultSet rsetC = selC.executeQuery(STMTC);
 
-					ResultSet rsetV = Queries.queries.getResult("update rencontre set idJoueur="+ rsetC.getInt(1)+" where nomTour=\' " + nomTour + "\', numRencontre=",+numRencontre+"");
+
+					String STMTV= "update rencontre set idJoueur=? where nomTour=?, numRenconre=?";
+
+					PreparedStatement selV = conn.prepareStatement(STMTV);
+					selV.setInt(1,rsetC.getInt(1));
+					selV.setString(2,nomTour);
+					selV.setInt(3,numRencontre);
+					selV.executeUpdate();
+
+					ResultSet rsetV = selV.executeQuery(STMTV);
 
 				}
 			}

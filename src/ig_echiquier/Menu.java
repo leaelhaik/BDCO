@@ -11,6 +11,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Controleur.ControlleurPhase;
+
 public class Menu extends JPanel {
 	private JComboBox<String> choixRencontre = new JComboBox<String>();
 	private JLabel label = new JLabel("Selectionnez vote rencontre");
@@ -19,6 +21,7 @@ public class Menu extends JPanel {
 	private int idRencontre;
 	private JLabel labelRencontre = new JLabel("Rencontre n°1 - Machin contre truc");
 	private JLabel labelStatut = new JLabel(" --- en cours");
+	private String nomTour;
 	
 	
 	public Menu(int n) {
@@ -26,6 +29,9 @@ public class Menu extends JPanel {
 		
 		idRencontre=1;
 		//premiere rencontre de l aliste idRencontre=listRencontres.first();
+		ControlleurPhase cp = new ControlleurPhase();
+		
+		nomTour=cp.getMostAdvanceTour();
 		
 		JPanel top = new JPanel();
 		top.add(label);

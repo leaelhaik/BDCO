@@ -13,15 +13,14 @@ public class Qualification extends Tour {
 
     public Qualification() {
         ListeJoueurs participants = new ListeJoueurs();
-        Connect co = new Connect();
-        Connection conn = co.getConnection();
-        participants.getAllJoueurs(conn);
+        participants.getAllJoueurs();
+        System.out.println(participants.toString());
         this.participants = participants;
     }
 
     public void genererRencontre() {
-        for (int i =0; i < participants.getNumberJoueurs() - 1; i++) {
-            for (int j = i + 1; j < participants.getNumberJoueurs(); j++) {
+        for (int i = 1; i < participants.getNumberJoueurs(); i++) {
+            for (int j = i + 1; j < participants.getNumberJoueurs() + 1; j++) {
                 if (Math.random() > 0.5) {
                     Fabrique.rencontres.nouvelleRencontre(participants.getJoueur(i), participants.getJoueur(j), "qualifications");
                 } else {

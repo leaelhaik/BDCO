@@ -82,8 +82,10 @@ public class VerificationCoup {
 			startTransact(Queries.queries.getConnection());
 			ResultSet rsetDel = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour= \' "+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
 		}
-		ResultSet rsetUp = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour=\'"+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
+		ResultSet rsetIdCoup = Queries.queries("Select Count(idCoup) from Historique");
+		int idCoup = rsetIdCoup.getInt(1) + 1;
 
+		ResultSet rsetHisto = Queries.queries.getResult("Insert into Historique Values(" + idCoup + ",\'" + nomTour + ",\'" + numRencontre + ",\'" + posX ",\'" + posY ",\'" + oldX ",\'" + oldY +"\')";
 
 		ResultSet rsetUpdate = Queries.queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
 
@@ -183,7 +185,7 @@ public class VerificationCoup {
 
 			ResultSet rsetPion1, rsetPion2;
 
-			if(((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur))) {
+			if((((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur)))) {
 				if((tabOldX[0]-tabPosX[0])==1)  {// Veut manger à gauche
 			  		rsetPion1 = Queries.queries.getResult("select idPiece, couleur, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
 					bool=!(rsetPion1.next());
@@ -278,7 +280,7 @@ public class VerificationCoup {
 	      }
 
 	      ResultSet rsetTour1, rsetTour2;
-	      if((tabPosX[0]==tabOldX[0]) || (posY==oldY)) {
+	      if(((tabPosX[0]==tabOldX[0]) || (posY==oldY))) {
 	        if(posY==oldY) {
 	        	if(tabPosX[0] < tabOldX[0]) {
 	        		rsetTour1 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + posX + "\' and  \'" + oldX + "\' and posY =" + posY + " ");
@@ -319,12 +321,10 @@ public class VerificationCoup {
 
 	  public void rollFunction(){
 	    ResultSet rset = Queries.queries.getResult("Rollback;");
-	    Queries.queries.closeConnection();
 	  }
 
 	  public void commit(){
 		    ResultSet rset = Queries.queries.getResult("Commit;");
-		    Queries.queries.closeConnection();
 	  }
 
 }
