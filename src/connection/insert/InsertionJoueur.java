@@ -7,10 +7,7 @@ import java.sql.*;
 import connection.MultipleQueries;
 
 public class InsertionJoueur {
-  static final String STMT = "insert into joueur values(?,?,?,?,?)";
   public int id=0;
-  static final String STMTVerif = "select idJoueur from joueur where nomJoueur=? and prenomJoueur=? ";
-  //private MultipleQueries queries;
 
   public InsertionJoueur() {
   }
