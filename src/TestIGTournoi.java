@@ -16,7 +16,7 @@ public class TestIGTournoi {
 		Fabrique.joueurs = new FabriqueJoueurConcrete();
 		Fabrique.rencontres = new FabriqueRencontreConcrete();
 		exe = new ExecutableTournoi("Tournoi", 700, 700);
-		Queries.queries.closeConnection();
+		//Queries.queries.closeConnection();
 
 	}
 }
