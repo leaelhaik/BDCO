@@ -11,8 +11,6 @@ import connection.Queries;
 
 public class VerificationEchec {
 
-
-	//static final  STMT = "select idPiece,posX,posY,couleur,typePiece from piece where couleur<>?, numRencontre=?,nomTour=?";
 	private boolean enEchec = false ;
 
 	//si on a les pos du roi
@@ -41,7 +39,7 @@ public class VerificationEchec {
 			}
 		}
 
-	
+
 	public boolean enEchec(){
 		return this.enEchec ;
 	}
