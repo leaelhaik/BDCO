@@ -3,7 +3,7 @@ CREATE TABLE Tour(nomTour varchar(20) NOT NULL CHECK(nomTour in ('finale','demiF
 CREATE TABLE Joueur(idJoueur integer,
 	nomJoueur character varying(30),
 	prenomJoueur character varying(30),
-	dateNaissance DATE,
+	dateNaissance character varying(10),
 	adresseJoueur character varying(30),
 	PRIMARY KEY(idJoueur));
 
