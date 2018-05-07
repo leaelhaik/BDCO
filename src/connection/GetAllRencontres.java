@@ -7,9 +7,10 @@ public class GetAllRencontres {
 
     private ArrayList<Integer> listeRencontres;
 
-    public GetAllRencontres(int idJoueur, Connection conn) {
+    public GetAllRencontres(int idJoueur, String nomTour) {
         try {
-            ResultSet rset = Queries.queries.getResult("SELECT numRencontre FROM Rencontre idJoueur="+idJoueur+"");
+            //la clé c'est nomTour et numRencontre, pas juste numRencontre
+            ResultSet rset = Queries.queries.getResult("SELECT numRencontre FROM AffectationCouleur where idJoueur="+idJoueur+", nomTour=\'"+nomTour+"\'");
 
             listeRencontres = new ArrayList<>();
             while(!(rset.isLast())){
