@@ -1,8 +1,10 @@
 package Java.Modele;
 
 import connection.Connect;
+import connection.MultipleQueries;
 import connection.Queries;
 import connection.init.InitAffectationCouleur;
+import connection.insert.InsertPiece;
 import connection.insert.InsertRencontre;
 
 import java.sql.Connection;
@@ -40,11 +42,13 @@ public class FabriqueRencontreConcrete extends FabriqueRencontre{
         numRencontre : id   | id
         nomCouleur : blanc  | noir
          */
-        Connect co = new Connect();
-        Connection conn = co.getConnection();
-        InsertRencontre _ = new InsertRencontre(tour, numRencontre);
-        InitAffectationCouleur __ = new InitAffectationCouleur(Queries.queries, "blanc", blanc.getId(), tour, numRencontre);
-        InitAffectationCouleur ___ = new InitAffectationCouleur(Queries.queries, "noir", noir.getId(), tour, numRencontre);
+        Queries.queries.closeConnection();
+        Queries.queries = new MultipleQueries();
+        new InsertRencontre(tour, numRencontre);
+        new InitAffectationCouleur(Queries.queries, "blanc", blanc.getId(), tour, numRencontre);
+        new InitAffectationCouleur(Queries.queries, "noir", noir.getId(), tour, numRencontre);
+        new InsertPiece(numRencontre, tour);
+
         numRencontre ++;
     }
 

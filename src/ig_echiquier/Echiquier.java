@@ -26,7 +26,7 @@ public class Echiquier extends JPanel {
 		int taille=echelle(this.getHeight(), this.getWidth());
 		taille=taille-taille/8;
 		dessineEchiquier(g, taille);
-		//dessinePions(g, taille);
+		dessinePions(g, taille);
 		dessineLegende(g, taille);
 
 	}

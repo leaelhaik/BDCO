@@ -1,6 +1,5 @@
 package Controleur;
 import Java.Modele.*;
-import com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBaseTraversers;
 import connection.*;
 //permet de trouver dans quelle phase on est et de la renvoyer à l'IG
 

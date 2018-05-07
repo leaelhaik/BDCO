@@ -14,15 +14,13 @@ public class InsertionJoueur {
 
   public boolean verifInsertion(String nom, String prenom) {
       ResultSet rset1 = Queries.queries.getResult("select idJoueur from joueur where nomJoueur= \'" + nom+"\' and prenomJoueur= \'"+prenom+"\'");
+      
+      
       try {
-		if(rset1.next()){
-		    return false;
-		  }
-		  else{
-		    return true;
-		  }
+		rset1.next();
+		return true;
 	} catch (SQLException e) {
-		e.printStackTrace();
+		//e.printStackTrace();
 		return false;
 	}
 
