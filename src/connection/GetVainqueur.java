@@ -7,7 +7,7 @@ public class GetVainqueur {
   private String nom="";
 
   public GetVainqueur(String nomTour, int numRencontre) {
-    ResultSet rsetCreateCouleur = Queries.queries.getResult("select prenomJoueur,nomJoueur, idJoueur from joueur,rencontre where joueur.idJoueur=rencontre.idJoueur,rencontre.numRencontre=" + numRencontre + ",rencontre.nomTour=" + nomTour + "");
+    ResultSet rsetCreateCouleur = Queries.queries.getResult("select prenomJoueur,nomJoueur from joueur,rencontre where joueur.idJoueur=rencontre.idJoueur,rencontre.numRencontre=" + numRencontre + ",rencontre.nomTour=" + nomTour + "");
     try {
       while (rsetCreateCouleur.next()) {
         this.prenom = rsetCreateCouleur.getString("prenomJoueur");

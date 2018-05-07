@@ -7,7 +7,7 @@ import java.sql.*;
 // le nom du tour
 
 public class GetJoueur {
-	public GetJoueur(String nomTour, int numRencontre, String couleur, Connection conn) {
+	public GetJoueur(String nomTour, int numRencontre, String couleur) {
 		try {
 
 			ResultSet rset = Queries.queries.getResult("select prenomJoueur,nomJoueur from joueur,affectationCouleur where joueur.idJoueur=affectationCouleur.idJoueur, affectationCouleur.nomCouleur=\'"+couleur+"\',affectationCouleur.numRencontre="+numRencontre+",affectationCouleur.nomTour=\'"+nomTour + "\'");
