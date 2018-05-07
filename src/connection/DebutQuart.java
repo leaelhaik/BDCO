@@ -5,7 +5,7 @@ public class DebutQuart {
   private int[] tabClassement = new int[8];
   public DebutQuart() {
     int i=0;
-    ResultSet rsetQuart = Queries.queries.getResult("Select idJoueur,count(nomTour) from Rencontre where nomTour='qualifications' group by(idJoueur) LIMIT 0,8 ORDER by count(nomTour) ASC");
+    ResultSet rsetQuart = Queries.queries.getResult("Select idJoueur,count(nomTour) from Rencontre where nomTour='qualifications' group by(idJoueur) ORDER by count(nomTour) ASC"); //limit 8
     try {
       while (rsetQuart.next()) {
         tabClassement[i] = rsetQuart.getInt(1);

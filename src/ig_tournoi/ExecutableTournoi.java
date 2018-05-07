@@ -199,7 +199,6 @@ class BoutonSuivantListener implements java.awt.event.ActionListener {
 		if (ControlleurPhase.nextPhase()) {
 
 		} else {
-
 			cl.next(cards);
 		}
 		

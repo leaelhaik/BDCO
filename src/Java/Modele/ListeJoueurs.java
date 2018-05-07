@@ -1,5 +1,6 @@
 package Java.Modele;
 import Java.Modele.Joueur;
+import connection.GetIdJoueur;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -105,6 +106,16 @@ public class ListeJoueurs {
             liste += j.toString() + "\n";
         }
         return liste;
+    }
+
+    public Joueur recupJoueur(int id) {
+        ResultSet rset = GetIdJoueur.getJoueurFromId(id);
+        try {
+            rset.next();
+            return new JoueurConcret(rset.getString(2), rset.getString(3), rset.getInt(1), rset.getString(4), rset.getString(5));
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
 }

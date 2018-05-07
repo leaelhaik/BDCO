@@ -6,11 +6,12 @@ public class GetMostAdvanceTour {
 
 	private String nomTour;
 
-	public GetMostAdvanceTour(Connection conn) {
+	public GetMostAdvanceTour() {
 		try {
 			  ResultSet rset = Queries.queries.getResult("select count(distinct nomTour) from Historique");
+			  rset.next();
 			  int nbNomTour = Integer.parseInt(rset.getString(1));
-
+			  nbNomTour = 1;
 			  switch(nbNomTour){
 			  	case 1 : this.nomTour = "qualifications";
 			  	break;

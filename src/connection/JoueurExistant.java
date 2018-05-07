@@ -1,4 +1,6 @@
 package connection;
+import connection.insert.InsertionJoueur;
+
 import java.sql.*;
 import java.util.Date;
 

@@ -16,11 +16,11 @@ public class ControlleurPhase {
     //TODO : corriger ce truc
     public static String getMostAdvanceTour(){
     	Connect co = new Connect();
-    	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());
+    	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour();
         if( req.getNomTour() != "erreur"){
         	return req.getNomTour();
         }
-        return "erreur au niveau du contrôleur de phases";
+        return "erreur";
     }
 
     public static boolean nextPhase() {
@@ -48,13 +48,16 @@ public class ControlleurPhase {
                 break;
             case "finale":
                 break;
+            case "erreur":
+                System.err.println("Erreur au niveau du controleur de phase");
+                return true;
         }
         return false;
     }
 
     public static void recuperer(ListeJoueurs joueurs, int[] tab_indices) {
         for (int i = 0; i < tab_indices.length; i++) {
-            joueurs.ajoutJoueur(joueurs.getJoueur(tab_indices[i]));
+            joueurs.ajoutJoueur(joueurs.recupJoueur(tab_indices[i]));
         }
     }
 }
