@@ -1,7 +1,6 @@
 package Controleur;
 
 import connection.*;
-import connection.drop.Drop;
 
 /**
  * Created by ensimag on 06/05/18.
