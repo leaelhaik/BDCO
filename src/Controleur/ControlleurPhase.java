@@ -14,7 +14,7 @@ public class ControlleurPhase {
 
     }
     //TODO : corriger ce truc
-    public String getMostAdvanceTour(){
+    public static String getMostAdvanceTour(){
     	Connect co = new Connect();
     	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour(co.getConnection());
         if( req.getNomTour() != "erreur"){
@@ -23,7 +23,7 @@ public class ControlleurPhase {
         return "erreur au niveau du contrôleur de phases";
     }
 
-    public boolean nextPhase() {
+    public static boolean nextPhase() {
         String phase = getMostAdvanceTour();
         Tour suivant;
         ListeJoueurs joueurs = new ListeJoueurs();
@@ -46,11 +46,13 @@ public class ControlleurPhase {
                 Fabrique.rencontres.reset();
                 suivant = new FinaleFinal(joueurs);
                 break;
+            case "finale":
+                break;
         }
         return false;
     }
 
-    public void recuperer(ListeJoueurs joueurs, int[] tab_indices) {
+    public static void recuperer(ListeJoueurs joueurs, int[] tab_indices) {
         for (int i = 0; i < tab_indices.length; i++) {
             joueurs.ajoutJoueur(joueurs.getJoueur(tab_indices[i]));
         }

@@ -41,10 +41,9 @@ public class C_Rencontre {
      * @param iDJoueur
      * @return une ArrayList d'Integers (et non pas d'int) contenant la liste des rencontres
      */
-    public ArrayList<Integer> getAllRencontres(int iDJoueur){
+    public ArrayList<Integer> getAllRencontres(int iDJoueur, String nomTour){
         ArrayList<Integer> listeRencontres = new ArrayList<Integer>();
-        Connect co = new Connect();
-        connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, co.getConnection());
+        connection.GetAllRencontres req = new connection.GetAllRencontres(iDJoueur, nomTour);
         return req.getListeRencontres();
 
     }

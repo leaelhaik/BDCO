@@ -1,5 +1,8 @@
 package ig_tournoi;
 
+import Controleur.C_Rencontre;
+import Controleur.ControlleurPhase;
+
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -193,7 +196,12 @@ class BoutonSuivantListener implements java.awt.event.ActionListener {
 
 	public void actionPerformed(ActionEvent arg0) {
 		//tester le nombre de joueurs
-		cl.next(cards);
+		if (ControlleurPhase.nextPhase()) {
+
+		} else {
+
+			cl.next(cards);
+		}
 		
 	}
 	
@@ -205,8 +213,11 @@ class BoutonValiderJoueursListener implements java.awt.event.ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		//tester le nombre de joueurs
 		//creer les rencontres en BD
-		cl.next(cards);
-		
+		if (C_Rencontre.genererRencontresQualif()) {
+
+		} else {
+			cl.next(cards);
+		}
 	}
 	
 }
