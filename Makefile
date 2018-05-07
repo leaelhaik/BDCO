@@ -39,7 +39,7 @@ testCT:
 	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestControleTournoi.java
 
 testDesTrucs:
-	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestDesTrucs.java
+	javac -d bin -classpath bin/ojdbc6.jar -sourcepath src src/TestGetCouleur.java
 
 #Execution
 
@@ -59,7 +59,7 @@ exeCT:
 	java -classpath bin:bin/ojdbc6.jar TestControleTournoi
 	
 exeTestDesTrucs:
-	java -classpath bin:bin/ojdbc6.jar TestDesTrucs
+	java -classpath bin:bin/ojdbc6.jar TestGetCouleur
 
 clean:
 	rm -rf bin/*.class
