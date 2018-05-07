@@ -15,7 +15,6 @@ public class ControlleurPhase {
     }
     //TODO : corriger ce truc
     public static String getMostAdvanceTour(){
-    	Connect co = new Connect();
     	connection.GetMostAdvanceTour req = new connection.GetMostAdvanceTour();
         if( req.getNomTour() != "erreur"){
         	return req.getNomTour();

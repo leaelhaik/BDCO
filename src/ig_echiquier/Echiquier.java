@@ -67,7 +67,7 @@ public class Echiquier extends JPanel {
 				x =j*taille;
 				y= i*taille;
 				coordJ = Character.toString((char)(64+j)); //Renvoi la lettre liée à la position X
-				piece = new Piece(coordJ, coordI , 1 ,"finale");
+				piece = new Piece(coordJ, coordI , 1 ,"qualifications");
 				if (piece.getNomPiece() != null && piece.getCouleur() != null) {
 					try {
 					 Image img = ImageIO.read(new File("./images/"+piece.getNomPiece()+"_"+piece.getCouleur()+".png"));

@@ -169,7 +169,19 @@ public ExecutableTournoi(String nomFenetre, int hauteurFenetre, int largeurFenet
 
 private int getPhase() {
 	// TODO retourner 0,1,2 ou 3 en fonction de la phase, autre chose si tournoi non commencé
-	return ControlleurPhase.getMostAdvanceTour();
+	String phase = ControlleurPhase.getMostAdvanceTour();
+	switch (phase) {
+		case "qualifications":
+			return 0;
+		case "quartFinale":
+			return 1;
+		case "demiFinale":
+			return 2;
+		case "finale":
+			return 3;
+		default:
+			return 1000;
+	}
 	}
 
 private int getIDTournoi() {
