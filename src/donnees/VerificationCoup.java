@@ -185,7 +185,7 @@ public class VerificationCoup {
 
 			ResultSet rsetPion1, rsetPion2;
 
-			if(((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur))) {
+			if((((posY-oldY)==1 && "blanc".equals(couleur)) || ((oldY-posY)==1 && "noir".equals(couleur)))) {
 				if((tabOldX[0]-tabPosX[0])==1)  {// Veut manger à gauche
 			  		rsetPion1 = Queries.queries.getResult("select idPiece, couleur, posX, posY from Piece where numRencontre = " + numRencontre + " and nomTour = \' " + nomTour + "\' and couleur<>\' " + couleur + "\' and posX = \'" + posX + "\' and posY = " + posY +"");
 					bool=!(rsetPion1.next());
@@ -280,7 +280,7 @@ public class VerificationCoup {
 	      }
 
 	      ResultSet rsetTour1, rsetTour2;
-	      if((tabPosX[0]==tabOldX[0]) || (posY==oldY)) {
+	      if(((tabPosX[0]==tabOldX[0]) || (posY==oldY))) {
 	        if(posY==oldY) {
 	        	if(tabPosX[0] < tabOldX[0]) {
 	        		rsetTour1 = Queries.queries.getResult("select idPiece from Piece where numRencontre=" + numRencontre + " and nomTour=\' " + nomTour + " \'  and posX between \'" + posX + "\' and  \'" + oldX + "\' and posY =" + posY + " ");
