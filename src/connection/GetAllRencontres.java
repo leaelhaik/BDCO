@@ -5,14 +5,12 @@ import java.util.List;
 
 public class GetAllRencontres {
 
-    static final String STMT = "SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.idJoueur=?";
-
     private ArrayList<Integer> listeRencontres;
 
     public GetAllRencontres(int idJoueur, Connection conn) {
         try {
-            ResultSet rset = Queries.queries.getResult("SELECT rencontres.numRencontre FROM JournalCoups WHERE Rencontre.Joue.idJoueur="+idJoueur+"");
-            
+            ResultSet rset = Queries.queries.getResult("SELECT numRencontre FROM Rencontre idJoueur="+idJoueur+"");
+
             listeRencontres = new ArrayList<>();
             while(!(rset.isLast())){
                 listeRencontres.add(rset.getInt(1));

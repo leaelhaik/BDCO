@@ -10,8 +10,7 @@ public class GetCouleur {
 	private MultipleQueries queries;
 
 	public GetCouleur(int idJoueur) {
-		ResultSet rset = queries.getResult("select couleur from joueur where joueur.idjoueur=" +
-				idJoueur + "");
+		ResultSet rset = queries.getResult("select couleur from joueur where idJoueur=" + idJoueur + "");
 		try {
 			rset.next();
 			this.couleur = rset.getString(1);

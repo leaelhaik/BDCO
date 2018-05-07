@@ -82,8 +82,10 @@ public class VerificationCoup {
 			startTransact(Queries.queries.getConnection());
 			ResultSet rsetDel = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour= \' "+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
 		}
-		ResultSet rsetUp = Queries.queries.getResult("Delete from piece where numRencontre="+ numRencontre + " and nomTour=\'"+nomTour+"\' and posY =" + posY + " and posX =\'" + posX + "\'");
+		ResultSet rsetIdCoup = Queries.queries("Select Count(idCoup) from Historique");
+		int idCoup = rsetIdCoup.getInt(1) + 1;
 
+		ResultSet rsetHisto = Queries.queries.getResult("Insert into Historique Values(" + idCoup + ",\'" + nomTour + ",\'" + numRencontre + ",\'" + posX ",\'" + posY ",\'" + oldX ",\'" + oldY +"\')";
 
 		ResultSet rsetUpdate = Queries.queries.getResult("update Piece SET posX=\'" +posX+ "\', posY = " + posY + ", oldX=\'" +oldX+ "\', oldY= " + oldY + " where posX = \'" +oldX+ "\' , posY = " + oldY +"");
 
